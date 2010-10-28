@@ -22,6 +22,7 @@ void Module::setVideo(bool b) {
         {
             connect(this, SIGNAL(frameReady(QImage)), this, SLOT(showFrame(QImage)), Qt::QueuedConnection);
             displayVideo=true;
+            emit videoEmited(getVideoWidget());
         }
     }
     else
@@ -30,6 +31,7 @@ void Module::setVideo(bool b) {
         {
             disconnect(this, SIGNAL(frameReady(QImage)), this, SLOT(showFrame(QImage)));
             displayVideo=false;
+            emit videoStopped(getVideoWidget());
         }
     }
 }

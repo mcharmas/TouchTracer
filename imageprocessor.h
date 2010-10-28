@@ -8,18 +8,19 @@
 #include <QtGlobal>
 using namespace cv;
 
-class ImageProcessor : public QThread, public QList<Module*>
+class ImageProcessor : public QThread
 {
     Q_OBJECT
 public:
-    ImageProcessor(VideoCapture* cap, QObject *parent = 0);
+    ImageProcessor(QString, QObject *parent = 0);
+    ImageProcessor(QString, QList<Module*> *modules, QObject *parent = 0);
     ~ImageProcessor();
+    void init(QString fileName, QList<Module*> *modules);
     void run();
+    void setModuleList(QList<Module*> *modules) { mut.lock(); this->modules = modules; mut.unlock(); }
+    void chModList() { mut.lock(); }
+    void stopChModList() { mut.unlock(); }
 
-    void addModule(Module *m, int pos);
-    void addModule(Module *m);
-    void removeModule(Module *m);
-signals:
 
 public slots:
     void stop() { this->running = false; QThread::wait();}
@@ -28,6 +29,8 @@ private:
     VideoCapture *capture;
     int interval;
     bool running;
+    QList<Module*> *modules;
+    QMutex mut;
 
 };
 

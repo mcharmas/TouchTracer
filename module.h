@@ -12,7 +12,7 @@ class Module : public QObject
     Q_OBJECT
 public:
     Module(QObject *parent = 0):QObject(parent),locked(false){ videoWidget = new QLabel(); }
-    ~Module() { delete videoWidget; }
+    ~Module() { setVideo(false); delete videoWidget; }
 
     bool processImage(cv::Mat &mat)
     {
@@ -22,7 +22,9 @@ public:
         process(mat);
 
         if(displayVideo) {
-            QImage img = matToQImage(mat);
+            cv::Mat m;
+            cv::resize(mat, m, cv::Size(), 0.5, 0.5);
+            QImage img = matToQImage(m);
             emit frameReady(img);
         }
         return true;
@@ -33,10 +35,13 @@ public:
 
     QWidget* getVideoWidget() { return videoWidget; }
 
+public slots:
     void setVideo(bool);
 
 signals:
     void frameReady(const QImage &);
+    void videoEmited(QWidget*);
+    void videoStopped(QWidget*);
 
 private:
     QImage matToQImage(const cv::Mat& mat) const;

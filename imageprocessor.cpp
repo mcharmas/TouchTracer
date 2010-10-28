@@ -1,13 +1,26 @@
 #include "imageprocessor.h"
 
-ImageProcessor::ImageProcessor(cv::VideoCapture* cap, QObject *parent) :
-    QThread(parent), QList<Module*>(), capture(cap)
+ImageProcessor::ImageProcessor(QString fileName, QObject *parent) :
+    QThread(parent)
 {
-    if(!cap->isOpened()) {
+    init(fileName, NULL);
+}
+
+ImageProcessor::ImageProcessor(QString fileName, QList<Module *> * modules, QObject *parent)
+    :     QThread(parent)
+{
+    init(fileName, modules);
+}
+
+void ImageProcessor::init(QString fileName, QList<Module *> *modules)
+{
+    capture = new VideoCapture(fileName.toStdString());
+    if(!capture->isOpened()) {
         throw new Exception();
     }
 
-    interval = (int)(1000000 / (cap->get(CV_CAP_PROP_FPS)));
+    interval = (int)(1000000 / (capture->get(CV_CAP_PROP_FPS)));
+    setModuleList(modules);
     running = true;
 }
 
@@ -16,10 +29,8 @@ ImageProcessor::~ImageProcessor()
     if(this->isRunning()) {
        this->stop();
     }
+    delete capture;
 
-    foreach(Module *m, (QList<Module*>)*this){
-        delete m;
-    }
 }
 
 void ImageProcessor::run()
@@ -28,28 +39,17 @@ void ImageProcessor::run()
         Mat frame;
         *capture >> frame;
         //TODO: dodac liczenie czasu i odejmowac od intervala
-
-        foreach(Module *m, (QList<Module*>)*this){
-            m->processImage(frame);
+        mut.lock();
+        if(modules != NULL) {
+           foreach(Module *m, *modules){
+               m->processImage(frame);
+           }
         }
+        mut.unlock();
 
         this->usleep(interval);
     }
 }
 
-void ImageProcessor::addModule(Module *m)
-{
-    this->append(m);
-}
-
-void ImageProcessor::addModule(Module *m, int pos)
-{
-    this->insert(pos, m);
-}
-
-void ImageProcessor::removeModule(Module *m)
-{
-    this->removeOne(m);
-}
 
 

@@ -2,11 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "imageprocessor.h"
-#include "modulevideo.h"
 #include <cv.h>
 #include <highgui.h>
-#include "videowidget.h"
+#include "imageprocessor.h"
+#include "modulemanagerwidget.h"
 
 namespace Ui {
     class MainWindow;
@@ -22,11 +21,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    ImageProcessor *processor;
-    ModuleVideo *video;
+
+    ModuleManagerWidget *manager;
+
 
 private slots:
-    void on_startButton_clicked();
+
 
 };
 

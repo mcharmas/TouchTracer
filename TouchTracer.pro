@@ -16,11 +16,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     imageprocessor.cpp \
     modulevideo.cpp \
-    module.cpp
+    module.cpp \
+    modulemanagerwidget.cpp \
+    videogallery.cpp \
+    abstractsettingswidget.cpp
 
 HEADERS  += mainwindow.h \
     module.h \
     imageprocessor.h \
-    modulevideo.h
+    modulevideo.h \
+    modulemanagerwidget.h \
+    videogallery.h \
+    abstractsettingswidget.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    modulemanagerwidget.ui \
+    abstractsettingswidget.ui
