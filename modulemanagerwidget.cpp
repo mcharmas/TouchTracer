@@ -5,6 +5,8 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     QWidget(parent), ui(new Ui::ModuleManagerWidget), videoWidget((VideoGallery*)videoWidget)
 {
     ui->setupUi(this);
+    new QVBoxLayout(ui->settingsBox);
+    currentSettingsWidget = NULL;
     fileName = "/media/disk/Downloads/Dexter.S05E03.HDTV.XviD-2HD/dexter.s05e03.hdtv.xvid-2hd.avi";
     processor = NULL;//new ImageProcessor(fileName, this);
     modules = new QList<Module*>();
@@ -12,6 +14,7 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     ui->modulesBox->addItems(possibleModules);
     QStringListModel* model = new QStringListModel(ui->modulesList);
     ui->modulesList->setModel(model);
+    connect(ui->modulesList, SIGNAL(clicked(QModelIndex)), this, SLOT(showSettings(QModelIndex)));
 }
 
 ModuleManagerWidget::~ModuleManagerWidget()
@@ -58,9 +61,8 @@ void ModuleManagerWidget::on_addModuleButton_clicked()
 {
     QString moduleName = ui->modulesBox->currentText();
     Module* m = new ModuleVideo();
-    connect(m, SIGNAL(videoEmited(QWidget*)), videoWidget, SLOT(registerNewWidget(QWidget*)));
+    //connect(m, SIGNAL(videoEmited(QWidget*)), videoWidget, SLOT(registerNewWidget(QWidget*)));
     connect(m, SIGNAL(videoStopped(QWidget*)), videoWidget, SLOT(unRegisterWidget(QWidget*)));
-    m->setVideo(true);
     videoWidget->layout()->addWidget(m->getVideoWidget());
 
     if(processor)
@@ -97,8 +99,29 @@ void ModuleManagerWidget::on_removeModuleButton_clicked()
         m->setVideo(false);
         videoWidget->layout()->removeWidget(m->getVideoWidget());
         modules->removeAt(sel);
+        if(currentSettingsWidget == m->getSettingsWidget()) {
+            ui->settingsBox->layout()->removeWidget(currentSettingsWidget);
+            currentSettingsWidget = NULL;
+        }
         delete m;
         processor->stopChModList();
         updateList();
+    }
+}
+
+void ModuleManagerWidget::showSettings(const QModelIndex &index)
+{
+    if(!ui->modulesList->selectionModel()->selectedRows().isEmpty())
+    {
+        int sel = ui->modulesList->selectionModel()->currentIndex().row();
+        Module *m = modules->at(sel);
+        if(currentSettingsWidget){
+            currentSettingsWidget->hide();
+            ui->settingsBox->layout()->removeWidget(currentSettingsWidget);
+        }
+        ui->settingsBox->layout()->addWidget(m->getSettingsWidget());
+        ui->settingsBox->layout()->update();
+        currentSettingsWidget = m->getSettingsWidget();
+        currentSettingsWidget->show();
     }
 }

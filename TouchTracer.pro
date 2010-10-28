@@ -12,23 +12,17 @@ TEMPLATE = app
 CONFIG += link_pkgconfig
 PKGCONFIG += opencv
 
+include(Modules/Modules.pri)
+
 SOURCES += main.cpp\
         mainwindow.cpp \
-    imageprocessor.cpp \
-    modulevideo.cpp \
-    module.cpp \
     modulemanagerwidget.cpp \
-    videogallery.cpp \
-    abstractsettingswidget.cpp
+    videogallery.cpp
 
 HEADERS  += mainwindow.h \
-    module.h \
-    imageprocessor.h \
-    modulevideo.h \
     modulemanagerwidget.h \
-    videogallery.h \
-    abstractsettingswidget.h
+    videogallery.h
 
 FORMS    += mainwindow.ui \
-    modulemanagerwidget.ui \
-    abstractsettingswidget.ui
+    modulemanagerwidget.ui
+

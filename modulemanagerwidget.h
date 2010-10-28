@@ -5,8 +5,8 @@
 #include <QStringListModel>
 #include <QDebug>
 #include "videogallery.h"
-#include "imageprocessor.h"
-#include "modulevideo.h"
+#include "Modules/imageprocessor.h"
+#include "Modules/modulevideo.h"
 
 namespace Ui {
     class ModuleManagerWidget;
@@ -29,13 +29,15 @@ private:
     cv::VideoCapture *capture;
     QString fileName;
     void updateList();
-
+    QWidget *currentSettingsWidget;
 
 private slots:
     void on_removeModuleButton_clicked();
     void on_addModuleButton_clicked();
     void on_stopButton_clicked();
     void on_startButton_clicked();
+    void showSettings(const QModelIndex & index);
+
 };
 
 #endif // MODULEMANAGERWIDGET_H

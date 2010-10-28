@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <cv.h>
 #include <highgui.h>
-#include "imageprocessor.h"
+#include "Modules/imageprocessor.h"
 #include "modulemanagerwidget.h"
 
 namespace Ui {

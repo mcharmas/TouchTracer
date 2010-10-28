@@ -10,11 +10,11 @@ VideoGallery::VideoGallery(QWidget *parent) :
 
 void VideoGallery::registerNewWidget(QWidget *w)
 {
-    x++;
     QGridLayout* layout = (QGridLayout*)this->layout();
     int i = x/columns;
     int j = x%columns;
-    layout->addWidget(w, i, j);
+    layout->addWidget(w, j, i);
+    x++;
 }
 
 void VideoGallery::unRegisterWidget(QWidget *w)
