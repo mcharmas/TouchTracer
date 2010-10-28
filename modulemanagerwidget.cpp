@@ -14,7 +14,8 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     ui->modulesBox->addItems(possibleModules);
     QStringListModel* model = new QStringListModel(ui->modulesList);
     ui->modulesList->setModel(model);
-    connect(ui->modulesList, SIGNAL(clicked(QModelIndex)), this, SLOT(showSettings(QModelIndex)));
+    selectedModule=NULL;
+    connect(ui->modulesList->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(showSettings(QItemSelection,QItemSelection)));
 }
 
 ModuleManagerWidget::~ModuleManagerWidget()
@@ -63,7 +64,7 @@ void ModuleManagerWidget::on_addModuleButton_clicked()
     Module* m = new ModuleVideo();
     //connect(m, SIGNAL(videoEmited(QWidget*)), videoWidget, SLOT(registerNewWidget(QWidget*)));
     connect(m, SIGNAL(videoStopped(QWidget*)), videoWidget, SLOT(unRegisterWidget(QWidget*)));
-    videoWidget->layout()->addWidget(m->getVideoWidget());
+    videoWidget->registerNewWidget(m->getVideoWidget());
 
     if(processor)
         processor->chModList();
@@ -95,6 +96,11 @@ void ModuleManagerWidget::on_removeModuleButton_clicked()
     {
         int sel = ui->modulesList->selectionModel()->currentIndex().row();
         Module *m = modules->at(sel);
+
+        if(m == selectedModule) {
+            selectedModule = NULL;
+        }
+
         processor->chModList();
         m->setVideo(false);
         videoWidget->layout()->removeWidget(m->getVideoWidget());
@@ -109,19 +115,28 @@ void ModuleManagerWidget::on_removeModuleButton_clicked()
     }
 }
 
-void ModuleManagerWidget::showSettings(const QModelIndex &index)
+void ModuleManagerWidget::showSettings(QItemSelection,QItemSelection)
 {
     if(!ui->modulesList->selectionModel()->selectedRows().isEmpty())
     {
         int sel = ui->modulesList->selectionModel()->currentIndex().row();
-        Module *m = modules->at(sel);
+        Module *m = modules->at(sel);        
+
+        if (selectedModule) {
+            ((VideoWidget*)(selectedModule->getVideoWidget()))->setSelected(true);
+        }
+        selectedModule = m;
+        ((VideoWidget*)(m->getVideoWidget()))->setSelected(false);
+
         if(currentSettingsWidget){
             currentSettingsWidget->hide();
             ui->settingsBox->layout()->removeWidget(currentSettingsWidget);
         }
+
         ui->settingsBox->layout()->addWidget(m->getSettingsWidget());
         ui->settingsBox->layout()->update();
         currentSettingsWidget = m->getSettingsWidget();
         currentSettingsWidget->show();
+
     }
 }

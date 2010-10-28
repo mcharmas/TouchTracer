@@ -13,7 +13,7 @@ void VideoGallery::registerNewWidget(QWidget *w)
     QGridLayout* layout = (QGridLayout*)this->layout();
     int i = x/columns;
     int j = x%columns;
-    layout->addWidget(w, j, i);
+    layout->addWidget(w, i, j);
     x++;
 }
 

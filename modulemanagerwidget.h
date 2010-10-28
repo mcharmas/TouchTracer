@@ -30,13 +30,14 @@ private:
     QString fileName;
     void updateList();
     QWidget *currentSettingsWidget;
+    Module *selectedModule;
 
 private slots:
     void on_removeModuleButton_clicked();
     void on_addModuleButton_clicked();
     void on_stopButton_clicked();
     void on_startButton_clicked();
-    void showSettings(const QModelIndex & index);
+    void showSettings(QItemSelection,QItemSelection);
 
 };
 

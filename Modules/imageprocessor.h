@@ -2,10 +2,13 @@
 #define IMAGEPROCESSOR_H
 
 #include <QThread>
-#include "module.h"
+#include <QtGlobal>
+
 #include <cv.h>
 #include <highgui.h>
-#include <QtGlobal>
+
+#include "module.h"
+
 using namespace cv;
 
 class ImageProcessor : public QThread

@@ -22,7 +22,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="settingsWidget" native="true"/>
+    <widget class="QWidget" name="settingsWidget" native="true">
+     <zorder>videoCheckBox</zorder>
+    </widget>
    </item>
   </layout>
  </widget>

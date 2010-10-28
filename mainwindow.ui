@@ -42,9 +42,28 @@
       <property name="title">
        <string>Video</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="VideoGallery" name="videosContainer" native="true"/>
+        <widget class="QScrollArea" name="scrollArea">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>363</width>
+            <height>306</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="VideoGallery" name="videosContainer" native="true"/>
+           </item>
+          </layout>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -57,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>675</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

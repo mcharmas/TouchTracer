@@ -7,62 +7,37 @@
 #include <QObject>
 #include <QLabel>
 
+#include "videowidget.h"
+
 class Module : public QObject
 {
     Q_OBJECT
 public:
-    Module(QObject *parent = 0):QObject(parent),locked(false){
-        videoWidget = new QLabel();
-    }
+    Module(QObject *parent = 0);
+    ~Module();
 
-    ~Module() {
-        emit videoStopped(getVideoWidget());
-        setVideo(false);
-        delete videoWidget;
-    }
+    bool processImage(cv::Mat &mat);
 
-
-
-    bool processImage(cv::Mat &mat)
-    {
-        if(isSettingsLocked()) {
-            return false;
-        }
-        process(mat);
-
-        if(displayVideo) {
-            cv::Mat m;
-            cv::resize(mat, m, cv::Size(), 0.5, 0.5);
-            QImage img = matToQImage(m);
-            emit frameReady(img);
-        }
-        return true;
-    }
+    QWidget* getVideoWidget() { return videoWidget; }
 
     virtual QString getName() { return ""; }
     virtual QWidget* getSettingsWidget()=0;
-
-    QWidget* getVideoWidget() { return videoWidget; }
 
 public slots:
     void setVideo(bool);
 
 signals:
     void frameReady(const QImage &);
-    void videoEmited(QWidget*);
     void videoStopped(QWidget*);
 
 private:
     QImage matToQImage(const cv::Mat& mat) const;
 
-    QLabel* videoWidget;
+    VideoWidget* videoWidget;
     bool locked;
     bool isSettingsLocked() { return locked; }
     bool displayVideo;
     QMutex mutex;
-
-private slots:
-    void showFrame(const QImage &);
 
 protected:
     /**
@@ -77,10 +52,7 @@ protected:
 
     virtual void process(cv::Mat &mat)=0;
 
-    void init() {
-        videoWidget->setText(getName() + ": No Video");
-    }
-
+    void init();
 };
 
 #endif // MODULE_H
