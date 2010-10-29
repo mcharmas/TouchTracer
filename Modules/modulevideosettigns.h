@@ -17,7 +17,7 @@ public:
     ~ModuleVideoSettigns();
 
 protected:
-    QWidget* getConreteWidget() { return (QWidget*)ui; }
+    QWidget* getConreteWidget() { return this; }
 
 private:
     Ui::ModuleVideoSettigns *ui;

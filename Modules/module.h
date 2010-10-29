@@ -96,6 +96,13 @@ private:
     QMutex mutex; /*!< Mutex locking module settings. */
 
     /*!
+      \brief Check if settings are locked.
+      \return if settings are locked.
+    */
+    bool isSettingsLocked() { return locked; }
+
+protected:
+    /*!
      \brief Converts cv::Mat to QImage in order to display it on VideoWidget.
 
      \param mat cv::Mat to be converted.
@@ -103,13 +110,6 @@ private:
     */
     QImage matToQImage(const cv::Mat& mat) const;
 
-    /*!
-      \brief Check if settings are locked.
-      \return if settings are locked.
-    */
-    bool isSettingsLocked() { return locked; }
-
-protected:
     /*!
       Should be used before settings change.
     */

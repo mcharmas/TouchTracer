@@ -3,21 +3,25 @@
 
 AbstractSettingsWidget::AbstractSettingsWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::AbstractSettingsWidget)
+    baseUi(new Ui::AbstractSettingsWidget)
 {
-    ui->setupUi(this);
-    new QVBoxLayout(ui->settingsWidget);
-    connect(ui->videoCheckBox, SIGNAL(toggled(bool)), this, SLOT(toggleVideo(bool)));
-    if(getConreteSettings())
-        ui->settingsWidget->layout()->addWidget(getConreteSettings());
+    baseUi->setupUi(this);
+    connect(baseUi->videoCheckBox, SIGNAL(toggled(bool)), this, SLOT(toggleVideo(bool)));
+//    if(getConreteSettings())
+//        ui->settingsWidget->layout()->addWidget(getConreteSettings());
 }
 
 AbstractSettingsWidget::~AbstractSettingsWidget()
 {
-    delete ui;
+    delete baseUi;
 }
 
 void AbstractSettingsWidget::toggleVideo(bool b)
 {
     emit showVideoChanged(b);
+}
+
+QWidget* AbstractSettingsWidget::getSettingsWidget()
+{
+    return baseUi->settingsWidget;
 }

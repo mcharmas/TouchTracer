@@ -19,8 +19,16 @@ public:
     QWidget* getSettingsWidget() { return settings; }
     QString getName() { return "Background removal"; }
 
+public slots:
+    void storeFrame();
+
 private:
+    bool frameToStore;
+    Mat storedFrame;
     ModuleBackgroundSettings *settings;
+
+signals:
+    void frameStored(QImage);
 
 };
 

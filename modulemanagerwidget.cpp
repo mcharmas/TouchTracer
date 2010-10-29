@@ -10,8 +10,10 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     fileName = "/media/disk/Downloads/Dexter.S05E03.HDTV.XviD-2HD/dexter.s05e03.hdtv.xvid-2hd.avi";
     processor = NULL;
     modules = new QList<Module*>();
+
     possibleModules.append("Dummy Module");
     possibleModules.append("Background removal");
+
     ui->modulesBox->addItems(possibleModules);
     QStringListModel* model = new QStringListModel(ui->modulesList);
     ui->modulesList->setModel(model);
@@ -62,8 +64,14 @@ void ModuleManagerWidget::on_stopButton_clicked()
 void ModuleManagerWidget::on_addModuleButton_clicked()
 {
     QString moduleName = ui->modulesBox->currentText();
-    Module* m = new ModuleVideo();
-    //connect(m, SIGNAL(videoEmited(QWidget*)), videoWidget, SLOT(registerNewWidget(QWidget*)));
+    qDebug() << moduleName;
+    Module* m = NULL;
+    if(moduleName == "Dummy Module") {
+        m = new ModuleVideo();
+    } else if(moduleName == "Background removal") {
+        m = new ModuleBackground();
+    }
+
     connect(m, SIGNAL(videoStopped(QWidget*)), videoWidget, SLOT(unRegisterWidget(QWidget*)));
     videoWidget->registerNewWidget(m->getVideoWidget());
 

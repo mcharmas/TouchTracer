@@ -17,10 +17,11 @@ public:
     ~AbstractSettingsWidget();
 
 protected:
-    virtual QWidget *getConreteSettings() { return NULL; }
+    QWidget* getSettingsWidget();
 
 private:
-    Ui::AbstractSettingsWidget *ui;
+    Ui::AbstractSettingsWidget *baseUi;
+
 
 private slots:
     void toggleVideo(bool);

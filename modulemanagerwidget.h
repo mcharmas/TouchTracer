@@ -7,6 +7,7 @@
 #include "videogallery.h"
 #include "Modules/imageprocessor.h"
 #include "Modules/modulevideo.h"
+#include "Modules/modulebackground.h"
 
 namespace Ui {
     class ModuleManagerWidget;
