@@ -1,11 +1,13 @@
 #ifndef MODULE_H
 #define MODULE_H
 #include <cv.h>
+#include <highgui.h>
 #include <QString>
 #include <QMutex>
 #include <QWidget>
 #include <QObject>
 #include <QLabel>
+#include <QDebug>
 
 #include "videowidget.h"
 
@@ -15,7 +17,7 @@
  Important methods to override are:
  process(), getName(), getSettingsWidget()
 
- Modules are stored in list. When processing every frame process() method is called.
+ Modules are sstored in list. When processing every frame process() method is called.
  First method called in Constructor should be init() to create proper VideoWidget.
 */
 class Module : public QObject
@@ -103,7 +105,7 @@ private:
 
 protected:
     /*!
-     \brief Converts cv::Mat to QImage in order to display it on VideoWidget.
+     \brief Converts BGR cv::Mat to QImage in order to display it on VideoWidget.
 
      \param mat cv::Mat to be converted.
      \return QImage corresponding QImage

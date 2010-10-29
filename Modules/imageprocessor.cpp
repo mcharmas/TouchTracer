@@ -38,6 +38,7 @@ void ImageProcessor::run()
     while(running) {
         Mat frame;
         *capture >> frame;
+
         //TODO: dodac liczenie czasu i odejmowac od intervala
         mut.lock();
         if(modules != NULL) {
@@ -46,6 +47,7 @@ void ImageProcessor::run()
            }
         }
         mut.unlock();
+
 
         this->usleep(interval);
     }

@@ -35,8 +35,18 @@ bool Module::processImage(cv::Mat &mat)
 
 QImage Module::matToQImage(const cv::Mat& mat) const
 {
-    QImage img(mat.data, mat.size().width, mat.size().height, mat.step,QImage::Format_RGB888);
-    return img.rgbSwapped();
+    if(mat.channels()==1)
+    {
+        cv::Mat m;
+        cv::cvtColor(mat, m, CV_GRAY2RGB);
+        QImage img(m.data, m.size().width, m.size().height, m.step, QImage::Format_RGB888);
+        return img.copy(0,0,img.width(),img.height());
+    }
+    else
+    {
+        QImage img(mat.data, mat.size().width, mat.size().height, mat.step, QImage::Format_RGB888);
+        return img.rgbSwapped();
+    }
 }
 
 void Module::setVideo(bool b) {

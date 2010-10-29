@@ -2,10 +2,11 @@
 #define MODULEBACKGROUND_H
 
 #include <cv.h>
+#include <highgui.h>
 
 #include "module.h"
 #include "modulebackgroundsettings.h"
-
+#include <QDebug>
 using namespace cv;
 
 class ModuleBackground : public Module
@@ -26,6 +27,8 @@ private:
     bool frameToStore;
     Mat storedFrame;
     ModuleBackgroundSettings *settings;
+
+    void substractBackground(Mat &mat);
 
 signals:
     void frameStored(QImage);
