@@ -1,0 +1,274 @@
+\hypertarget{class_module}{
+\section{Module Class Reference}
+\label{dd/df9/class_module}\index{Module@{Module}}
+}
+
+
+Base class for all modules. Important methods to override are: \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process()}, \hyperlink{class_module_a1cf07480fdd9a964eb8375bf2fb549b0}{getName()}, \hyperlink{class_module_a7a6a83882ef0d9aec623577884ce2fb5}{getSettingsWidget()}  
+
+
+
+
+{\ttfamily \#include $<$module.h$>$}
+
+
+
+Inheritance diagram for Module:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{d1/d4b/class_module__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Module:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{d0/d57/class_module__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_module_a44b6835871fe594af9e8b687ca3f349f}{setVideo} (bool)
+\begin{DoxyCompactList}\small\item\em Turns on/off video on \hyperlink{class_video_widget}{VideoWidget}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_module_a216ad8e0b35bdcc51a37ea40aa3bfdcf}{frameReady} (const QImage \&)
+\begin{DoxyCompactList}\small\item\em Emited when frame has been processed and is ready to be shown. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_module_abd2a5a79ff77212c6730767dc7d5d49d}{videoStopped} (QWidget $\ast$)
+\begin{DoxyCompactList}\small\item\em Emited when \hyperlink{class_module}{Module} is removed from the list in order to unregister it from \hyperlink{class_video_gallery}{VideoGallery}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_module_a898c66ef74395bb450900d479b51fc21}{Module} (QObject $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Constructor. Does nothing except setting QObject parent. \item\end{DoxyCompactList}\item 
+\hypertarget{class_module_a7c9d9c096786d127590fdd8aa2b7d681}{
+\hyperlink{class_module_a7c9d9c096786d127590fdd8aa2b7d681}{$\sim$Module} ()}
+\label{dd/df9/class_module_a7c9d9c096786d127590fdd8aa2b7d681}
+
+\begin{DoxyCompactList}\small\item\em Removes all stuff. \item\end{DoxyCompactList}\item 
+bool \hyperlink{class_module_a030fde5f794abbc63e33286e40a0192c}{processImage} (cv::Mat \&mat)
+\begin{DoxyCompactList}\small\item\em Method called by \hyperlink{class_image_processor}{ImageProcessor} in order to process frame. It is a wrapper to process method which check if settings are not locked (mutex because of thread). \item\end{DoxyCompactList}\item 
+QWidget $\ast$ \hyperlink{class_module_acbca15013c486ec2a6cc2391e4170880}{getVideoWidget} ()
+\item 
+virtual QString \hyperlink{class_module_a1cf07480fdd9a964eb8375bf2fb549b0}{getName} ()
+\begin{DoxyCompactList}\small\item\em Should be overriten in order to get proper module name on \hyperlink{class_video_widget}{VideoWidget}. \item\end{DoxyCompactList}\item 
+virtual QWidget $\ast$ \hyperlink{class_module_a7a6a83882ef0d9aec623577884ce2fb5}{getSettingsWidget} ()=0
+\begin{DoxyCompactList}\small\item\em Should be overriten and provide module configuration interface. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_module_a56495f4dcfb3fc0a77178ba47a5414c9}{settingsLock} ()
+\item 
+void \hyperlink{class_module_a1834931d5ddcdc84d9289661aaf0cece}{settingsUnlock} ()
+\item 
+virtual void \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process} (cv::Mat \&mat)=0
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_module}{Module} processing method. The most important method. Should be overriten to provide frame processing. \item\end{DoxyCompactList}\item 
+\hypertarget{class_module_ad1956ac81429ec1f61f83dbc081cf18c}{
+void \hyperlink{class_module_ad1956ac81429ec1f61f83dbc081cf18c}{init} ()}
+\label{dd/df9/class_module_ad1956ac81429ec1f61f83dbc081cf18c}
+
+\begin{DoxyCompactList}\small\item\em This method creates proper \hyperlink{class_video_widget}{VideoWidget}. Should be called in subclass Constructor! \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class for all modules. Important methods to override are: \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process()}, \hyperlink{class_module_a1cf07480fdd9a964eb8375bf2fb549b0}{getName()}, \hyperlink{class_module_a7a6a83882ef0d9aec623577884ce2fb5}{getSettingsWidget()} Modules are stored in list. When processing every frame \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process()} method is called. First method called in Constructor should be \hyperlink{class_module_ad1956ac81429ec1f61f83dbc081cf18c}{init()} to create proper \hyperlink{class_video_widget}{VideoWidget}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_module_a898c66ef74395bb450900d479b51fc21}{
+\index{Module@{Module}!Module@{Module}}
+\index{Module@{Module}!Module@{Module}}
+\subsubsection[{Module}]{\setlength{\rightskip}{0pt plus 5cm}Module::Module (
+\begin{DoxyParamCaption}
+\item[{QObject $\ast$}]{ parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}
+\label{dd/df9/class_module_a898c66ef74395bb450900d479b51fc21}
+
+
+Constructor. Does nothing except setting QObject parent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_module_a216ad8e0b35bdcc51a37ea40aa3bfdcf}{
+\index{Module@{Module}!frameReady@{frameReady}}
+\index{frameReady@{frameReady}!Module@{Module}}
+\subsubsection[{frameReady}]{\setlength{\rightskip}{0pt plus 5cm}void Module::frameReady (
+\begin{DoxyParamCaption}
+\item[{const QImage \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{dd/df9/class_module_a216ad8e0b35bdcc51a37ea40aa3bfdcf}
+
+
+Emited when frame has been processed and is ready to be shown. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & QImage\& reference to frame to be shown. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_module_a1cf07480fdd9a964eb8375bf2fb549b0}{
+\index{Module@{Module}!getName@{getName}}
+\index{getName@{getName}!Module@{Module}}
+\subsubsection[{getName}]{\setlength{\rightskip}{0pt plus 5cm}virtual QString Module::getName (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{dd/df9/class_module_a1cf07480fdd9a964eb8375bf2fb549b0}
+
+
+Should be overriten in order to get proper module name on \hyperlink{class_video_widget}{VideoWidget}. 
+
+\begin{DoxyReturn}{Returns}
+Name of module. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_module_video_a32ae57628cb1ebaf5c3447354bc86852}{ModuleVideo}.
+
+\hypertarget{class_module_a7a6a83882ef0d9aec623577884ce2fb5}{
+\index{Module@{Module}!getSettingsWidget@{getSettingsWidget}}
+\index{getSettingsWidget@{getSettingsWidget}!Module@{Module}}
+\subsubsection[{getSettingsWidget}]{\setlength{\rightskip}{0pt plus 5cm}virtual QWidget$\ast$ Module::getSettingsWidget (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{dd/df9/class_module_a7a6a83882ef0d9aec623577884ce2fb5}
+
+
+Should be overriten and provide module configuration interface. 
+
+\begin{DoxyReturn}{Returns}
+QWidget $\ast$ with module configuration interface. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_module_video_ae56c411ea37384d34702ddd994d9d02e}{ModuleVideo}.
+
+\hypertarget{class_module_acbca15013c486ec2a6cc2391e4170880}{
+\index{Module@{Module}!getVideoWidget@{getVideoWidget}}
+\index{getVideoWidget@{getVideoWidget}!Module@{Module}}
+\subsubsection[{getVideoWidget}]{\setlength{\rightskip}{0pt plus 5cm}QWidget$\ast$ Module::getVideoWidget (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{dd/df9/class_module_acbca15013c486ec2a6cc2391e4170880}
+Getter for \hyperlink{class_video_widget}{VideoWidget} of module.
+
+\begin{DoxyReturn}{Returns}
+videoWidget ready to show video after processing frame. 
+\end{DoxyReturn}
+\hypertarget{class_module_a5105981c562627043d38527dc31124c8}{
+\index{Module@{Module}!process@{process}}
+\index{process@{process}!Module@{Module}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Module::process (
+\begin{DoxyParamCaption}
+\item[{cv::Mat \&}]{ mat}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}protected, pure virtual\mbox{]}}}}
+\label{dd/df9/class_module_a5105981c562627043d38527dc31124c8}
+
+
+\hyperlink{class_module}{Module} processing method. The most important method. Should be overriten to provide frame processing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & cv::Mat to process \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_module_a030fde5f794abbc63e33286e40a0192c}{
+\index{Module@{Module}!processImage@{processImage}}
+\index{processImage@{processImage}!Module@{Module}}
+\subsubsection[{processImage}]{\setlength{\rightskip}{0pt plus 5cm}bool Module::processImage (
+\begin{DoxyParamCaption}
+\item[{cv::Mat \&}]{ mat}
+\end{DoxyParamCaption}
+)}}
+\label{dd/df9/class_module_a030fde5f794abbc63e33286e40a0192c}
+
+
+Method called by \hyperlink{class_image_processor}{ImageProcessor} in order to process frame. It is a wrapper to process method which check if settings are not locked (mutex because of thread). 
+
+If settings are locked it returns false in order to ommit this frame. 
+\begin{DoxyParams}{Parameters}
+{\em mat} & frame to process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool false if settings are locked, true if frame was properly processed 
+\end{DoxyReturn}
+\hypertarget{class_module_a56495f4dcfb3fc0a77178ba47a5414c9}{
+\index{Module@{Module}!settingsLock@{settingsLock}}
+\index{settingsLock@{settingsLock}!Module@{Module}}
+\subsubsection[{settingsLock}]{\setlength{\rightskip}{0pt plus 5cm}void Module::settingsLock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, protected\mbox{]}}}}
+\label{dd/df9/class_module_a56495f4dcfb3fc0a77178ba47a5414c9}
+Should be used before settings change. \hypertarget{class_module_a1834931d5ddcdc84d9289661aaf0cece}{
+\index{Module@{Module}!settingsUnlock@{settingsUnlock}}
+\index{settingsUnlock@{settingsUnlock}!Module@{Module}}
+\subsubsection[{settingsUnlock}]{\setlength{\rightskip}{0pt plus 5cm}void Module::settingsUnlock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, protected\mbox{]}}}}
+\label{dd/df9/class_module_a1834931d5ddcdc84d9289661aaf0cece}
+Should be used to unlock processing after settings change. \hypertarget{class_module_a44b6835871fe594af9e8b687ca3f349f}{
+\index{Module@{Module}!setVideo@{setVideo}}
+\index{setVideo@{setVideo}!Module@{Module}}
+\subsubsection[{setVideo}]{\setlength{\rightskip}{0pt plus 5cm}void Module::setVideo (
+\begin{DoxyParamCaption}
+\item[{bool}]{ b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}slot\mbox{]}}}}
+\label{dd/df9/class_module_a44b6835871fe594af9e8b687ca3f349f}
+
+
+Turns on/off video on \hyperlink{class_video_widget}{VideoWidget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bool} & true -\/ on / false -\/ off \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_module_abd2a5a79ff77212c6730767dc7d5d49d}{
+\index{Module@{Module}!videoStopped@{videoStopped}}
+\index{videoStopped@{videoStopped}!Module@{Module}}
+\subsubsection[{videoStopped}]{\setlength{\rightskip}{0pt plus 5cm}void Module::videoStopped (
+\begin{DoxyParamCaption}
+\item[{QWidget $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{dd/df9/class_module_abd2a5a79ff77212c6730767dc7d5d49d}
+
+
+Emited when \hyperlink{class_module}{Module} is removed from the list in order to unregister it from \hyperlink{class_video_gallery}{VideoGallery}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Pointer} & to \hyperlink{class_video_widget}{VideoWidget}. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+Modules/module.h\item 
+Modules/module.cpp\end{DoxyCompactItemize}

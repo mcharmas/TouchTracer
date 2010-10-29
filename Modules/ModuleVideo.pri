@@ -7,4 +7,3 @@ SOURCES += Modules/modulevideo.cpp \
 
 FORMS += \
     Modules/modulevideosettigns.ui
-

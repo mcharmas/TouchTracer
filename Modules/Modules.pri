@@ -14,3 +14,4 @@ FORMS += Modules/abstractsettingswidget.ui \
         Modules/videowidget.ui
 
 include(ModuleVideo.pri)
+include(ModuleBackground.pri)

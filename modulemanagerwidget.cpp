@@ -8,9 +8,10 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     new QVBoxLayout(ui->settingsBox);
     currentSettingsWidget = NULL;
     fileName = "/media/disk/Downloads/Dexter.S05E03.HDTV.XviD-2HD/dexter.s05e03.hdtv.xvid-2hd.avi";
-    processor = NULL;//new ImageProcessor(fileName, this);
+    processor = NULL;
     modules = new QList<Module*>();
     possibleModules.append("Dummy Module");
+    possibleModules.append("Background removal");
     ui->modulesBox->addItems(possibleModules);
     QStringListModel* model = new QStringListModel(ui->modulesList);
     ui->modulesList->setModel(model);
