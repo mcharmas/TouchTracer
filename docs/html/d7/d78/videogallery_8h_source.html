@@ -32,28 +32,28 @@
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QWidget&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;QGridLayout&gt;</span>
 <a name="l00006"></a>00006 
-<a name="l00007"></a><a class="code" href="../../dc/d09/class_video_gallery.html">00007</a> <span class="keyword">class </span><a class="code" href="../../dc/d09/class_video_gallery.html">VideoGallery</a> : <span class="keyword">public</span> QWidget
-<a name="l00008"></a>00008 {
-<a name="l00009"></a>00009     Q_OBJECT
-<a name="l00010"></a>00010 <span class="keyword">public</span>:
-<a name="l00011"></a>00011     <span class="keyword">explicit</span> <a class="code" href="../../dc/d09/class_video_gallery.html">VideoGallery</a>(QWidget *parent = 0);
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 signals:
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="keyword">public</span> slots:
-<a name="l00016"></a>00016     <span class="keywordtype">void</span> registerNewWidget(QWidget*);
-<a name="l00017"></a>00017     <span class="keywordtype">void</span> unRegisterWidget(QWidget*);
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="keyword">private</span>:
-<a name="l00020"></a>00020     <span class="keywordtype">int</span> columns;
-<a name="l00021"></a>00021     <span class="keywordtype">int</span> rows;
-<a name="l00022"></a>00022     <span class="keywordtype">int</span> x;
-<a name="l00023"></a>00023 };
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="preprocessor">#endif // VIDEOGALLERY_H</span>
+<a name="l00011"></a><a class="code" href="../../dc/d09/class_video_gallery.html">00011</a> <span class="keyword">class </span><a class="code" href="../../dc/d09/class_video_gallery.html" title="Class used to display videowidgets in grid layout.">VideoGallery</a> : <span class="keyword">public</span> QWidget
+<a name="l00012"></a>00012 {
+<a name="l00013"></a>00013     Q_OBJECT
+<a name="l00014"></a>00014 <span class="keyword">public</span>:
+<a name="l00020"></a>00020     <span class="keyword">explicit</span> <a class="code" href="../../dc/d09/class_video_gallery.html#aa20be933d1bfef5e9533ea255afc8142" title="Constructor.">VideoGallery</a>(QWidget *parent = 0);
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022 signals:
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="keyword">public</span> slots:
+<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="../../dc/d09/class_video_gallery.html#ad25f124c9bf433bdaa104f9638c59399" title="Registers new VideoWidget and displays it on the layout.">registerNewWidget</a>(QWidget*);
+<a name="l00031"></a>00031 
+<a name="l00037"></a>00037     <span class="keywordtype">void</span> <a class="code" href="../../dc/d09/class_video_gallery.html#a1be90e78200e971b1b357aa342c23b3e" title="Removes widget from gallery.">unRegisterWidget</a>(QWidget*);
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keyword">private</span>:
+<a name="l00040"></a>00040     <span class="keywordtype">int</span> columns; 
+<a name="l00041"></a>00041     <span class="keywordtype">int</span> x; 
+<a name="l00042"></a>00042 };
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="preprocessor">#endif // VIDEOGALLERY_H</span>
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 28 2010 20:29:11 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

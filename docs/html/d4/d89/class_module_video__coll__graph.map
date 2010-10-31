@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$dd/df9/class_module.html" title="Base class for all modules. Important methods to override are: process(), getName(), getSettingsWidget()" alt="" coords="29,101,96,131"/>
+<area shape="rect" id="node2" href="$dd/df9/class_module.html" title="Base class for all modules." alt="" coords="29,101,96,131"/>
 <area shape="rect" id="node4" href="$db/df7/class_video_widget.html" title="Class used for displaying video." alt="" coords="5,5,107,35"/>
-<area shape="rect" id="node6" href="$d6/d30/class_module_video_settigns.html" title="ModuleVideoSettigns" alt="" coords="132,101,289,131"/>
-<area shape="rect" id="node8" href="$db/dcb/class_abstract_settings_widget.html" title="AbstractSettingsWidget" alt="" coords="131,5,301,35"/>
+<area shape="rect" id="node6" href="$d6/d30/class_module_video_settigns.html" title="Class implementing empty settings to dummy ModuleVideo." alt="" coords="132,101,289,131"/>
+<area shape="rect" id="node8" href="$db/dcb/class_abstract_settings_widget.html" title="Abstract widget used to create settings widget." alt="" coords="131,5,301,35"/>
 </map>

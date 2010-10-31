@@ -29,62 +29,64 @@
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef MODULE_H</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define MODULE_H</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#include &lt;cv.h&gt;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QString&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;QMutex&gt;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;QWidget&gt;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;QObject&gt;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;QLabel&gt;</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;videowidget.h&quot;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;highgui.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;QString&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;QMutex&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;QWidget&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;QObject&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;QLabel&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;QDebug&gt;</span>
 <a name="l00011"></a>00011 
-<a name="l00020"></a><a class="code" href="../../dd/df9/class_module.html">00020</a> <span class="keyword">class </span><a class="code" href="../../dd/df9/class_module.html" title="Base class for all modules. Important methods to override are: process(), getName(), getSettingsWidget()">Module</a> : <span class="keyword">public</span> QObject
-<a name="l00021"></a>00021 {
-<a name="l00022"></a>00022     Q_OBJECT
-<a name="l00023"></a>00023 <span class="keyword">public</span>:
-<a name="l00024"></a>00024 
-<a name="l00030"></a>00030     <a class="code" href="../../dd/df9/class_module.html#a898c66ef74395bb450900d479b51fc21" title="Constructor. Does nothing except setting QObject parent.">Module</a>(QObject *parent = 0);
-<a name="l00031"></a>00031 
-<a name="l00035"></a>00035     <a class="code" href="../../dd/df9/class_module.html#a7c9d9c096786d127590fdd8aa2b7d681" title="Removes all stuff.">~Module</a>();
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037 
-<a name="l00046"></a>00046     <span class="keywordtype">bool</span> <a class="code" href="../../dd/df9/class_module.html#a030fde5f794abbc63e33286e40a0192c" title="Method called by ImageProcessor in order to process frame. It is a wrapper to process method which ch...">processImage</a>(cv::Mat &amp;mat);
-<a name="l00047"></a>00047 
-<a name="l00053"></a><a class="code" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880">00053</a>     QWidget* <a class="code" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880">getVideoWidget</a>() { <span class="keywordflow">return</span> videoWidget; }
-<a name="l00054"></a>00054 
-<a name="l00060"></a><a class="code" href="../../dd/df9/class_module.html#a1cf07480fdd9a964eb8375bf2fb549b0">00060</a>     <span class="keyword">virtual</span> QString <a class="code" href="../../dd/df9/class_module.html#a1cf07480fdd9a964eb8375bf2fb549b0" title="Should be overriten in order to get proper module name on VideoWidget.">getName</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>; }
-<a name="l00066"></a>00066     <span class="keyword">virtual</span> QWidget* <a class="code" href="../../dd/df9/class_module.html#a7a6a83882ef0d9aec623577884ce2fb5" title="Should be overriten and provide module configuration interface.">getSettingsWidget</a>()=0;
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 <span class="keyword">public</span> slots:
-<a name="l00074"></a>00074     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a44b6835871fe594af9e8b687ca3f349f" title="Turns on/off video on VideoWidget.">setVideo</a>(<span class="keywordtype">bool</span>);
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076 signals:
-<a name="l00082"></a>00082     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a216ad8e0b35bdcc51a37ea40aa3bfdcf" title="Emited when frame has been processed and is ready to be shown.">frameReady</a>(<span class="keyword">const</span> QImage &amp;);
-<a name="l00083"></a>00083 
-<a name="l00089"></a>00089     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#abd2a5a79ff77212c6730767dc7d5d49d" title="Emited when Module is removed from the list in order to unregister it from VideoGallery.">videoStopped</a>(QWidget*);
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="keyword">private</span>:
-<a name="l00092"></a>00092     <a class="code" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>* videoWidget; 
-<a name="l00093"></a>00093     <span class="keywordtype">bool</span> locked; 
-<a name="l00094"></a>00094     <span class="keywordtype">bool</span> displayVideo; 
-<a name="l00095"></a>00095     QMutex mutex; 
-<a name="l00103"></a>00103     QImage matToQImage(<span class="keyword">const</span> cv::Mat&amp; mat) <span class="keyword">const</span>;
-<a name="l00104"></a>00104 
-<a name="l00109"></a>00109     <span class="keywordtype">bool</span> isSettingsLocked() { <span class="keywordflow">return</span> locked; }
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111 <span class="keyword">protected</span>:
-<a name="l00115"></a><a class="code" href="../../dd/df9/class_module.html#a56495f4dcfb3fc0a77178ba47a5414c9">00115</a>     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a56495f4dcfb3fc0a77178ba47a5414c9">settingsLock</a>() { mutex.lock(); locked = <span class="keyword">true</span>; }
-<a name="l00116"></a>00116 
-<a name="l00120"></a><a class="code" href="../../dd/df9/class_module.html#a1834931d5ddcdc84d9289661aaf0cece">00120</a>     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a1834931d5ddcdc84d9289661aaf0cece">settingsUnlock</a>() { mutex.unlock(); locked = <span class="keyword">false</span>; }
-<a name="l00121"></a>00121 
-<a name="l00127"></a>00127     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a5105981c562627043d38527dc31124c8" title="Module processing method. The most important method. Should be overriten to provide frame processing...">process</a>(cv::Mat &amp;mat)=0;
-<a name="l00128"></a>00128 
-<a name="l00133"></a>00133     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#ad1956ac81429ec1f61f83dbc081cf18c" title="This method creates proper VideoWidget. Should be called in subclass Constructor!">init</a>();
-<a name="l00134"></a>00134 };
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136 <span class="preprocessor">#endif // MODULE_H</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;videowidget.h&quot;</span>
+<a name="l00013"></a>00013 
+<a name="l00023"></a><a class="code" href="../../dd/df9/class_module.html">00023</a> <span class="keyword">class </span><a class="code" href="../../dd/df9/class_module.html" title="Base class for all modules.">Module</a> : <span class="keyword">public</span> QObject
+<a name="l00024"></a>00024 {
+<a name="l00025"></a>00025     Q_OBJECT
+<a name="l00026"></a>00026 <span class="keyword">public</span>:
+<a name="l00027"></a>00027 
+<a name="l00033"></a>00033     <a class="code" href="../../dd/df9/class_module.html#a898c66ef74395bb450900d479b51fc21" title="Constructor. Does nothing except setting QObject parent.">Module</a>(QObject *parent = 0);
+<a name="l00034"></a>00034 
+<a name="l00038"></a>00038     <a class="code" href="../../dd/df9/class_module.html#a7c9d9c096786d127590fdd8aa2b7d681" title="Removes all stuff.">~Module</a>();
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 
+<a name="l00049"></a>00049     <span class="keywordtype">bool</span> <a class="code" href="../../dd/df9/class_module.html#a030fde5f794abbc63e33286e40a0192c" title="Method called by ImageProcessor in order to process frame. It is a wrapper to process method which ch...">processImage</a>(cv::Mat &amp;mat);
+<a name="l00050"></a>00050 
+<a name="l00056"></a><a class="code" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880">00056</a>     QWidget* <a class="code" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880">getVideoWidget</a>() { <span class="keywordflow">return</span> videoWidget; }
+<a name="l00057"></a>00057 
+<a name="l00063"></a><a class="code" href="../../dd/df9/class_module.html#a1cf07480fdd9a964eb8375bf2fb549b0">00063</a>     <span class="keyword">virtual</span> QString <a class="code" href="../../dd/df9/class_module.html#a1cf07480fdd9a964eb8375bf2fb549b0" title="Should be overriten in order to get proper module name on VideoWidget.">getName</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>; }
+<a name="l00069"></a>00069     <span class="keyword">virtual</span> QWidget* <a class="code" href="../../dd/df9/class_module.html#a7a6a83882ef0d9aec623577884ce2fb5" title="Should be overriten and provide module configuration interface.">getSettingsWidget</a>()=0;
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 <span class="keyword">public</span> slots:
+<a name="l00077"></a>00077     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a44b6835871fe594af9e8b687ca3f349f" title="Turns on/off video on VideoWidget.">setVideo</a>(<span class="keywordtype">bool</span>);
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 signals:
+<a name="l00085"></a>00085     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a216ad8e0b35bdcc51a37ea40aa3bfdcf" title="Emited when frame has been processed and is ready to be shown.">frameReady</a>(<span class="keyword">const</span> QImage &amp;);
+<a name="l00086"></a>00086 
+<a name="l00092"></a>00092     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#abd2a5a79ff77212c6730767dc7d5d49d" title="Emited when Module is removed from the list in order to unregister it from VideoGallery.">videoStopped</a>(QWidget*);
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 <span class="keyword">private</span>:
+<a name="l00095"></a>00095     <a class="code" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>* videoWidget; 
+<a name="l00096"></a>00096     <span class="keywordtype">bool</span> locked; 
+<a name="l00097"></a>00097     <span class="keywordtype">bool</span> displayVideo; 
+<a name="l00098"></a>00098     QMutex mutex; 
+<a name="l00104"></a>00104     <span class="keywordtype">bool</span> isSettingsLocked() { <span class="keywordflow">return</span> locked; }
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 <span class="keyword">protected</span>:
+<a name="l00113"></a>00113     QImage <a class="code" href="../../dd/df9/class_module.html#a74dffbc8228fd6e3722e3f93a33f3eb1" title="Converts BGR cv::Mat to QImage in order to display it on VideoWidget.">matToQImage</a>(<span class="keyword">const</span> cv::Mat&amp; mat) <span class="keyword">const</span>;
+<a name="l00114"></a>00114 
+<a name="l00118"></a><a class="code" href="../../dd/df9/class_module.html#a56495f4dcfb3fc0a77178ba47a5414c9">00118</a>     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a56495f4dcfb3fc0a77178ba47a5414c9">settingsLock</a>() { mutex.lock(); locked = <span class="keyword">true</span>; }
+<a name="l00119"></a>00119 
+<a name="l00123"></a><a class="code" href="../../dd/df9/class_module.html#a1834931d5ddcdc84d9289661aaf0cece">00123</a>     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a1834931d5ddcdc84d9289661aaf0cece">settingsUnlock</a>() { mutex.unlock(); locked = <span class="keyword">false</span>; }
+<a name="l00124"></a>00124 
+<a name="l00130"></a>00130     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a5105981c562627043d38527dc31124c8" title="Module processing method. The most important method. Should be overriten to provide frame processing...">process</a>(cv::Mat &amp;mat)=0;
+<a name="l00131"></a>00131 
+<a name="l00136"></a>00136     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#ad1956ac81429ec1f61f83dbc081cf18c" title="This method creates proper VideoWidget. Should be called in subclass Constructor!">init</a>();
+<a name="l00137"></a>00137 };
+<a name="l00138"></a>00138 
+<a name="l00139"></a>00139 <span class="preprocessor">#endif // MODULE_H</span>
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 28 2010 20:29:11 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

@@ -4,7 +4,7 @@
 }
 
 
-Base class for all modules. Important methods to override are: \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process()}, \hyperlink{class_module_a1cf07480fdd9a964eb8375bf2fb549b0}{getName()}, \hyperlink{class_module_a7a6a83882ef0d9aec623577884ce2fb5}{getSettingsWidget()}  
+Base class for all modules.  
 
 
 
@@ -13,17 +13,17 @@ Base class for all modules. Important methods to override are: \hyperlink{class_
 
 
 
-Inheritance diagram for Module:\nopagebreak
+Inheritance diagram for Module:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=158pt]{d1/d4b/class_module__inherit__graph}
+\includegraphics[width=284pt]{d1/d4b/class_module__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for Module:
-\nopagebreak
+Collaboration diagram for Module:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -63,6 +63,8 @@ virtual QWidget $\ast$ \hyperlink{class_module_a7a6a83882ef0d9aec623577884ce2fb5
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+QImage \hyperlink{class_module_a74dffbc8228fd6e3722e3f93a33f3eb1}{matToQImage} (const cv::Mat \&mat) const 
+\begin{DoxyCompactList}\small\item\em Converts BGR cv::Mat to QImage in order to display it on \hyperlink{class_video_widget}{VideoWidget}. \item\end{DoxyCompactList}\item 
 void \hyperlink{class_module_a56495f4dcfb3fc0a77178ba47a5414c9}{settingsLock} ()
 \item 
 void \hyperlink{class_module_a1834931d5ddcdc84d9289661aaf0cece}{settingsUnlock} ()
@@ -77,7 +79,9 @@ void \hyperlink{class_module_ad1956ac81429ec1f61f83dbc081cf18c}{init} ()}
 
 
 \subsection{Detailed Description}
-Base class for all modules. Important methods to override are: \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process()}, \hyperlink{class_module_a1cf07480fdd9a964eb8375bf2fb549b0}{getName()}, \hyperlink{class_module_a7a6a83882ef0d9aec623577884ce2fb5}{getSettingsWidget()} Modules are stored in list. When processing every frame \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process()} method is called. First method called in Constructor should be \hyperlink{class_module_ad1956ac81429ec1f61f83dbc081cf18c}{init()} to create proper \hyperlink{class_video_widget}{VideoWidget}. 
+Base class for all modules. Important methods to override are: \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process()}, \hyperlink{class_module_a1cf07480fdd9a964eb8375bf2fb549b0}{getName()}, \hyperlink{class_module_a7a6a83882ef0d9aec623577884ce2fb5}{getSettingsWidget()}
+
+Modules are sstored in list. When processing every frame \hyperlink{class_module_a5105981c562627043d38527dc31124c8}{process()} method is called. First method called in Constructor should be \hyperlink{class_module_ad1956ac81429ec1f61f83dbc081cf18c}{init()} to create proper \hyperlink{class_video_widget}{VideoWidget}. 
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{class_module_a898c66ef74395bb450900d479b51fc21}{
@@ -137,7 +141,7 @@ Name of module.
 \end{DoxyReturn}
 
 
-Reimplemented in \hyperlink{class_module_video_a32ae57628cb1ebaf5c3447354bc86852}{ModuleVideo}.
+Reimplemented in \hyperlink{class_module_background_a909cd371484ceb4842c0359b2c25915f}{ModuleBackground}, and \hyperlink{class_module_video_a32ae57628cb1ebaf5c3447354bc86852}{ModuleVideo}.
 
 \hypertarget{class_module_a7a6a83882ef0d9aec623577884ce2fb5}{
 \index{Module@{Module}!getSettingsWidget@{getSettingsWidget}}
@@ -157,7 +161,7 @@ QWidget $\ast$ with module configuration interface.
 \end{DoxyReturn}
 
 
-Implemented in \hyperlink{class_module_video_ae56c411ea37384d34702ddd994d9d02e}{ModuleVideo}.
+Implemented in \hyperlink{class_module_background_a752da9035e52eb6306aed6da553697a4}{ModuleBackground}, and \hyperlink{class_module_video_ae56c411ea37384d34702ddd994d9d02e}{ModuleVideo}.
 
 \hypertarget{class_module_acbca15013c486ec2a6cc2391e4170880}{
 \index{Module@{Module}!getVideoWidget@{getVideoWidget}}
@@ -172,6 +176,27 @@ Getter for \hyperlink{class_video_widget}{VideoWidget} of module.
 
 \begin{DoxyReturn}{Returns}
 videoWidget ready to show video after processing frame. 
+\end{DoxyReturn}
+\hypertarget{class_module_a74dffbc8228fd6e3722e3f93a33f3eb1}{
+\index{Module@{Module}!matToQImage@{matToQImage}}
+\index{matToQImage@{matToQImage}!Module@{Module}}
+\subsubsection[{matToQImage}]{\setlength{\rightskip}{0pt plus 5cm}QImage Module::matToQImage (
+\begin{DoxyParamCaption}
+\item[{const cv::Mat \&}]{ mat}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{dd/df9/class_module_a74dffbc8228fd6e3722e3f93a33f3eb1}
+
+
+Converts BGR cv::Mat to QImage in order to display it on \hyperlink{class_video_widget}{VideoWidget}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & cv::Mat to be converted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+QImage corresponding QImage 
 \end{DoxyReturn}
 \hypertarget{class_module_a5105981c562627043d38527dc31124c8}{
 \index{Module@{Module}!process@{process}}

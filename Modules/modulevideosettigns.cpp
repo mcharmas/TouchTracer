@@ -5,7 +5,7 @@ ModuleVideoSettigns::ModuleVideoSettigns(QWidget *parent) :
     AbstractSettingsWidget(parent),
     ui(new Ui::ModuleVideoSettigns)
 {
-    ui->setupUi(this);
+    ui->setupUi(getSettingsWidget());
 }
 
 ModuleVideoSettigns::~ModuleVideoSettigns()

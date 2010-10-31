@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$d6/d30/class_module_video_settigns.html" title="ModuleVideoSettigns" alt="" coords="12,83,169,112"/>
+<area shape="rect" id="node3" href="$d7/deb/class_module_background_settings.html" title="Class implementing settings widget for ModuleBackground." alt="" coords="5,83,203,112"/>
+<area shape="rect" id="node5" href="$d6/d30/class_module_video_settigns.html" title="Class implementing empty settings to dummy ModuleVideo." alt="" coords="227,83,384,112"/>
 </map>

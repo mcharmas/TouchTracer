@@ -2,27 +2,90 @@
 \section{VideoGallery Class Reference}
 \label{dc/d09/class_video_gallery}\index{VideoGallery@{VideoGallery}}
 }
+
+
+Class used to display videowidgets in grid layout.  
+
+
+
+
+{\ttfamily \#include $<$videogallery.h$>$}
+
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_video_gallery_ad25f124c9bf433bdaa104f9638c59399}{
-void {\bfseries registerNewWidget} (QWidget $\ast$)}
-\label{dc/d09/class_video_gallery_ad25f124c9bf433bdaa104f9638c59399}
-
-\item 
-\hypertarget{class_video_gallery_a1be90e78200e971b1b357aa342c23b3e}{
-void {\bfseries unRegisterWidget} (QWidget $\ast$)}
-\label{dc/d09/class_video_gallery_a1be90e78200e971b1b357aa342c23b3e}
-
-\end{DoxyCompactItemize}
+void \hyperlink{class_video_gallery_ad25f124c9bf433bdaa104f9638c59399}{registerNewWidget} (QWidget $\ast$)
+\begin{DoxyCompactList}\small\item\em Registers new \hyperlink{class_video_widget}{VideoWidget} and displays it on the layout. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_video_gallery_a1be90e78200e971b1b357aa342c23b3e}{unRegisterWidget} (QWidget $\ast$)
+\begin{DoxyCompactList}\small\item\em Removes widget from gallery. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{class_video_gallery_aa20be933d1bfef5e9533ea255afc8142}{VideoGallery} (QWidget $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class used to display videowidgets in grid layout. 
+
+\subsection{Constructor \& Destructor Documentation}
 \hypertarget{class_video_gallery_aa20be933d1bfef5e9533ea255afc8142}{
-{\bfseries VideoGallery} (QWidget $\ast$parent=0)}
+\index{VideoGallery@{VideoGallery}!VideoGallery@{VideoGallery}}
+\index{VideoGallery@{VideoGallery}!VideoGallery@{VideoGallery}}
+\subsubsection[{VideoGallery}]{\setlength{\rightskip}{0pt plus 5cm}VideoGallery::VideoGallery (
+\begin{DoxyParamCaption}
+\item[{QWidget $\ast$}]{ parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
 \label{dc/d09/class_video_gallery_aa20be933d1bfef5e9533ea255afc8142}
 
-\end{DoxyCompactItemize}
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & QWidget parent \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_video_gallery_ad25f124c9bf433bdaa104f9638c59399}{
+\index{VideoGallery@{VideoGallery}!registerNewWidget@{registerNewWidget}}
+\index{registerNewWidget@{registerNewWidget}!VideoGallery@{VideoGallery}}
+\subsubsection[{registerNewWidget}]{\setlength{\rightskip}{0pt plus 5cm}void VideoGallery::registerNewWidget (
+\begin{DoxyParamCaption}
+\item[{QWidget $\ast$}]{ w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}slot\mbox{]}}}}
+\label{dc/d09/class_video_gallery_ad25f124c9bf433bdaa104f9638c59399}
+
+
+Registers new \hyperlink{class_video_widget}{VideoWidget} and displays it on the layout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pointer} & to widget \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_video_gallery_a1be90e78200e971b1b357aa342c23b3e}{
+\index{VideoGallery@{VideoGallery}!unRegisterWidget@{unRegisterWidget}}
+\index{unRegisterWidget@{unRegisterWidget}!VideoGallery@{VideoGallery}}
+\subsubsection[{unRegisterWidget}]{\setlength{\rightskip}{0pt plus 5cm}void VideoGallery::unRegisterWidget (
+\begin{DoxyParamCaption}
+\item[{QWidget $\ast$}]{ w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}slot\mbox{]}}}}
+\label{dc/d09/class_video_gallery_a1be90e78200e971b1b357aa342c23b3e}
+
+
+Removes widget from gallery. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pointer} & to widget to remove \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

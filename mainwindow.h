@@ -11,22 +11,30 @@ namespace Ui {
     class MainWindow;
 }
 
+/*!
+ \brief MainWindow class.
+
+ Does nothing except showing GUI components (VideoGallery and ModuleManagerWidget).
+*/
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    /*!
+     \brief Constructs.
+     \param parent
+    */
     explicit MainWindow(QWidget *parent = 0);
+
+    /*!
+     \brief Destroys.
+    */
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
-
-    ModuleManagerWidget *manager;
-
-
-private slots:
-
+    Ui::MainWindow *ui; /*!< UI */
+    ModuleManagerWidget *manager; /*!< Pointer to module manager widget. */
 
 };
 

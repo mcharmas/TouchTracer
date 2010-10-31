@@ -51,7 +51,7 @@ public slots:
     void showFrame(const QImage&);
 
 private:
-    Ui::VideoWidget *ui; /*!< */
+    Ui::VideoWidget *ui; /*!< UI */
 
 };
 

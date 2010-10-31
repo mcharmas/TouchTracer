@@ -34,35 +34,118 @@
 <h1>AbstractSettingsWidget Class Reference</h1>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="AbstractSettingsWidget" --><!-- startSectionHeader --><div class="dynheader">
+<!-- doxytag: class="AbstractSettingsWidget" -->
+<p>Abstract widget used to create settings widget.  
+<a href="#_details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../d9/dbe/abstractsettingswidget_8h_source.html">abstractsettingswidget.h</a>&gt;</code></p>
+<!-- startSectionHeader --><div class="dynheader">
 Inheritance diagram for AbstractSettingsWidget:<!-- endSectionHeader --></div>
 <!-- startSectionSummary --><!-- endSectionSummary --><!-- startSectionContent --><div class="dyncontent">
 <div class="center"><img src="../../db/de4/class_abstract_settings_widget__inherit__graph.png" border="0" usemap="#_abstract_settings_widget_inherit__map" alt="Inheritance graph"/></div>
 <map name="_abstract_settings_widget_inherit__map" id="_abstract_settings_widget_inherit__map">
-<area shape="rect" id="node3" href="../../d6/d30/class_module_video_settigns.html" title="ModuleVideoSettigns" alt="" coords="12,83,169,112"/></map>
+<area shape="rect" id="node3" href="../../d7/deb/class_module_background_settings.html" title="Class implementing settings widget for ModuleBackground." alt="" coords="5,83,203,112"/><area shape="rect" id="node5" href="../../d6/d30/class_module_video_settigns.html" title="Class implementing empty settings to dummy ModuleVideo." alt="" coords="227,83,384,112"/></map>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center><!-- endSectionContent --></div>
 
 <p><a href="../../d8/d94/class_abstract_settings_widget-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f1f041ffe91ad92284eda558f011a39"></a><!-- doxytag: member="AbstractSettingsWidget::showVideoChanged" ref="a1f1f041ffe91ad92284eda558f011a39" args="(bool)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>showVideoChanged</b> (bool)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/class_abstract_settings_widget.html#a1f1f041ffe91ad92284eda558f011a39">showVideoChanged</a> (bool)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal used to notify module that showVideo property has changed.  <a href="#a1f1f041ffe91ad92284eda558f011a39"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1febbb1cfae0f5e21fb2ab86d301211"></a><!-- doxytag: member="AbstractSettingsWidget::AbstractSettingsWidget" ref="ae1febbb1cfae0f5e21fb2ab86d301211" args="(QWidget *parent=0)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>AbstractSettingsWidget</b> (QWidget *parent=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/class_abstract_settings_widget.html#ae1febbb1cfae0f5e21fb2ab86d301211">AbstractSettingsWidget</a> (QWidget *parent=0)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs.  <a href="#ae1febbb1cfae0f5e21fb2ab86d301211"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a93267e92d5d37f97f034c3a8ddc575ed"></a><!-- doxytag: member="AbstractSettingsWidget::~AbstractSettingsWidget" ref="a93267e92d5d37f97f034c3a8ddc575ed" args="()" -->
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/class_abstract_settings_widget.html#a93267e92d5d37f97f034c3a8ddc575ed">~AbstractSettingsWidget</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up. <br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b53233f9893f914da8b70fa30ccf476"></a><!-- doxytag: member="AbstractSettingsWidget::getConreteSettings" ref="a9b53233f9893f914da8b70fa30ccf476" args="()" -->
-virtual QWidget *&#160;</td><td class="memItemRight" valign="bottom"><b>getConreteSettings</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/class_abstract_settings_widget.html#afc0c4a698fa75911990a3af2623b28b6">getSettingsWidget</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns settings widget in which subclasses can show other settings.  <a href="#afc0c4a698fa75911990a3af2623b28b6"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Abstract widget used to create settings widget. </p>
+<p>Provides one setting common for all modules: showVideo - shows video in <a class="el" href="../../dc/d09/class_video_gallery.html" title="Class used to display videowidgets in grid layout.">VideoGallery</a> after processing it by module. </p>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ae1febbb1cfae0f5e21fb2ab86d301211"></a><!-- doxytag: member="AbstractSettingsWidget::AbstractSettingsWidget" ref="ae1febbb1cfae0f5e21fb2ab86d301211" args="(QWidget *parent=0)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AbstractSettingsWidget::AbstractSettingsWidget </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"> <em>parent</em> = <code>0</code>&#160;)</td>
+          <td><code> [explicit]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructs. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="afc0c4a698fa75911990a3af2623b28b6"></a><!-- doxytag: member="AbstractSettingsWidget::getSettingsWidget" ref="afc0c4a698fa75911990a3af2623b28b6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QWidget * AbstractSettingsWidget::getSettingsWidget </td>
+          <td>(</td>
+          <td class="paramname">&#160;)</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns settings widget in which subclasses can show other settings. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>QWidget * empty widget placed below showVideo setting. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1f1f041ffe91ad92284eda558f011a39"></a><!-- doxytag: member="AbstractSettingsWidget::showVideoChanged" ref="a1f1f041ffe91ad92284eda558f011a39" args="(bool)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AbstractSettingsWidget::showVideoChanged </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname">&#160;)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Signal used to notify module that showVideo property has changed. </p>
+<p>Sholud be connected in constructor of new module. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bool</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Modules/<a class="el" href="../../d9/dbe/abstractsettingswidget_8h_source.html">abstractsettingswidget.h</a></li>
 <li>Modules/abstractsettingswidget.cpp</li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 28 2010 20:29:11 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>
