@@ -26,6 +26,7 @@ void ImageProcessor::init(QString fileName, QList<Module *> *modules)
     running = true;
     this->timer.setInterval(1000);
     connect(&timer, SIGNAL(timeout()), this, SLOT(countFps()));
+    fps = 30;
 }
 
 ImageProcessor::~ImageProcessor()
@@ -46,12 +47,13 @@ void ImageProcessor::run()
     while(running) {
         while(capture->grab() && running)
         {
+            qint64 start = QDateTime::currentMSecsSinceEpoch();
+
             fpsMutex.lock();
             fps++;
             fpsMutex.unlock();
 
             Mat frame;
-            qint64 start = QDateTime::currentMSecsSinceEpoch();
             if(!capture->retrieve(frame))
                 break;
 
