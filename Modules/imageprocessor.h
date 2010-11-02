@@ -3,6 +3,9 @@
 
 #include <QThread>
 #include <QtGlobal>
+#include <QDateTime>
+#include <QTimer>
+#include <QAtomicInt>
 
 #include <cv.h>
 #include <highgui.h>
@@ -78,6 +81,12 @@ private:
     bool running; /*!< If thread is running. */
     QList<Module*> *modules; /*!< Pointer to module list. */
     QMutex mut; /*!< Mutex securing module list. */
+    QString fileName;
+    QTimer timer;
+
+    QMutex fpsMutex;
+    int fps;
+
 
     /*!
      \brief Inits whole class.
@@ -88,6 +97,12 @@ private:
      \param modules
     */
     void init(QString fileName, QList<Module*> *modules);
+
+private slots:
+    void countFps();
+
+signals:
+    void fpsUpdated(int);
 
 
 };

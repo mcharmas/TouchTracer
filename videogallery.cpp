@@ -4,7 +4,7 @@ VideoGallery::VideoGallery(QWidget *parent) :
     QWidget(parent)
 {
     new QGridLayout(this);
-    columns = 3;
+    columns = 2;
     x = 0;
 }
 

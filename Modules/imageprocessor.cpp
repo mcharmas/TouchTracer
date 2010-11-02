@@ -14,14 +14,18 @@ ImageProcessor::ImageProcessor(QString fileName, QList<Module *> * modules, QObj
 
 void ImageProcessor::init(QString fileName, QList<Module *> *modules)
 {
+    this->fileName = fileName;
     capture = new VideoCapture(fileName.toStdString());
     if(!capture->isOpened()) {
         throw new Exception();
     }
 
+    qDebug() << capture->get(CV_CAP_PROP_FPS);
     interval = (int)(1000000 / (capture->get(CV_CAP_PROP_FPS)));
     setModuleList(modules);
     running = true;
+    this->timer.setInterval(1000);
+    connect(&timer, SIGNAL(timeout()), this, SLOT(countFps()));
 }
 
 ImageProcessor::~ImageProcessor()
@@ -35,23 +39,67 @@ ImageProcessor::~ImageProcessor()
 
 void ImageProcessor::run()
 {
+    bool skipFrame = false;
+    qint64 timeToWait = 0;
+    timer.start();
+
     while(running) {
-        Mat frame;
-        *capture >> frame;
+        while(capture->grab() && running)
+        {
+            fpsMutex.lock();
+            fps++;
+            fpsMutex.unlock();
 
-        //TODO: dodac liczenie czasu i odejmowac od intervala
-        mut.lock();
-        if(modules != NULL) {
-           foreach(Module *m, *modules){
-               m->processImage(frame);
-           }
+            Mat frame;
+            qint64 start = QDateTime::currentMSecsSinceEpoch();
+            if(!capture->retrieve(frame))
+                break;
+
+            if(skipFrame) {
+                int x = timeToWait - interval;
+                if(x > 0) {
+                    skipFrame = true;
+                    timeToWait = x;
+                } else {
+                    skipFrame = false;
+                    this->usleep(interval - timeToWait);
+                }
+                continue;
+            }
+
+            mut.lock();
+            if(modules != NULL) {
+                foreach(Module *m, *modules){
+                    m->processImage(frame);
+                }
+            }
+            mut.unlock();
+
+            qint64 duration = QDateTime::currentMSecsSinceEpoch() - start;
+
+            if((interval - duration*1000) < 0)
+            {
+                skipFrame = true;
+                timeToWait = duration*1000 - interval;
+            }
+            else
+            {
+                this->usleep(interval - duration*1000);
+            }
         }
-        mut.unlock();
 
-
-        this->usleep(interval);
+        capture->release();
+        delete capture;
+        capture = new VideoCapture(fileName.toStdString());
     }
 }
 
 
-
+void ImageProcessor::countFps()
+{
+    fpsMutex.lock();
+    int xfps = fps;
+    fps = 0;
+    fpsMutex.unlock();
+    emit fpsUpdated(xfps);
+}

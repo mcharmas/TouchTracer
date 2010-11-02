@@ -78,6 +78,8 @@ private slots:
     */
     void showSettings(QItemSelection,QItemSelection);
 
+    void showFps(int);
+
 };
 
 #endif // MODULEMANAGERWIDGET_H

@@ -52,6 +52,7 @@ public slots:
 
 private:
     Ui::VideoWidget *ui; /*!< UI */
+    bool sizeSet;
 
 };
 

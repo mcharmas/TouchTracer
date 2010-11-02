@@ -3,8 +3,9 @@
 
 VideoWidget::VideoWidget(QString caption, QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::VideoWidget)
-{
+    ui(new Ui::VideoWidget),
+    sizeSet(false)
+{    
     ui->setupUi(this);
     ui->caption->setText(caption);
 }
@@ -16,6 +17,11 @@ VideoWidget::~VideoWidget()
 
 void VideoWidget::showFrame(const QImage &img)
 {
+    if(!sizeSet)
+    {
+        ui->video->setMaximumSize(img.width(),img.height());
+        sizeSet = true;
+    }
     ui->video->setPixmap(QPixmap::fromImage(img));
 }
 

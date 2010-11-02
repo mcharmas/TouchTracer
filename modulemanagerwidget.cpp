@@ -7,7 +7,8 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     ui->setupUi(this);
     new QVBoxLayout(ui->settingsBox);
     currentSettingsWidget = NULL;
-    fileName = "/media/disk/Downloads/Dexter.S05E03.HDTV.XviD-2HD/dexter.s05e03.hdtv.xvid-2hd.avi";
+    //fileName = "/media/disk/Downloads/Dexter.S05E03.HDTV.XviD-2HD/dexter.s05e03.hdtv.xvid-2hd.avi";
+    fileName = "/home/orbit/stol-szajze-wideo/bezfiltra-2A-1palec.avi";
     processor = NULL;
     modules = new QList<Module*>();
 
@@ -42,6 +43,7 @@ void ModuleManagerWidget::on_startButton_clicked()
     if(!processor) {
         processor = new ImageProcessor(fileName, modules, this);
         processor->setModuleList(modules);
+        connect(processor, SIGNAL(fpsUpdated(int)), this, SLOT(showFps(int)));
     }
 
     if(!processor->isRunning()) {
@@ -55,6 +57,7 @@ void ModuleManagerWidget::on_stopButton_clicked()
 {
     if(processor->isRunning()){
         processor->stop();
+        disconnect(processor, SIGNAL(fpsUpdated(int)));
         delete processor;
         processor = NULL;
     }
@@ -146,6 +149,10 @@ void ModuleManagerWidget::showSettings(QItemSelection,QItemSelection)
         ui->settingsBox->layout()->update();
         currentSettingsWidget = m->getSettingsWidget();
         currentSettingsWidget->show();
-
     }
+}
+
+void ModuleManagerWidget::showFps(int x)
+{
+    ui->fpsLabel->setText(QString::number(x));
 }
