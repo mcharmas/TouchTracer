@@ -21,7 +21,7 @@ void ImageProcessor::init(QString fileName, QList<Module *> *modules)
     }
 
     qDebug() << capture->get(CV_CAP_PROP_FPS);
-    interval = (int)(1000000 / (capture->get(CV_CAP_PROP_FPS)));
+    interval = (int)(1000000 / (capture->get(CV_CAP_PROP_FPS) + 1) );
     setModuleList(modules);
     running = true;
     this->timer.setInterval(1000);
