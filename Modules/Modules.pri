@@ -15,3 +15,5 @@ FORMS += Modules/abstractsettingswidget.ui \
 
 include(ModuleVideo.pri)
 include(ModuleBackground.pri)
+include(ModuleFilters.pri)
+include(ModuleTracking.pri)

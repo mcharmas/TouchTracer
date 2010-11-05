@@ -8,6 +8,8 @@
 #include "Modules/imageprocessor.h"
 #include "Modules/modulevideo.h"
 #include "Modules/modulebackground.h"
+#include "Modules/modulefilters.h"
+#include "Modules/moduletracking.h"
 
 namespace Ui {
     class ModuleManagerWidget;

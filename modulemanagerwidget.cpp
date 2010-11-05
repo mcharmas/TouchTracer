@@ -14,6 +14,8 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
 
     possibleModules.append("Dummy Module");
     possibleModules.append("Background removal");
+    possibleModules.append("Filters");
+    possibleModules.append("Tracking");
 
     ui->modulesBox->addItems(possibleModules);
     QStringListModel* model = new QStringListModel(ui->modulesList);
@@ -73,6 +75,10 @@ void ModuleManagerWidget::on_addModuleButton_clicked()
         m = new ModuleVideo();
     } else if(moduleName == "Background removal") {
         m = new ModuleBackground();
+    } else if(moduleName == "Filters") {
+        m = new ModuleFilters();
+    } else if(moduleName == "Tracking") {
+        m = new ModuleTracking();
     }
 
     connect(m, SIGNAL(videoStopped(QWidget*)), videoWidget, SLOT(unRegisterWidget(QWidget*)));
@@ -113,7 +119,9 @@ void ModuleManagerWidget::on_removeModuleButton_clicked()
             selectedModule = NULL;
         }
 
-        processor->chModList();
+        if(processor)
+            processor->chModList();
+
         m->setVideo(false);
         videoWidget->layout()->removeWidget(m->getVideoWidget());
         modules->removeAt(sel);
@@ -122,7 +130,10 @@ void ModuleManagerWidget::on_removeModuleButton_clicked()
             currentSettingsWidget = NULL;
         }
         delete m;
-        processor->stopChModList();
+
+        if(processor)
+            processor->stopChModList();
+
         updateList();
     }
 }
@@ -145,10 +156,13 @@ void ModuleManagerWidget::showSettings(QItemSelection,QItemSelection)
             ui->settingsBox->layout()->removeWidget(currentSettingsWidget);
         }
 
-        ui->settingsBox->layout()->addWidget(m->getSettingsWidget());
-        ui->settingsBox->layout()->update();
-        currentSettingsWidget = m->getSettingsWidget();
-        currentSettingsWidget->show();
+        if(m->getSettingsWidget()) {
+            ui->settingsBox->layout()->addWidget(m->getSettingsWidget());
+            ui->settingsBox->layout()->update();
+            currentSettingsWidget = m->getSettingsWidget();
+            currentSettingsWidget->show();
+        }
+
     }
 }
 
