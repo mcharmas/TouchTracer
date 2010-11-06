@@ -2,6 +2,7 @@
 #define MODULETRACKING_H
 #include "module.h"
 #include "moduletrackingsettings.h"
+#include "touch.h"
 
 #include <cv.h>
 #include <highgui.h>
@@ -24,15 +25,22 @@ public:
 protected:
     void process(cv::Mat &mat);
     int thres;
+    int minBlob;
+    int maxBlob;
 
 
 private:
     ModuleTrackingSettings* settings;
 
 signals:
+    void thresholdChanged(int);
+    void minBlobChanged(int);
+    void maxBlobChanged(int);
 
 public slots:
     void setThreshold(int);
+    void setMinBlob(int);
+    void setMaxBlob(int);
 
 };
 

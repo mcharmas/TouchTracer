@@ -18,6 +18,14 @@ public:
     ~ModuleTrackingSettings();
 
     QSlider* thresholdSlider;
+    QSlider* minBlobSizeSlider;
+    QSlider* maxBlobSizeSlider;
+
+public slots:
+    void setThresholdInfo(int);
+    void setMinBlobInfo(int);
+    void setMaxBlobInfo(int);
+
 private:
     Ui::ModuleTrackingSettings *ui;
 };
