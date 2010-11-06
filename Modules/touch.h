@@ -14,11 +14,15 @@ class Touch : public QObject
 {
     Q_OBJECT
 public:
+    Touch(QObject *parent = 0);
+    Touch(const Touch& t);
     Touch(const vector<Point> &countours, QObject *parent = 0);
+    Touch& operator=(const Touch& t);
     int getArea() { return area; }
     Point getCoordinates() { return middle; }
-    vector<Point>& getCvContour() { return contourPoints; }
-
+    const vector<Point>& getCvContour() const { return contourPoints; }
+    void setContours(const vector<Point>& contours);
+    void drawMiddle(Mat &mat);
 signals:
 
 public slots:

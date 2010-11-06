@@ -3,6 +3,7 @@
 #include "module.h"
 #include "moduletrackingsettings.h"
 #include "touch.h"
+#include "tracker.h"
 
 #include <cv.h>
 #include <highgui.h>
@@ -31,6 +32,9 @@ protected:
 
 private:
     ModuleTrackingSettings* settings;
+    void filterContours(vector<vector<Point> > &contours, vector<vector<Point> >& filtered);
+    void drawMiddles(Mat& mat, QVector<Touch*>* touches);
+    Tracker tracker;
 
 signals:
     void thresholdChanged(int);

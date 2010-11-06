@@ -37,30 +37,37 @@ void ModuleTracking::process(cv::Mat &mat)
     }
     Mat thresholded;
     threshold(mat, thresholded, thres, 255, THRESH_BINARY);
-
-    findContours(thresholded, contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
-
     cvtColor(thresholded, mat, CV_GRAY2BGR);
-    drawContours(mat, contours, -1, Scalar(0,255,255,0), 2);
+
+    findContours(thresholded, contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);        
 
     vector<vector<Point> > contoursToDraw;
+    filterContours(contours, contoursToDraw);
+    //drawMiddles(mat, touches);
+    tracker.pushNewTouches(contours);
+
+    drawContours(mat, contoursToDraw, -1, Scalar(0,0,255,0), 2);
+}
+
+void ModuleTracking::drawMiddles(Mat& mat, QVector<Touch *> *touches)
+{
+    for(QVector<Touch*>::iterator it=touches->begin(); it!=touches->end(); it++)
+    {
+        (*it)->drawMiddle(mat);
+    }
+}
+
+void ModuleTracking::filterContours(vector<vector<Point> > &contours, vector<vector<Point> >& filtered)
+{
     for(vector<vector<Point> >::iterator it=contours.begin(); it!=contours.end(); it++)
     {
         Touch t(*it);
         if(t.getArea() >= minBlob && t.getArea() <= maxBlob)
         {
-            Point up(t.getCoordinates().x, t.getCoordinates().y+2);
-            Point down(t.getCoordinates().x, t.getCoordinates().y-2);
-            Point left(t.getCoordinates().x-2, t.getCoordinates().y);
-            Point right(t.getCoordinates().x+2, t.getCoordinates().y);
-            //line(mat, up, down, Scalar(0,255,255,0), 2);
-            //line(mat, left, right, Scalar(0,255,255,0), 2);
-            contoursToDraw.push_back(t.getCvContour());
+            filtered.push_back(t.getCvContour());
         }
     }
-    //drawContours(mat, contoursToDraw, -1, Scalar(0,255,255,0), 2);
-
-}
+ }
 
 void ModuleTracking::setThreshold(int x)
 {
