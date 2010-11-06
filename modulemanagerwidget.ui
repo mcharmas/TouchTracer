@@ -141,6 +141,19 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QLabel" name="dpsLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>DPS</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

@@ -27,6 +27,7 @@ void ImageProcessor::init(QString fileName, QList<Module *> *modules)
     this->timer.setInterval(1000);
     connect(&timer, SIGNAL(timeout()), this, SLOT(countFps()));
     fps = 30;
+    dps = 0;
 }
 
 ImageProcessor::~ImageProcessor()
@@ -58,6 +59,9 @@ void ImageProcessor::run()
                 break;
 
             if(skipFrame) {
+                fpsMutex.lock();
+                dps++;
+                fpsMutex.unlock();
                 int x = timeToWait - interval;
                 if(x > 0) {
                     skipFrame = true;
@@ -102,6 +106,9 @@ void ImageProcessor::countFps()
     fpsMutex.lock();
     int xfps = fps;
     fps = 0;
+    int xdps = dps;
+    dps=0;
     fpsMutex.unlock();
     emit fpsUpdated(xfps);
+    emit dpsUpdated(xdps);
 }

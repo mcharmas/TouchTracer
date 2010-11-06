@@ -46,6 +46,7 @@ void ModuleManagerWidget::on_startButton_clicked()
         processor = new ImageProcessor(fileName, modules, this);
         processor->setModuleList(modules);
         connect(processor, SIGNAL(fpsUpdated(int)), this, SLOT(showFps(int)));
+        connect(processor, SIGNAL(dpsUpdated(int)), this, SLOT(showDps(int)));
     }
 
     if(!processor->isRunning()) {
@@ -60,6 +61,7 @@ void ModuleManagerWidget::on_stopButton_clicked()
     if(processor->isRunning()){
         processor->stop();
         disconnect(processor, SIGNAL(fpsUpdated(int)));
+        disconnect(processor, SIGNAL(dpsUpdated(int)));
         delete processor;
         processor = NULL;
     }
@@ -169,4 +171,9 @@ void ModuleManagerWidget::showSettings(QItemSelection,QItemSelection)
 void ModuleManagerWidget::showFps(int x)
 {
     ui->fpsLabel->setText(QString::number(x));
+}
+
+void ModuleManagerWidget::showDps(int x)
+{
+    ui->dpsLabel->setText(QString::number(x));
 }

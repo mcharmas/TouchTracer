@@ -86,6 +86,7 @@ private:
 
     QMutex fpsMutex;
     int fps;
+    int dps;
 
 
     /*!
@@ -103,6 +104,7 @@ private slots:
 
 signals:
     void fpsUpdated(int);
+    void dpsUpdated(int);
 
 
 };

@@ -81,6 +81,7 @@ private slots:
     void showSettings(QItemSelection,QItemSelection);
 
     void showFps(int);
+    void showDps(int);
 
 };
 
