@@ -62,12 +62,6 @@ private:
     Mat storedFrame; /*!< backgorund frame */
     ModuleBackgroundSettings *settings; /*!< Settings widget */
 
-    /*!
-     \brief Substracts stored background from mat.
-     \param mat
-    */
-    void substractBackground(Mat &mat);
-
 signals:
     /*!
      \brief Signal used to notify settings widget that background have been stored.
