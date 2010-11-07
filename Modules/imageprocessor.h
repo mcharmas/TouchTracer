@@ -4,7 +4,6 @@
 #include <QThread>
 #include <QtGlobal>
 #include <QDateTime>
-#include <QTimer>
 #include <QAtomicInt>
 
 #include <cv.h>
@@ -68,6 +67,8 @@ public:
     */
     void stopChModList() { mut.unlock(); }
 
+    void timerEvent(QTimerEvent *);
+
 
 public slots:
     /*!
@@ -82,8 +83,6 @@ private:
     QList<Module*> *modules; /*!< Pointer to module list. */
     QMutex mut; /*!< Mutex securing module list. */
     QString fileName;
-    QTimer timer;
-
     QMutex fpsMutex;
     int fps;
     int dps;

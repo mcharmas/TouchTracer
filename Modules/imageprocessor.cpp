@@ -20,12 +20,9 @@ void ImageProcessor::init(QString fileName, QList<Module *> *modules)
         throw new Exception();
     }
 
-    qDebug() << capture->get(CV_CAP_PROP_FPS);
     interval = (int)(1000000 / (capture->get(CV_CAP_PROP_FPS) + 1) );
     setModuleList(modules);
     running = true;
-    this->timer.setInterval(1000);
-    connect(&timer, SIGNAL(timeout()), this, SLOT(countFps()));
     fps = 30;
     dps = 0;
 }
@@ -41,9 +38,9 @@ ImageProcessor::~ImageProcessor()
 
 void ImageProcessor::run()
 {
+    startTimer(1000);
     bool skipFrame = false;
     qint64 timeToWait = 0;
-    timer.start();
 
     while(running) {
         while(capture->grab() && running)
@@ -101,6 +98,10 @@ void ImageProcessor::run()
     }
 }
 
+void ImageProcessor::timerEvent(QTimerEvent *)
+{
+    countFps();
+}
 
 void ImageProcessor::countFps()
 {
