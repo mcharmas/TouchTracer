@@ -82,6 +82,7 @@ void ImageProcessor::run()
             mut.unlock();
 
             qint64 duration = QDateTime::currentMSecsSinceEpoch() - start;
+            qDebug() << duration;
 
             if((interval - duration*1000) < 0)
             {

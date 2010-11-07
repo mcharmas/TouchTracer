@@ -44,7 +44,7 @@ void ModuleTracking::process(cv::Mat &mat)
     vector<vector<Point> > contoursToDraw;
     filterContours(contours, contoursToDraw);
     //drawMiddles(mat, touches);
-    tracker.pushNewTouches(contours);
+    tracker.pushNewTouches(contoursToDraw, mat);
 
     drawContours(mat, contoursToDraw, -1, Scalar(0,0,255,0), 2);
 }

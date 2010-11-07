@@ -4,22 +4,29 @@ Touch::Touch(QObject *parent) :QObject(parent)
 {
     middle = Point(0,0);
     area = 0;
+    found = false;
 }
 
 Touch::Touch(const vector<Point>& contours, QObject *parent) :
     QObject(parent)
 {
     setContours(contours);
+    found = false;
 }
 
 Touch::Touch(const Touch &t) : QObject(t.parent())
 {
     setContours(t.getCvContour());
+    found = t.isFound();
+    id = t.getId();
 }
+
 
 Touch& Touch::operator=(const Touch& t)
 {
     setContours(t.getCvContour());
+    found = t.isFound();
+    id = t.getId();
     return *this;
 }
 
@@ -59,4 +66,17 @@ void Touch::drawMiddle(Mat &mat)
     Point right(getCoordinates().x+2, getCoordinates().y);
     line(mat, up, down, Scalar(0,0,255,0), 1);
     line(mat, left, right, Scalar(0,0,255,0), 1);
+}
+
+void Touch::drawId(Mat &mat)
+{
+    Point p(getCoordinates().x, getCoordinates().y-10);
+    putText(mat, QString::number(getId()).toStdString(), p, FONT_HERSHEY_SIMPLEX, 1.2, Scalar(0,0,255,0), 2);
+}
+
+double Touch::distance(const Touch &t) const
+{
+    int x_dst = this->getCoordinates().x - t.getCoordinates().x;
+    int y_dst = this->getCoordinates().y - t.getCoordinates().y;
+    return sqrt(x_dst*x_dst + y_dst*y_dst);
 }

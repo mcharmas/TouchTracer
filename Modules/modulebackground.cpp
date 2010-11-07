@@ -21,7 +21,7 @@ void ModuleBackground::process(Mat& mat)
     {
         Mat m1;
         cvtColor(mat, m1, CV_RGB2GRAY);
-        mat = m1;
+        m1.copyTo(mat);
     }
 
     if(frameToStore)

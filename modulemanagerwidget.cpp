@@ -8,7 +8,10 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     new QVBoxLayout(ui->settingsBox);
     currentSettingsWidget = NULL;
     //fileName = "/media/disk/Downloads/Dexter.S05E03.HDTV.XviD-2HD/dexter.s05e03.hdtv.xvid-2hd.avi";
-    fileName = "/home/orbit/stol-szajze-wideo/bezfiltra-2A-1palec.avi";
+    //fileName = "/home/orbit/stol-szajze-wideo/bezfiltra-2A-1palec.avi";
+    fileName = "/home/orbit/stol-szajze-wideo/bezfiltra-3A-wiele-palcow.avi";
+    //fileName = "/home/orbit/stol-szajze-wideo/bezfiltra-2B-1palec-odrywanie.avi";
+
     processor = NULL;
     modules = new QList<Module*>();
 
