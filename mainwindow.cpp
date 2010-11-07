@@ -16,3 +16,12 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Video"), "~", tr("Video Files (*.avi)"));
+    if(fileName!="")
+    {
+        manager->openFile(fileName);
+    }
+}

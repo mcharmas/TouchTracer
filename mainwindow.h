@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDebug>
+#include <QFileDialog>
 #include <cv.h>
 #include <highgui.h>
 #include "Modules/imageprocessor.h"
@@ -36,6 +38,9 @@ private:
     Ui::MainWindow *ui; /*!< UI */
     ModuleManagerWidget *manager; /*!< Pointer to module manager widget. */
 
+
+private slots:
+    void on_actionOpen_triggered();
 };
 
 #endif // MAINWINDOW_H

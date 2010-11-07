@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QStringListModel>
 #include <QDebug>
+#include <QMessageBox>
 #include "videogallery.h"
 #include "Modules/imageprocessor.h"
 #include "Modules/modulevideo.h"
@@ -36,6 +37,8 @@ public:
      \brief Clean up.
     */
     ~ModuleManagerWidget();
+
+    void openFile(QString fileName);
 
 private:
     /*!

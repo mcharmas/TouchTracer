@@ -7,7 +7,8 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     ui->setupUi(this);
     new QVBoxLayout(ui->settingsBox);
     currentSettingsWidget = NULL;
-    fileName = "/home/orbit/stol-szajze-wideo/zfiltrem-2B-1palec-odrywanie.avi";
+    fileName = "";
+    //fileName = "/home/orbit/stol-szajze-wideo/zfiltrem-2B-1palec-odrywanie.avi";
     //fileName = "/home/orbit/stol-szajze-wideo/bezfiltra-2A-1palec.avi";
     //fileName = "/home/orbit/stol-szajze-wideo/bezfiltra-3A-wiele-palcow.avi";
     //fileName = "/home/orbit/stol-szajze-wideo/bezfiltra-2B-1palec-odrywanie.avi";
@@ -27,6 +28,12 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     connect(ui->modulesList->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(showSettings(QItemSelection,QItemSelection)));
 }
 
+void ModuleManagerWidget::openFile(QString fileName)
+{
+    on_stopButton_clicked();
+    this->fileName = fileName;
+}
+
 ModuleManagerWidget::~ModuleManagerWidget()
 {
     delete ui;
@@ -44,6 +51,11 @@ ModuleManagerWidget::~ModuleManagerWidget()
 
 void ModuleManagerWidget::on_startButton_clicked()
 {
+    if(fileName=="")
+    {
+        QMessageBox::information(this, tr("No file opened."), tr("No video file has been opened."), QMessageBox::Ok);
+        return;
+    }
 
     if(!processor) {
         processor = new ImageProcessor(fileName, modules, this);
@@ -61,7 +73,7 @@ void ModuleManagerWidget::on_startButton_clicked()
 
 void ModuleManagerWidget::on_stopButton_clicked()
 {
-    if(processor->isRunning()){
+    if(processor && processor->isRunning()){
         processor->stop();
         disconnect(processor, SIGNAL(fpsUpdated(int)));
         disconnect(processor, SIGNAL(dpsUpdated(int)));
