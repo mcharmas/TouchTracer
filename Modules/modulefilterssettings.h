@@ -2,6 +2,7 @@
 #define MODULEFILTERSSETTINGS_H
 
 #include <QWidget>
+#include <QSlider>
 #include "abstractsettingswidget.h"
 
 namespace Ui {
@@ -15,6 +16,7 @@ class ModuleFiltersSettings : public AbstractSettingsWidget
 public:
     explicit ModuleFiltersSettings(QWidget *parent = 0);
     ~ModuleFiltersSettings();
+    QSlider* gainSlider;
 
 signals:
     void blurValueChanged(int);

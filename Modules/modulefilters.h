@@ -23,11 +23,13 @@ public:
 
 public slots:
     void changeBlur(int);
+    void changeGain(int);
 
 
 private:
     ModuleFiltersSettings *settings;
     int blurValue;
+    double gain;
 
 };
 

@@ -6,6 +6,7 @@ ModuleFiltersSettings::ModuleFiltersSettings(QWidget *parent) :
     ui(new Ui::ModuleFiltersSettings)
 {
     ui->setupUi(getSettingsWidget());
+    gainSlider = ui->gainSlider;
     connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(changeBlurValue(int)));
 }
 
