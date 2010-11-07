@@ -6,9 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    new QHBoxLayout(ui->managerWidget);
+    ui->managerWidget->setLayout(new QVBoxLayout());
 
-    manager = new ModuleManagerWidget(ui->videosContainer, ui->managerWidget);
+    manager = new ModuleManagerWidget(ui->videosContainer);
+    ui->managerWidget->layout()->addWidget(manager);
 }
 
 MainWindow::~MainWindow()

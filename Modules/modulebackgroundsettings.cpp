@@ -21,6 +21,6 @@ void ModuleBackgroundSettings::on_storeButton_clicked()
 
 void ModuleBackgroundSettings::showStoredBackground(QImage img)
 {
-    img = img.scaled(this->size(),Qt::KeepAspectRatio);
+    img = img.scaled(ui->frameLabel->size(),Qt::KeepAspectRatio);
     ui->frameLabel->setPixmap(QPixmap::fromImage(img));
 }
