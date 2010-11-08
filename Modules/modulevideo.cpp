@@ -13,7 +13,7 @@ ModuleVideo::~ModuleVideo()
     delete settings;
 }
 
-void ModuleVideo::process(Mat& m)
+void ModuleVideo::process(Mat&)
 {
 }
 

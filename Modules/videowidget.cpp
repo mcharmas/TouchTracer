@@ -17,29 +17,31 @@ VideoWidget::~VideoWidget()
 
 void VideoWidget::showFrame(const QImage &img)
 {
-    if(!sizeSet)
+/*    if(!sizeSet)
     {
         ui->video->setMaximumSize(img.width(),img.height());
         sizeSet = true;
     }
-    ui->video->setPixmap(QPixmap::fromImage(img));
+    ui->video->setPixmap(QPixmap::fromImage(img));*/
+    ui->video->setImage(img);
 }
 
 void VideoWidget::stopVideo()
 {
-    ui->video->setText("No Video");
+    //ui->video->setText("No Video");
 }
 
 void VideoWidget::setSelected(bool b)
 {
-    if(b) {
+/*    if(b) {
         this->setFrameShadow(QFrame::Sunken);
     }
     else {
         this->setFrameShadow(QFrame::Raised);
-    }
+    }*/
+    //ui->video->updateGL();
 
-    hide();
-    show();
+//    hide();
+//    show();
     //update();
 }
