@@ -6,7 +6,7 @@ ModuleFilters::ModuleFilters(QObject *parent) :
     init();
     settings = new ModuleFiltersSettings();
     connect(settings, SIGNAL(showVideoChanged(bool)), this, SLOT(setVideo(bool)));
-    connect(settings, SIGNAL(blurValueChanged(int)), this, SLOT(changeBlur(int)));
+    connect(settings->blurSlider, SIGNAL(valueChanged(int)), this, SLOT(changeBlur(int)));
     connect(settings->gainSlider, SIGNAL(valueChanged(int)), this, SLOT(changeGain(int)));
     blurValue = 0;
     gain = 1;

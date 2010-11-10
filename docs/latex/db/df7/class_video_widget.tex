@@ -14,7 +14,7 @@ Class used for displaying video.
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{class_video_widget_af99b87e3779f8a55473941540e84bdf2}{showFrame} (const QImage \&)
+void \hyperlink{class_video_widget_a9b0e926e4ed31a04cfeee3d086e0d332}{showFrame} (const QImage \&frame)
 \begin{DoxyCompactList}\small\item\em Used to get over frame to display. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -31,7 +31,7 @@ void \hyperlink{class_video_widget_a7cd8b0959b43587884972e2076fb05d2}{stopVideo}
 \label{db/df7/class_video_widget_a7cd8b0959b43587884972e2076fb05d2}
 
 \begin{DoxyCompactList}\small\item\em Shows information on video label that video has been stopped. \item\end{DoxyCompactList}\item 
-void \hyperlink{class_video_widget_af98a0482139c6fce67225501ea2c2922}{setSelected} (bool)
+void \hyperlink{class_video_widget_a094692eefb7ee61a6f066acc8abddc45}{setSelected} (bool b)
 \begin{DoxyCompactList}\small\item\em Changes look of widget to notify user that it is selected. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -63,7 +63,7 @@ Creates object with caption.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{class_video_widget_af98a0482139c6fce67225501ea2c2922}{
+\hypertarget{class_video_widget_a094692eefb7ee61a6f066acc8abddc45}{
 \index{VideoWidget@{VideoWidget}!setSelected@{setSelected}}
 \index{setSelected@{setSelected}!VideoWidget@{VideoWidget}}
 \subsubsection[{setSelected}]{\setlength{\rightskip}{0pt plus 5cm}void VideoWidget::setSelected (
@@ -71,32 +71,32 @@ Creates object with caption.
 \item[{bool}]{ b}
 \end{DoxyParamCaption}
 )}}
-\label{db/df7/class_video_widget_af98a0482139c6fce67225501ea2c2922}
+\label{db/df7/class_video_widget_a094692eefb7ee61a6f066acc8abddc45}
 
 
 Changes look of widget to notify user that it is selected. 
 
-
+Not working right now due to problems with QGLWidget displaying video. 
 \begin{DoxyParams}{Parameters}
-{\em bool} & true -\/ selected / false not \\
+{\em b} & true -\/ selected / false not \\
 \hline
 \end{DoxyParams}
-\hypertarget{class_video_widget_af99b87e3779f8a55473941540e84bdf2}{
+\hypertarget{class_video_widget_a9b0e926e4ed31a04cfeee3d086e0d332}{
 \index{VideoWidget@{VideoWidget}!showFrame@{showFrame}}
 \index{showFrame@{showFrame}!VideoWidget@{VideoWidget}}
 \subsubsection[{showFrame}]{\setlength{\rightskip}{0pt plus 5cm}void VideoWidget::showFrame (
 \begin{DoxyParamCaption}
-\item[{const QImage \&}]{ img}
+\item[{const QImage \&}]{ frame}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}slot\mbox{]}}}}
-\label{db/df7/class_video_widget_af99b87e3779f8a55473941540e84bdf2}
+\label{db/df7/class_video_widget_a9b0e926e4ed31a04cfeee3d086e0d332}
 
 
 Used to get over frame to display. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em frame} & \\
+{\em frame} & image to be displayed. \\
 \hline
 \end{DoxyParams}
 

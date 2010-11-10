@@ -38,6 +38,13 @@ public:
     */
     ~ModuleManagerWidget();
 
+    /**
+     * @brief Opens video file.
+     *
+     * Stops currently processing thread (if any) and sets the name.
+     * New thread is created and started by on_start_button_clicked().
+     * @param fileName
+    */
     void openFile(QString fileName);
 
 private:
@@ -83,8 +90,20 @@ private slots:
     */
     void showSettings(QItemSelection,QItemSelection);
 
-    void showFps(int);
-    void showDps(int);
+
+    /**
+     * @brief Shows FPS in GUI.
+     * Used by ImageProcessor to notify about current framerate.
+     * @param x current framerate to display
+    */
+    void showFps(int x);
+
+    /**
+     * @brief Shows DPS in GUI.
+     * Used by ImageProcessor to notify about current dropped frames.
+     * @param x current dropped frames to display
+    */
+    void showDps(int x);
 
 };
 

@@ -49,14 +49,6 @@ void ModuleTracking::process(cv::Mat &mat)
     drawContours(mat, contoursToDraw, -1, Scalar(0,0,255,0), 2);
 }
 
-void ModuleTracking::drawMiddles(Mat& mat, QVector<Touch *> *touches)
-{
-    for(QVector<Touch*>::iterator it=touches->begin(); it!=touches->end(); it++)
-    {
-        (*it)->drawMiddle(mat);
-    }
-}
-
 void ModuleTracking::filterContours(vector<vector<Point> > &contours, vector<vector<Point> >& filtered)
 {
     for(vector<vector<Point> >::iterator it=contours.begin(); it!=contours.end(); it++)
@@ -71,6 +63,11 @@ void ModuleTracking::filterContours(vector<vector<Point> > &contours, vector<vec
 
 void ModuleTracking::setThreshold(int x)
 {
+    if(x<0 || x>255)
+    {
+        return;
+    }
+
     settingsLock();
     thres = x;
     settingsUnlock();

@@ -45,7 +45,7 @@ Inheritance diagram for Module:<!-- endSectionHeader --></div>
 <!-- startSectionSummary --><!-- endSectionSummary --><!-- startSectionContent --><div class="dyncontent">
 <div class="center"><img src="../../d1/d4b/class_module__inherit__graph.png" border="0" usemap="#_module_inherit__map" alt="Inheritance graph"/></div>
 <map name="_module_inherit__map" id="_module_inherit__map">
-<area shape="rect" id="node3" href="../../d0/deb/class_module_background.html" title="Class implementing background removal module." alt="" coords="5,83,149,112"/><area shape="rect" id="node5" href="../../db/d7c/class_module_video.html" title="Class implementing dumm Module." alt="" coords="173,83,277,112"/></map>
+<area shape="rect" id="node3" href="../../d0/deb/class_module_background.html" title="Class implementing background removal module." alt="" coords="5,83,149,112"/><area shape="rect" id="node5" href="../../d9/d65/class_module_filters.html" title="Class implementing image filters." alt="" coords="173,83,277,112"/><area shape="rect" id="node7" href="../../da/d70/class_module_tracking.html" title="Module which performs finder tracking." alt="" coords="301,83,419,112"/><area shape="rect" id="node9" href="../../db/d7c/class_module_video.html" title="Class implementing dumm Module." alt="" coords="443,83,547,112"/></map>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center><!-- endSectionContent --></div>
 <!-- startSectionHeader --><div class="dynheader">
 Collaboration diagram for Module:<!-- endSectionHeader --></div>
@@ -59,14 +59,14 @@ Collaboration diagram for Module:<!-- endSectionHeader --></div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#a44b6835871fe594af9e8b687ca3f349f">setVideo</a> (bool)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns on/off video on <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>.  <a href="#a44b6835871fe594af9e8b687ca3f349f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#a9f09b6299ae8bfc21733173faa7ff6e7">setVideo</a> (bool b)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns on/off video on <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>.  <a href="#a9f09b6299ae8bfc21733173faa7ff6e7"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#a216ad8e0b35bdcc51a37ea40aa3bfdcf">frameReady</a> (const QImage &amp;)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Emited when frame has been processed and is ready to be shown.  <a href="#a216ad8e0b35bdcc51a37ea40aa3bfdcf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#abd2a5a79ff77212c6730767dc7d5d49d">videoStopped</a> (QWidget *)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Emited when <a class="el" href="../../dd/df9/class_module.html" title="Base class for all modules.">Module</a> is removed from the list in order to unregister it from <a class="el" href="../../dc/d09/class_video_gallery.html" title="Class used to display videowidgets in grid layout.">VideoGallery</a>.  <a href="#abd2a5a79ff77212c6730767dc7d5d49d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#aca320affcf9e924d453e41afccb2c038">frameReady</a> (const QImage &amp;img)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Emited when frame has been processed and is ready to be shown.  <a href="#aca320affcf9e924d453e41afccb2c038"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#abee88121a38e84eb969ba6f52eb5761b">videoStopped</a> (QWidget *w)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Emited when <a class="el" href="../../dd/df9/class_module.html" title="Base class for all modules.">Module</a> is removed from the list in order to unregister it from <a class="el" href="../../dc/d09/class_video_gallery.html" title="Class used to display videowidgets in grid layout.">VideoGallery</a>.  <a href="#abee88121a38e84eb969ba6f52eb5761b"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#a898c66ef74395bb450900d479b51fc21">Module</a> (QObject *parent=0)</td></tr>
@@ -77,6 +77,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#a030fde5f794abbc63e33286e40a0192c">processImage</a> (cv::Mat &amp;mat)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Method called by <a class="el" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a> in order to process frame. It is a wrapper to process method which check if settings are not locked (mutex because of thread).  <a href="#a030fde5f794abbc63e33286e40a0192c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880">getVideoWidget</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a> of module.  <a href="#acbca15013c486ec2a6cc2391e4170880"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#a1cf07480fdd9a964eb8375bf2fb549b0">getName</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Should be overriten in order to get proper module name on <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>.  <a href="#a1cf07480fdd9a964eb8375bf2fb549b0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/class_module.html#a7a6a83882ef0d9aec623577884ce2fb5">getSettingsWidget</a> ()=0</td></tr>
@@ -124,7 +125,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a216ad8e0b35bdcc51a37ea40aa3bfdcf"></a><!-- doxytag: member="Module::frameReady" ref="a216ad8e0b35bdcc51a37ea40aa3bfdcf" args="(const QImage &amp;)" -->
+<a class="anchor" id="aca320affcf9e924d453e41afccb2c038"></a><!-- doxytag: member="Module::frameReady" ref="aca320affcf9e924d453e41afccb2c038" args="(const QImage &amp;img)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -132,7 +133,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
           <td class="memname">void Module::frameReady </td>
           <td>(</td>
           <td class="paramtype">const QImage &amp;&#160;</td>
-          <td class="paramname">&#160;)</td>
+          <td class="paramname"> <em>img</em>&#160;)</td>
           <td><code> [signal]</code></td>
         </tr>
       </table>
@@ -142,7 +143,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <p>Emited when frame has been processed and is ready to be shown. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">const</td><td>QImage&amp; reference to frame to be shown. </td></tr>
+    <tr><td class="paramname">img</td><td>reference to frame to be shown. </td></tr>
   </table>
   </dd>
 </dl>
@@ -166,7 +167,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <p>Should be overriten in order to get proper module name on <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Name of module. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="../../d0/deb/class_module_background.html#a909cd371484ceb4842c0359b2c25915f">ModuleBackground</a>, and <a class="el" href="../../db/d7c/class_module_video.html#a32ae57628cb1ebaf5c3447354bc86852">ModuleVideo</a>.</p>
+<p>Reimplemented in <a class="el" href="../../d0/deb/class_module_background.html#a909cd371484ceb4842c0359b2c25915f">ModuleBackground</a>, <a class="el" href="../../d9/d65/class_module_filters.html#a79ff5c49fcd619af1ce4ad68c2520d7f">ModuleFilters</a>, <a class="el" href="../../da/d70/class_module_tracking.html#a0e9be8f553fe9a0bc82b32d6a3fae558">ModuleTracking</a>, and <a class="el" href="../../db/d7c/class_module_video.html#a32ae57628cb1ebaf5c3447354bc86852">ModuleVideo</a>.</p>
 
 </div>
 </div>
@@ -187,7 +188,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <p>Should be overriten and provide module configuration interface. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>QWidget * with module configuration interface. </dd></dl>
 
-<p>Implemented in <a class="el" href="../../d0/deb/class_module_background.html#a752da9035e52eb6306aed6da553697a4">ModuleBackground</a>, and <a class="el" href="../../db/d7c/class_module_video.html#ae56c411ea37384d34702ddd994d9d02e">ModuleVideo</a>.</p>
+<p>Implemented in <a class="el" href="../../d0/deb/class_module_background.html#a752da9035e52eb6306aed6da553697a4">ModuleBackground</a>, <a class="el" href="../../d9/d65/class_module_filters.html#abce7f07b738eac63a89e8674fb07de7b">ModuleFilters</a>, <a class="el" href="../../da/d70/class_module_tracking.html#addbdb7fab533d049d36b807f160d3675">ModuleTracking</a>, and <a class="el" href="../../db/d7c/class_module_video.html#ae56c411ea37384d34702ddd994d9d02e">ModuleVideo</a>.</p>
 
 </div>
 </div>
@@ -204,7 +205,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
       </table>
 </div>
 <div class="memdoc">
-<p>Getter for <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a> of module.</p>
+
+<p>Getter for <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a> of module. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>videoWidget ready to show video after processing frame. </dd></dl>
 
 </div>
@@ -257,6 +259,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
   </table>
   </dd>
 </dl>
+
+<p>Implemented in <a class="el" href="../../da/d70/class_module_tracking.html#a2fbd4a21aafd845410393574ccc3ec23">ModuleTracking</a>.</p>
 
 </div>
 </div>
@@ -321,7 +325,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 
 </div>
 </div>
-<a class="anchor" id="a44b6835871fe594af9e8b687ca3f349f"></a><!-- doxytag: member="Module::setVideo" ref="a44b6835871fe594af9e8b687ca3f349f" args="(bool)" -->
+<a class="anchor" id="a9f09b6299ae8bfc21733173faa7ff6e7"></a><!-- doxytag: member="Module::setVideo" ref="a9f09b6299ae8bfc21733173faa7ff6e7" args="(bool b)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -339,14 +343,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <p>Turns on/off video on <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">bool</td><td>true - on / false - off </td></tr>
+    <tr><td class="paramname">b</td><td>true - on / false - off </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="abd2a5a79ff77212c6730767dc7d5d49d"></a><!-- doxytag: member="Module::videoStopped" ref="abd2a5a79ff77212c6730767dc7d5d49d" args="(QWidget *)" -->
+<a class="anchor" id="abee88121a38e84eb969ba6f52eb5761b"></a><!-- doxytag: member="Module::videoStopped" ref="abee88121a38e84eb969ba6f52eb5761b" args="(QWidget *w)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -354,7 +358,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
           <td class="memname">void Module::videoStopped </td>
           <td>(</td>
           <td class="paramtype">QWidget *&#160;</td>
-          <td class="paramname">&#160;)</td>
+          <td class="paramname"> <em>w</em>&#160;)</td>
           <td><code> [signal]</code></td>
         </tr>
       </table>
@@ -364,7 +368,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <p>Emited when <a class="el" href="../../dd/df9/class_module.html" title="Base class for all modules.">Module</a> is removed from the list in order to unregister it from <a class="el" href="../../dc/d09/class_video_gallery.html" title="Class used to display videowidgets in grid layout.">VideoGallery</a>. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Pointer</td><td>to <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>. </td></tr>
+    <tr><td class="paramname">w</td><td>Pointer to <a class="el" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -376,7 +380,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <li>Modules/module.cpp</li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 10 2010 17:07:12 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

@@ -25,16 +25,16 @@ public slots:
     /*!
      \brief Registers new VideoWidget and displays it on the layout.
 
-     \param pointer to widget
+     \param w pointer to widget
     */
-    void registerNewWidget(QWidget*);
+    void registerNewWidget(QWidget* w);
 
     /*!
      \brief Removes widget from gallery.
 
-     \param pointer to widget to remove
+     \param w pointer to widget to remove
     */
-    void unRegisterWidget(QWidget*);
+    void unRegisterWidget(QWidget* w);
 
 private:
     int columns; /*!< number of columns*/

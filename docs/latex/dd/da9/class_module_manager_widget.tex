@@ -13,8 +13,7 @@ Widget providing module management and settings.
 
 
 
-Collaboration diagram for ModuleManagerWidget:
-\nopagebreak
+Collaboration diagram for ModuleManagerWidget:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,7 +29,9 @@ Collaboration diagram for ModuleManagerWidget:
 \hyperlink{class_module_manager_widget_ad1e98e2130ca8f219a851a25d7ece061}{$\sim$ModuleManagerWidget} ()}
 \label{dd/da9/class_module_manager_widget_ad1e98e2130ca8f219a851a25d7ece061}
 
-\begin{DoxyCompactList}\small\item\em Clean up. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Clean up. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_module_manager_widget_ad33dbaccfea14ce5861cde4bec652e8f}{openFile} (QString fileName)
+\begin{DoxyCompactList}\small\item\em Opens video file. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -56,6 +57,27 @@ Constructor.
 {\em videoWidget} & pointer to \hyperlink{class_video_widget}{VideoWidget} (to show effect of modules) \\
 \hline
 {\em parent} & QWidget parent \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_module_manager_widget_ad33dbaccfea14ce5861cde4bec652e8f}{
+\index{ModuleManagerWidget@{ModuleManagerWidget}!openFile@{openFile}}
+\index{openFile@{openFile}!ModuleManagerWidget@{ModuleManagerWidget}}
+\subsubsection[{openFile}]{\setlength{\rightskip}{0pt plus 5cm}void ModuleManagerWidget::openFile (
+\begin{DoxyParamCaption}
+\item[{QString}]{ fileName}
+\end{DoxyParamCaption}
+)}}
+\label{dd/da9/class_module_manager_widget_ad33dbaccfea14ce5861cde4bec652e8f}
+
+
+Opens video file. 
+
+Stops currently processing thread (if any) and sets the name. New thread is created and started by on\_\-start\_\-button\_\-clicked(). 
+\begin{DoxyParams}{Parameters}
+{\em fileName} & \\
 \hline
 \end{DoxyParams}
 

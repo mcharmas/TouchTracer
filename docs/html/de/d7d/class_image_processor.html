@@ -28,6 +28,7 @@
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
+<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <h1>ImageProcessor Class Reference</h1>  </div>
@@ -46,12 +47,18 @@ Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9759fb0e904d60f127ce864ce89422ff"></a><!-- doxytag: member="ImageProcessor::stop" ref="a9759fb0e904d60f127ce864ce89422ff" args="()" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#a9759fb0e904d60f127ce864ce89422ff">stop</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops thread and joins. After this method thread is dead for sure. <br/></td></tr>
+<tr><td colspan="2"><h2><a name="signals"></a>
+Signals</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#ab46ee54f524c921c1f986f52520c0335">fpsUpdated</a> (int x)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal emmited when fps value is updated.  <a href="#ab46ee54f524c921c1f986f52520c0335"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#a7901548b6088dc05c969a7541efdf1dd">dpsUpdated</a> (int x)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal emmited when dps(dropped frames per second) value is updated.  <a href="#a7901548b6088dc05c969a7541efdf1dd"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#a4ad6c2b89340ebfbaf3cabb999fa5338">ImageProcessor</a> (QString, QObject *parent=0)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a4ad6c2b89340ebfbaf3cabb999fa5338"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#a881e0bba87130ef44fb6abeef830414e">ImageProcessor</a> (QString, QList&lt; <a class="el" href="../../dd/df9/class_module.html">Module</a> * &gt; *modules, QObject *parent=0)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a881e0bba87130ef44fb6abeef830414e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#aa97d442bc538f7a8d468c5c7b8c2e899">ImageProcessor</a> (QString fileName, QObject *parent=0)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#aa97d442bc538f7a8d468c5c7b8c2e899"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#aef473a32dfa762f21c325706da7e4341">ImageProcessor</a> (QString fileName, QList&lt; <a class="el" href="../../dd/df9/class_module.html">Module</a> * &gt; *modules, QObject *parent=0)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#aef473a32dfa762f21c325706da7e4341"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ff83cf5f0986ed04b7799499fe0defc"></a><!-- doxytag: member="ImageProcessor::~ImageProcessor" ref="a2ff83cf5f0986ed04b7799499fe0defc" args="()" -->
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#a2ff83cf5f0986ed04b7799499fe0defc">~ImageProcessor</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans. <br/></td></tr>
@@ -67,12 +74,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9d00dfbeeda0eae7f59a6bdab0bc4d4"></a><!-- doxytag: member="ImageProcessor::stopChModList" ref="aa9d00dfbeeda0eae7f59a6bdab0bc4d4" args="()" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#aa9d00dfbeeda0eae7f59a6bdab0bc4d4">stopChModList</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Should be called after changing of module list to unlock processing. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d7d/class_image_processor.html#a5f2ec93ec8263d8adbc85078b7cf8593">timerEvent</a> (QTimerEvent *e)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to count FPS.  <a href="#a5f2ec93ec8263d8adbc85078b7cf8593"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Object of this class is used for getting frames from input and processing it with provided modules. </p>
 <p>Works in different thread. Use <a class="el" href="../../de/d7d/class_image_processor.html#a76a8fc6e9f5e7f9883d69c5c0a607767" title="Should be called before modules list is changed outside the thread.">chModList()</a> and <a class="el" href="../../de/d7d/class_image_processor.html#aa9d00dfbeeda0eae7f59a6bdab0bc4d4" title="Should be called after changing of module list to unlock processing.">stopChModList()</a> when changing module list. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a4ad6c2b89340ebfbaf3cabb999fa5338"></a><!-- doxytag: member="ImageProcessor::ImageProcessor" ref="a4ad6c2b89340ebfbaf3cabb999fa5338" args="(QString, QObject *parent=0)" -->
+<a class="anchor" id="aa97d442bc538f7a8d468c5c7b8c2e899"></a><!-- doxytag: member="ImageProcessor::ImageProcessor" ref="aa97d442bc538f7a8d468c5c7b8c2e899" args="(QString fileName, QObject *parent=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -100,7 +109,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <p>Constructor. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">QString</td><td>name of the file to be opened. </td></tr>
+    <tr><td class="paramname">fileName</td><td>of the file to be opened. </td></tr>
     <tr><td class="paramname">parent</td><td>QObject parent. </td></tr>
   </table>
   </dd>
@@ -108,7 +117,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 
 </div>
 </div>
-<a class="anchor" id="a881e0bba87130ef44fb6abeef830414e"></a><!-- doxytag: member="ImageProcessor::ImageProcessor" ref="a881e0bba87130ef44fb6abeef830414e" args="(QString, QList&lt; Module * &gt; *modules, QObject *parent=0)" -->
+<a class="anchor" id="aef473a32dfa762f21c325706da7e4341"></a><!-- doxytag: member="ImageProcessor::ImageProcessor" ref="aef473a32dfa762f21c325706da7e4341" args="(QString fileName, QList&lt; Module * &gt; *modules, QObject *parent=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -142,9 +151,86 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <p>Constructor. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">QString</td><td>name of the file to be opened. </td></tr>
+    <tr><td class="paramname">fileName</td><td>name of the file to be opened. </td></tr>
     <tr><td class="paramname">modules</td><td>list of pointer to modules which should be used during processing. </td></tr>
     <tr><td class="paramname">parent</td><td>QObject parent. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a7901548b6088dc05c969a7541efdf1dd"></a><!-- doxytag: member="ImageProcessor::dpsUpdated" ref="a7901548b6088dc05c969a7541efdf1dd" args="(int x)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ImageProcessor::dpsUpdated </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"> <em>x</em>&#160;)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Signal emmited when dps(dropped frames per second) value is updated. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>current dps value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab46ee54f524c921c1f986f52520c0335"></a><!-- doxytag: member="ImageProcessor::fpsUpdated" ref="ab46ee54f524c921c1f986f52520c0335" args="(int x)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ImageProcessor::fpsUpdated </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"> <em>x</em>&#160;)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Signal emmited when fps value is updated. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>current fps value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5f2ec93ec8263d8adbc85078b7cf8593"></a><!-- doxytag: member="ImageProcessor::timerEvent" ref="a5f2ec93ec8263d8adbc85078b7cf8593" args="(QTimerEvent *e)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ImageProcessor::timerEvent </td>
+          <td>(</td>
+          <td class="paramtype">QTimerEvent *&#160;</td>
+          <td class="paramname"> <em>e</em>&#160;)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Used to count FPS. </p>
+<p>Timer is started by new thread. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>event </td></tr>
   </table>
   </dd>
 </dl>
@@ -156,7 +242,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <li>Modules/imageprocessor.cpp</li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 10 2010 17:07:12 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

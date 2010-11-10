@@ -1,3 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$dd/da9/class_module_manager_widget.html" title="Widget providing module management and settings." alt="" coords="7,5,172,35"/>
+<area shape="rect" id="node1" href="$dd/df9/class_module.html" title="Base class for all modules." alt="" coords="7,85,73,115"/>
+<area shape="rect" id="node3" href="$d0/deb/class_module_background.html" title="Class implementing background removal module." alt="" coords="123,5,267,35"/>
+<area shape="rect" id="node5" href="$d9/d65/class_module_filters.html" title="Class implementing image filters." alt="" coords="143,59,247,88"/>
+<area shape="rect" id="node7" href="$da/d70/class_module_tracking.html" title="Module which performs finder tracking." alt="" coords="136,112,253,141"/>
+<area shape="rect" id="node9" href="$db/d7c/class_module_video.html" title="Class implementing dumm Module." alt="" coords="143,165,247,195"/>
 </map>

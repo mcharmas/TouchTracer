@@ -44,15 +44,15 @@ Inheritance diagram for AbstractSettingsWidget:<!-- endSectionHeader --></div>
 <!-- startSectionSummary --><!-- endSectionSummary --><!-- startSectionContent --><div class="dyncontent">
 <div class="center"><img src="../../db/de4/class_abstract_settings_widget__inherit__graph.png" border="0" usemap="#_abstract_settings_widget_inherit__map" alt="Inheritance graph"/></div>
 <map name="_abstract_settings_widget_inherit__map" id="_abstract_settings_widget_inherit__map">
-<area shape="rect" id="node3" href="../../d7/deb/class_module_background_settings.html" title="Class implementing settings widget for ModuleBackground." alt="" coords="5,83,203,112"/><area shape="rect" id="node5" href="../../d6/d30/class_module_video_settigns.html" title="Class implementing empty settings to dummy ModuleVideo." alt="" coords="227,83,384,112"/></map>
+<area shape="rect" id="node3" href="../../d7/deb/class_module_background_settings.html" title="Class implementing settings widget for ModuleBackground." alt="" coords="227,5,424,35"/><area shape="rect" id="node5" href="../../d0/d0f/class_module_filters_settings.html" title="Filetering module settings widget." alt="" coords="247,59,404,88"/><area shape="rect" id="node7" href="../../db/d02/class_module_tracking_settings.html" title="Class providing settings for ModuleTracking." alt="" coords="240,112,411,141"/><area shape="rect" id="node9" href="../../d6/d30/class_module_video_settigns.html" title="Class implementing empty settings to dummy ModuleVideo." alt="" coords="247,165,404,195"/></map>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center><!-- endSectionContent --></div>
 
 <p><a href="../../d8/d94/class_abstract_settings_widget-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/class_abstract_settings_widget.html#a1f1f041ffe91ad92284eda558f011a39">showVideoChanged</a> (bool)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal used to notify module that showVideo property has changed.  <a href="#a1f1f041ffe91ad92284eda558f011a39"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/class_abstract_settings_widget.html#a949114dc2b02cc15bfd72069f5723bf9">showVideoChanged</a> (bool b)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal used to notify module that showVideo property has changed.  <a href="#a949114dc2b02cc15bfd72069f5723bf9"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/class_abstract_settings_widget.html#ae1febbb1cfae0f5e21fb2ab86d301211">AbstractSettingsWidget</a> (QWidget *parent=0)</td></tr>
@@ -87,7 +87,7 @@ Protected Member Functions</h2></td></tr>
 <p>Constructs. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td></td></tr>
+    <tr><td class="paramname">parent</td><td>QWidget parent </td></tr>
   </table>
   </dd>
 </dl>
@@ -114,7 +114,7 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1f1f041ffe91ad92284eda558f011a39"></a><!-- doxytag: member="AbstractSettingsWidget::showVideoChanged" ref="a1f1f041ffe91ad92284eda558f011a39" args="(bool)" -->
+<a class="anchor" id="a949114dc2b02cc15bfd72069f5723bf9"></a><!-- doxytag: member="AbstractSettingsWidget::showVideoChanged" ref="a949114dc2b02cc15bfd72069f5723bf9" args="(bool b)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -122,7 +122,7 @@ Protected Member Functions</h2></td></tr>
           <td class="memname">void AbstractSettingsWidget::showVideoChanged </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname">&#160;)</td>
+          <td class="paramname"> <em>b</em>&#160;)</td>
           <td><code> [signal]</code></td>
         </tr>
       </table>
@@ -133,7 +133,7 @@ Protected Member Functions</h2></td></tr>
 <p>Sholud be connected in constructor of new module. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">bool</td><td></td></tr>
+    <tr><td class="paramname">b</td><td>indicates if property has changed </td></tr>
   </table>
   </dd>
 </dl>
@@ -145,7 +145,7 @@ Protected Member Functions</h2></td></tr>
 <li>Modules/abstractsettingswidget.cpp</li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 10 2010 17:07:12 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

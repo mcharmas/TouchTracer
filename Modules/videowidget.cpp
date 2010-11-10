@@ -3,8 +3,7 @@
 
 VideoWidget::VideoWidget(QString caption, QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::VideoWidget),
-    sizeSet(false)
+    ui(new Ui::VideoWidget)
 {    
     ui->setupUi(this);
     ui->caption->setText(caption);

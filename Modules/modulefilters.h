@@ -8,13 +8,35 @@
 
 using namespace cv;
 
+/**
+ * @brief Class implementing image filters.
+ *
+ * Now supports: blur, gain
+ * @class ModuleFilters modulefilters.h "Modules/modulefilters.h"
+*/
 class ModuleFilters : public Module
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Contructor.
+     * @param parent QObject parent
+    */
     explicit ModuleFilters(QObject *parent = 0);
+
+    /**
+     * @brief Clean up.
+    */
     ~ModuleFilters();
 
+    /**
+     * @brief Processes current frame.
+     *
+     * Applies filters if necessary.
+     * Blur is applied only when window size > 1.
+     * Gain is applied only when factor > 1;
+     * @param mat to be processed
+    */
     void process(Mat &mat);
 
     QWidget* getSettingsWidget() { return settings; }
@@ -22,14 +44,26 @@ public:
     QString getName() { return "Filters module"; }
 
 public slots:
-    void changeBlur(int);
-    void changeGain(int);
+    /**
+     * @brief Changes blur window size.
+     * @param x window size
+    */
+    void changeBlur(int x);
+
+    /**
+     * @brief Changes gain factor.
+     *
+     * Gain factor is counted by dividing int value by 100 in order to get factor double value.
+     * If value has to be greater than 100 to change.
+     * @param x gain value <100;*> divided by 100 to get factor
+    */
+    void changeGain(int x);
 
 
 private:
-    ModuleFiltersSettings *settings;
-    int blurValue;
-    double gain;
+    ModuleFiltersSettings *settings; /**< Settings widget. */
+    int blurValue; /**< Blur window size. */
+    double gain; /**< Gain factor. */
 
 };
 

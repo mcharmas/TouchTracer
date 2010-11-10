@@ -11,7 +11,8 @@ namespace Ui {
 /*!
  \brief Abstract widget used to create settings widget.
 
- Provides one setting common for all modules: showVideo - shows video in VideoGallery after processing it by module.
+ Provides one setting common for all modules: showVideo - shows video in VideoGallery
+ after processing it by module.
 */
 class AbstractSettingsWidget : public QWidget
 {
@@ -20,7 +21,7 @@ class AbstractSettingsWidget : public QWidget
 public:
     /*!
      \brief Constructs.
-     \param parent
+     \param parent QWidget parent
     */
     explicit AbstractSettingsWidget(QWidget *parent = 0);
 
@@ -44,18 +45,18 @@ private:
 private slots:
     /*!
      \brief Turns on / off video by emmiting showVideoChanged().
-     \param bool
+     \param b true - on / false = off
     */
-    void toggleVideo(bool);
+    void toggleVideo(bool b);
 
 signals:
     /*!
      \brief Signal used to notify module that showVideo property has changed.
 
      Sholud be connected in constructor of new module.
-     \param bool
+     \param b indicates if property has changed
     */
-    void showVideoChanged(bool);
+    void showVideoChanged(bool b);
 };
 
 #endif // ABSTRACTSETTINGSWIDGET_H

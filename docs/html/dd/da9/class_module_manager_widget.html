@@ -54,6 +54,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad1e98e2130ca8f219a851a25d7ece061"></a><!-- doxytag: member="ModuleManagerWidget::~ModuleManagerWidget" ref="ad1e98e2130ca8f219a851a25d7ece061" args="()" -->
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da9/class_module_manager_widget.html#ad1e98e2130ca8f219a851a25d7ece061">~ModuleManagerWidget</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/da9/class_module_manager_widget.html#ad33dbaccfea14ce5861cde4bec652e8f">openFile</a> (QString fileName)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens video file.  <a href="#ad33dbaccfea14ce5861cde4bec652e8f"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Widget providing module management and settings. </p>
@@ -94,12 +96,39 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ad33dbaccfea14ce5861cde4bec652e8f"></a><!-- doxytag: member="ModuleManagerWidget::openFile" ref="ad33dbaccfea14ce5861cde4bec652e8f" args="(QString fileName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModuleManagerWidget::openFile </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"> <em>fileName</em>&#160;)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Opens video file. </p>
+<p>Stops currently processing thread (if any) and sets the name. New thread is created and started by on_start_button_clicked(). </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileName</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="../../d1/def/modulemanagerwidget_8h_source.html">modulemanagerwidget.h</a></li>
 <li>modulemanagerwidget.cpp</li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 10 2010 17:07:12 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

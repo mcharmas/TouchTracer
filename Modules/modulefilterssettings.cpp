@@ -7,7 +7,7 @@ ModuleFiltersSettings::ModuleFiltersSettings(QWidget *parent) :
 {
     ui->setupUi(getSettingsWidget());
     gainSlider = ui->gainSlider;
-    connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(changeBlurValue(int)));
+    blurSlider = ui->horizontalSlider;
 }
 
 ModuleFiltersSettings::~ModuleFiltersSettings()
@@ -15,7 +15,3 @@ ModuleFiltersSettings::~ModuleFiltersSettings()
     delete ui;
 }
 
-void ModuleFiltersSettings::changeBlurValue(int x)
-{
-    emit blurValueChanged(x);
-}

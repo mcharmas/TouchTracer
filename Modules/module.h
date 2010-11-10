@@ -49,7 +49,7 @@ public:
     bool processImage(cv::Mat &mat);
 
     /*!
-      \biref Getter for VideoWidget of module.
+      \brief Getter for VideoWidget of module.
 
       \return videoWidget ready to show video after processing frame.
     */
@@ -72,24 +72,24 @@ public slots:
     /*!
      \brief Turns on/off video on VideoWidget.
 
-     \param bool true - on / false - off
+     \param b true - on / false - off
     */
-    void setVideo(bool);
+    void setVideo(bool b);
 
 signals:
     /*!
      \brief Emited when frame has been processed and is ready to be shown.
 
-     \param const QImage& reference to frame to be shown.
+     \param img reference to frame to be shown.
     */
-    void frameReady(const QImage &);
+    void frameReady(const QImage& img);
 
     /*!
      \brief Emited when Module is removed from the list in order to unregister it from VideoGallery.
 
-     \param Pointer to VideoWidget.
+     \param w Pointer to VideoWidget.
     */
-    void videoStopped(QWidget*);
+    void videoStopped(QWidget* w);
 
 private:
     VideoWidget* videoWidget; /*!< Pointer to VideoWidget */

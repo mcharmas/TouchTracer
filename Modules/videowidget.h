@@ -39,20 +39,21 @@ public:
 
     /*!
      \brief Changes look of widget to notify user that it is selected.
-     \param bool true - selected / false not
+
+     Not working right now due to problems with QGLWidget displaying video.
+     \param b true - selected / false not
     */
-    void setSelected(bool);
+    void setSelected(bool b);
 
 public slots:
     /*!
      \brief Used to get over frame to display.
-     \param frame
+     \param frame image to be displayed.
     */
-    void showFrame(const QImage&);
+    void showFrame(const QImage& frame);
 
 private:
     Ui::VideoWidget *ui; /*!< UI */
-    bool sizeSet;
 
 };
 

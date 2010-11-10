@@ -1,4 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$d0/deb/class_module_background.html" title="Class implementing background removal module." alt="" coords="5,83,149,112"/>
-<area shape="rect" id="node5" href="$db/d7c/class_module_video.html" title="Class implementing dumm Module." alt="" coords="173,83,277,112"/>
+<area shape="rect" id="node5" href="$d9/d65/class_module_filters.html" title="Class implementing image filters." alt="" coords="173,83,277,112"/>
+<area shape="rect" id="node7" href="$da/d70/class_module_tracking.html" title="Module which performs finder tracking." alt="" coords="301,83,419,112"/>
+<area shape="rect" id="node9" href="$db/d7c/class_module_video.html" title="Class implementing dumm Module." alt="" coords="443,83,547,112"/>
 </map>

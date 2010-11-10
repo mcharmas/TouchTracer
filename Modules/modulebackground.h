@@ -66,9 +66,9 @@ signals:
     /*!
      \brief Signal used to notify settings widget that background have been stored.
 
-     \param QImage background QImage
+     \param img background QImage
     */
-    void frameStored(QImage);
+    void frameStored(QImage img);
 
 };
 

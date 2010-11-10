@@ -1,5 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$dd/df9/class_module.html" title="Base class for all modules." alt="" coords="7,32,73,61"/>
-<area shape="rect" id="node3" href="$d0/deb/class_module_background.html" title="Class implementing background removal module." alt="" coords="123,5,267,35"/>
-<area shape="rect" id="node5" href="$db/d7c/class_module_video.html" title="Class implementing dumm Module." alt="" coords="143,59,247,88"/>
+<area shape="rect" id="node1" href="$d9/dc6/class_main_window.html" title="MainWindow class." alt="" coords="5,5,104,35"/>
 </map>

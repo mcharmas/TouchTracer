@@ -33,9 +33,9 @@ public slots:
      \brief Slot used to show stored background by ModuleBackground.
 
      Shows background image on label on settings widget.
-     \param QImage shown image
+     \param img image to show
     */
-    void showStoredBackground(QImage);
+    void showStoredBackground(QImage img);
 
 private:
     Ui::ModuleBackgroundSettings *ui; /*!< UI */

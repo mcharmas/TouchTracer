@@ -51,18 +51,18 @@
 <a name="l00040"></a>00040 
 <a name="l00049"></a>00049     <span class="keywordtype">bool</span> <a class="code" href="../../dd/df9/class_module.html#a030fde5f794abbc63e33286e40a0192c" title="Method called by ImageProcessor in order to process frame. It is a wrapper to process method which ch...">processImage</a>(cv::Mat &amp;mat);
 <a name="l00050"></a>00050 
-<a name="l00056"></a><a class="code" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880">00056</a>     QWidget* <a class="code" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880">getVideoWidget</a>() { <span class="keywordflow">return</span> videoWidget; }
+<a name="l00056"></a><a class="code" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880">00056</a>     QWidget* <a class="code" href="../../dd/df9/class_module.html#acbca15013c486ec2a6cc2391e4170880" title="Getter for VideoWidget of module.">getVideoWidget</a>() { <span class="keywordflow">return</span> videoWidget; }
 <a name="l00057"></a>00057 
 <a name="l00063"></a><a class="code" href="../../dd/df9/class_module.html#a1cf07480fdd9a964eb8375bf2fb549b0">00063</a>     <span class="keyword">virtual</span> QString <a class="code" href="../../dd/df9/class_module.html#a1cf07480fdd9a964eb8375bf2fb549b0" title="Should be overriten in order to get proper module name on VideoWidget.">getName</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>; }
 <a name="l00069"></a>00069     <span class="keyword">virtual</span> QWidget* <a class="code" href="../../dd/df9/class_module.html#a7a6a83882ef0d9aec623577884ce2fb5" title="Should be overriten and provide module configuration interface.">getSettingsWidget</a>()=0;
 <a name="l00070"></a>00070 
 <a name="l00071"></a>00071 <span class="keyword">public</span> slots:
-<a name="l00077"></a>00077     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a44b6835871fe594af9e8b687ca3f349f" title="Turns on/off video on VideoWidget.">setVideo</a>(<span class="keywordtype">bool</span>);
+<a name="l00077"></a>00077     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a9f09b6299ae8bfc21733173faa7ff6e7" title="Turns on/off video on VideoWidget.">setVideo</a>(<span class="keywordtype">bool</span> b);
 <a name="l00078"></a>00078 
 <a name="l00079"></a>00079 signals:
-<a name="l00085"></a>00085     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#a216ad8e0b35bdcc51a37ea40aa3bfdcf" title="Emited when frame has been processed and is ready to be shown.">frameReady</a>(<span class="keyword">const</span> QImage &amp;);
+<a name="l00085"></a>00085     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#aca320affcf9e924d453e41afccb2c038" title="Emited when frame has been processed and is ready to be shown.">frameReady</a>(<span class="keyword">const</span> QImage&amp; img);
 <a name="l00086"></a>00086 
-<a name="l00092"></a>00092     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#abd2a5a79ff77212c6730767dc7d5d49d" title="Emited when Module is removed from the list in order to unregister it from VideoGallery.">videoStopped</a>(QWidget*);
+<a name="l00092"></a>00092     <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/class_module.html#abee88121a38e84eb969ba6f52eb5761b" title="Emited when Module is removed from the list in order to unregister it from VideoGallery.">videoStopped</a>(QWidget* w);
 <a name="l00093"></a>00093 
 <a name="l00094"></a>00094 <span class="keyword">private</span>:
 <a name="l00095"></a>00095     <a class="code" href="../../db/df7/class_video_widget.html" title="Class used for displaying video.">VideoWidget</a>* videoWidget; 
@@ -86,7 +86,7 @@
 <a name="l00139"></a>00139 <span class="preprocessor">#endif // MODULE_H</span>
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 10 2010 17:07:12 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

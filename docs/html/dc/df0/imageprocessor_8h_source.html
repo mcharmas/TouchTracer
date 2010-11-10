@@ -31,52 +31,69 @@
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QThread&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;QtGlobal&gt;</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;cv.h&gt;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;highgui.h&gt;</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;module.h&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;QDateTime&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;QAtomicInt&gt;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;cv.h&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;highgui.h&gt;</span>
 <a name="l00011"></a>00011 
-<a name="l00012"></a>00012 <span class="keyword">using namespace </span>cv;
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;module.h&quot;</span>
 <a name="l00013"></a>00013 
-<a name="l00020"></a><a class="code" href="../../de/d7d/class_image_processor.html">00020</a> <span class="keyword">class </span><a class="code" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a> : <span class="keyword">public</span> QThread
-<a name="l00021"></a>00021 {
-<a name="l00022"></a>00022     Q_OBJECT
-<a name="l00023"></a>00023 <span class="keyword">public</span>:
-<a name="l00030"></a>00030     <a class="code" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a>(QString, QObject *parent = 0);
-<a name="l00031"></a>00031 
-<a name="l00039"></a>00039     <a class="code" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a>(QString, QList&lt;Module*&gt; *modules, QObject *parent = 0);
-<a name="l00040"></a>00040 
-<a name="l00044"></a>00044     ~<a class="code" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a>();
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> run();
-<a name="l00052"></a>00052 
-<a name="l00056"></a><a class="code" href="../../de/d7d/class_image_processor.html#a1b0cb82d35114ea1d9a4f7a0965fa285">00056</a>     <span class="keywordtype">void</span> <a class="code" href="../../de/d7d/class_image_processor.html#a1b0cb82d35114ea1d9a4f7a0965fa285" title="Sets module list. Should be thread safe.">setModuleList</a>(QList&lt;Module*&gt; *modules) { mut.lock(); this-&gt;modules = modules; mut.unlock(); }
-<a name="l00057"></a>00057 
-<a name="l00061"></a><a class="code" href="../../de/d7d/class_image_processor.html#a76a8fc6e9f5e7f9883d69c5c0a607767">00061</a>     <span class="keywordtype">void</span> <a class="code" href="../../de/d7d/class_image_processor.html#a76a8fc6e9f5e7f9883d69c5c0a607767" title="Should be called before modules list is changed outside the thread.">chModList</a>() { mut.lock(); }
-<a name="l00062"></a>00062 
-<a name="l00066"></a><a class="code" href="../../de/d7d/class_image_processor.html#aa9d00dfbeeda0eae7f59a6bdab0bc4d4">00066</a>     <span class="keywordtype">void</span> <a class="code" href="../../de/d7d/class_image_processor.html#aa9d00dfbeeda0eae7f59a6bdab0bc4d4" title="Should be called after changing of module list to unlock processing.">stopChModList</a>() { mut.unlock(); }
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <span class="keyword">public</span> slots:
-<a name="l00073"></a><a class="code" href="../../de/d7d/class_image_processor.html#a9759fb0e904d60f127ce864ce89422ff">00073</a>     <span class="keywordtype">void</span> <a class="code" href="../../de/d7d/class_image_processor.html#a9759fb0e904d60f127ce864ce89422ff" title="Stops thread and joins. After this method thread is dead for sure.">stop</a>() { this-&gt;running = <span class="keyword">false</span>; QThread::wait();}
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075 <span class="keyword">private</span>:
-<a name="l00076"></a>00076     VideoCapture *capture; 
-<a name="l00077"></a>00077     <span class="keywordtype">int</span> interval; 
-<a name="l00078"></a>00078     <span class="keywordtype">bool</span> running; 
-<a name="l00079"></a>00079     QList&lt;Module*&gt; *modules; 
-<a name="l00080"></a>00080     QMutex mut; 
-<a name="l00090"></a>00090     <span class="keywordtype">void</span> init(QString fileName, QList&lt;Module*&gt; *modules);
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093 };
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095 <span class="preprocessor">#endif // IMAGEPROCESSOR_H</span>
+<a name="l00014"></a>00014 <span class="keyword">using namespace </span>cv;
+<a name="l00015"></a>00015 
+<a name="l00022"></a><a class="code" href="../../de/d7d/class_image_processor.html">00022</a> <span class="keyword">class </span><a class="code" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a> : <span class="keyword">public</span> QThread
+<a name="l00023"></a>00023 {
+<a name="l00024"></a>00024     Q_OBJECT
+<a name="l00025"></a>00025 <span class="keyword">public</span>:
+<a name="l00032"></a>00032     <a class="code" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a>(QString fileName, QObject *parent = 0);
+<a name="l00033"></a>00033 
+<a name="l00041"></a>00041     <a class="code" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a>(QString fileName, QList&lt;Module*&gt; *modules, QObject *parent = 0);
+<a name="l00042"></a>00042 
+<a name="l00046"></a>00046     ~<a class="code" href="../../de/d7d/class_image_processor.html" title="Object of this class is used for getting frames from input and processing it with provided modules...">ImageProcessor</a>();
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048 
+<a name="l00053"></a>00053     <span class="keywordtype">void</span> run();
+<a name="l00054"></a>00054 
+<a name="l00058"></a><a class="code" href="../../de/d7d/class_image_processor.html#a1b0cb82d35114ea1d9a4f7a0965fa285">00058</a>     <span class="keywordtype">void</span> <a class="code" href="../../de/d7d/class_image_processor.html#a1b0cb82d35114ea1d9a4f7a0965fa285" title="Sets module list. Should be thread safe.">setModuleList</a>(QList&lt;Module*&gt; *modules) { mut.lock(); this-&gt;modules = modules; mut.unlock(); }
+<a name="l00059"></a>00059 
+<a name="l00063"></a><a class="code" href="../../de/d7d/class_image_processor.html#a76a8fc6e9f5e7f9883d69c5c0a607767">00063</a>     <span class="keywordtype">void</span> <a class="code" href="../../de/d7d/class_image_processor.html#a76a8fc6e9f5e7f9883d69c5c0a607767" title="Should be called before modules list is changed outside the thread.">chModList</a>() { mut.lock(); }
+<a name="l00064"></a>00064 
+<a name="l00068"></a><a class="code" href="../../de/d7d/class_image_processor.html#aa9d00dfbeeda0eae7f59a6bdab0bc4d4">00068</a>     <span class="keywordtype">void</span> <a class="code" href="../../de/d7d/class_image_processor.html#aa9d00dfbeeda0eae7f59a6bdab0bc4d4" title="Should be called after changing of module list to unlock processing.">stopChModList</a>() { mut.unlock(); }
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070 
+<a name="l00077"></a>00077     <span class="keywordtype">void</span> timerEvent(QTimerEvent *e);
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 <span class="keyword">public</span> slots:
+<a name="l00084"></a><a class="code" href="../../de/d7d/class_image_processor.html#a9759fb0e904d60f127ce864ce89422ff">00084</a>     <span class="keywordtype">void</span> <a class="code" href="../../de/d7d/class_image_processor.html#a9759fb0e904d60f127ce864ce89422ff" title="Stops thread and joins. After this method thread is dead for sure.">stop</a>() { this-&gt;running = <span class="keyword">false</span>; QThread::wait();}
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 <span class="keyword">private</span>:
+<a name="l00087"></a>00087     VideoCapture *capture; 
+<a name="l00088"></a>00088     <span class="keywordtype">int</span> interval; 
+<a name="l00089"></a>00089     <span class="keywordtype">bool</span> running; 
+<a name="l00090"></a>00090     QList&lt;Module*&gt; *modules; 
+<a name="l00091"></a>00091     QMutex mut; 
+<a name="l00092"></a>00092     QString fileName; 
+<a name="l00093"></a>00093     QMutex fpsMutex; 
+<a name="l00094"></a>00094     <span class="keywordtype">int</span> fps; 
+<a name="l00095"></a>00095     <span class="keywordtype">int</span> dps; 
+<a name="l00106"></a>00106     <span class="keywordtype">void</span> init(QString fileName, QList&lt;Module*&gt; *modules);
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 <span class="keyword">private</span> slots:
+<a name="l00112"></a>00112     <span class="keywordtype">void</span> countFps();
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 signals:
+<a name="l00119"></a>00119     <span class="keywordtype">void</span> fpsUpdated(<span class="keywordtype">int</span> x);
+<a name="l00120"></a>00120 
+<a name="l00125"></a>00125     <span class="keywordtype">void</span> dpsUpdated(<span class="keywordtype">int</span> x);
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128 };
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130 <span class="preprocessor">#endif // IMAGEPROCESSOR_H</span>
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 16:05:39 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 10 2010 17:07:12 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>

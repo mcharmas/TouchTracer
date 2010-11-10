@@ -26,19 +26,19 @@ public:
     /*!
      \brief Constructor.
 
-     \param QString name of the file to be opened.
+     \param fileName of the file to be opened.
      \param parent QObject parent.
     */
-    ImageProcessor(QString, QObject *parent = 0);
+    ImageProcessor(QString fileName, QObject *parent = 0);
 
     /*!
      \brief Constructor.
 
-     \param QString name of the file to be opened.
+     \param fileName name of the file to be opened.
      \param modules list of pointer to modules which should be used during processing.
      \param parent QObject parent.
     */
-    ImageProcessor(QString, QList<Module*> *modules, QObject *parent = 0);
+    ImageProcessor(QString fileName, QList<Module*> *modules, QObject *parent = 0);
 
     /*!
      \brief Cleans.
@@ -67,7 +67,14 @@ public:
     */
     void stopChModList() { mut.unlock(); }
 
-    void timerEvent(QTimerEvent *);
+
+    /**
+     * @brief Used to count FPS.
+     *
+     * Timer is started by new thread.
+     * @param e event
+    */
+    void timerEvent(QTimerEvent *e);
 
 
 public slots:
@@ -82,10 +89,10 @@ private:
     bool running; /*!< If thread is running. */
     QList<Module*> *modules; /*!< Pointer to module list. */
     QMutex mut; /*!< Mutex securing module list. */
-    QString fileName;
-    QMutex fpsMutex;
-    int fps;
-    int dps;
+    QString fileName; /**< Name of the file to open. */
+    QMutex fpsMutex; /**< Mutex controlling access to fps and dps. */
+    int fps; /**< Fps counter */
+    int dps; /**< Dropped frame counder counter */
 
 
     /*!
@@ -99,11 +106,23 @@ private:
     void init(QString fileName, QList<Module*> *modules);
 
 private slots:
+    /**
+     * @brief Counts frames and emits fpsUpdated() and dpsUpdates() signals.
+    */
     void countFps();
 
 signals:
-    void fpsUpdated(int);
-    void dpsUpdated(int);
+    /**
+     * @brief Signal emmited when fps value is updated.
+     * @param x current fps value.
+    */
+    void fpsUpdated(int x);
+
+    /**
+     * @brief Signal emmited when dps(dropped frames per second) value is updated.
+     * @param x current dps value.
+    */
+    void dpsUpdated(int x);
 
 
 };
