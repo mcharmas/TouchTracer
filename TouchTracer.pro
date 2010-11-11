@@ -13,6 +13,7 @@ CONFIG += link_pkgconfig
 PKGCONFIG += opencv
 
 include(Modules/Modules.pri)
+include(TUIO/TUIO.pri)
 
 SOURCES += main.cpp\
         mainwindow.cpp \
