@@ -11,6 +11,8 @@
 #include <cv.h>
 #include <highgui.h>
 
+#include "../TUIO/TuioServer.h"
+
 #include "touch.h"
 
 using namespace std;

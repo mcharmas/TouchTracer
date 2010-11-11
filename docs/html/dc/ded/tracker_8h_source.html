@@ -39,43 +39,45 @@
 <a name="l00011"></a>00011 <span class="preprocessor">#include &lt;cv.h&gt;</span>
 <a name="l00012"></a>00012 <span class="preprocessor">#include &lt;highgui.h&gt;</span>
 <a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;touch.h&quot;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;../TUIO/TuioServer.h&quot;</span>
 <a name="l00015"></a>00015 
-<a name="l00016"></a>00016 <span class="keyword">using namespace </span>std;
-<a name="l00017"></a>00017 <span class="keyword">using namespace </span>cv;
-<a name="l00018"></a>00018 
-<a name="l00024"></a><a class="code" href="../../de/dbb/class_tracker.html">00024</a> <span class="keyword">class </span><a class="code" href="../../de/dbb/class_tracker.html" title="Class used to track contours.">Tracker</a> : <span class="keyword">public</span> QObject
-<a name="l00025"></a>00025 {
-<a name="l00026"></a>00026     Q_OBJECT
-<a name="l00027"></a>00027 
-<a name="l00028"></a>00028 <span class="keyword">public</span>:
-<a name="l00033"></a>00033     <span class="keyword">explicit</span> <a class="code" href="../../de/dbb/class_tracker.html" title="Class used to track contours.">Tracker</a>(QObject *parent = 0);
-<a name="l00034"></a>00034 
-<a name="l00038"></a>00038     ~<a class="code" href="../../de/dbb/class_tracker.html" title="Class used to track contours.">Tracker</a>();
-<a name="l00039"></a>00039 
-<a name="l00057"></a>00057     <span class="keywordtype">void</span> pushNewTouches(vector&lt;vector&lt;Point&gt; &gt;&amp; touches, Mat&amp; mat);
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <span class="keyword">protected</span>:
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;touch.h&quot;</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="keyword">using namespace </span>std;
+<a name="l00019"></a>00019 <span class="keyword">using namespace </span>cv;
+<a name="l00020"></a>00020 
+<a name="l00026"></a><a class="code" href="../../de/dbb/class_tracker.html">00026</a> <span class="keyword">class </span><a class="code" href="../../de/dbb/class_tracker.html" title="Class used to track contours.">Tracker</a> : <span class="keyword">public</span> QObject
+<a name="l00027"></a>00027 {
+<a name="l00028"></a>00028     Q_OBJECT
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 <span class="keyword">public</span>:
+<a name="l00035"></a>00035     <span class="keyword">explicit</span> <a class="code" href="../../de/dbb/class_tracker.html" title="Class used to track contours.">Tracker</a>(QObject *parent = 0);
+<a name="l00036"></a>00036 
+<a name="l00040"></a>00040     ~<a class="code" href="../../de/dbb/class_tracker.html" title="Class used to track contours.">Tracker</a>();
+<a name="l00041"></a>00041 
+<a name="l00059"></a>00059     <span class="keywordtype">void</span> pushNewTouches(vector&lt;vector&lt;Point&gt; &gt;&amp; touches, Mat&amp; mat);
 <a name="l00060"></a>00060 
-<a name="l00061"></a>00061 
-<a name="l00066"></a>00066     <span class="keywordtype">void</span> destroyFrameTouches(QVector&lt;Touch&gt;* touches);
-<a name="l00067"></a>00067 
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> destroyAllFrames();
-<a name="l00072"></a>00072 
-<a name="l00081"></a>00081     <span class="keywordtype">void</span> identifyFingers(QVector&lt;Touch&gt; *touches);
-<a name="l00082"></a>00082 
-<a name="l00095"></a>00095     <span class="keywordtype">long</span> findId(<span class="keyword">const</span> <a class="code" href="../../d1/dff/class_touch.html" title="Class holding all information about touch.">Touch</a>&amp; t, QList&lt;QVector&lt;Touch&gt;*&gt; list, QMap&lt;int, bool&gt;&amp; takenIds);
-<a name="l00096"></a>00096 
-<a name="l00097"></a><a class="code" href="../../de/dbb/class_tracker.html#a601db61af5b01acaa4b73f13013e52f0">00097</a>     <span class="keywordtype">int</span> <a class="code" href="../../de/dbb/class_tracker.html#a601db61af5b01acaa4b73f13013e52f0">framesToStore</a>; 
-<a name="l00098"></a><a class="code" href="../../de/dbb/class_tracker.html#afd3b08a68c5e668917f949282dbe9068">00098</a>     <span class="keywordtype">int</span> <a class="code" href="../../de/dbb/class_tracker.html#afd3b08a68c5e668917f949282dbe9068">usedIds</a>; 
-<a name="l00099"></a><a class="code" href="../../de/dbb/class_tracker.html#a702ac376de188e180cd5a8111cf92752">00099</a>     QList&lt;QVector&lt;Touch&gt;*&gt; *<a class="code" href="../../de/dbb/class_tracker.html#a702ac376de188e180cd5a8111cf92752">frameTouches</a>; 
-<a name="l00100"></a><a class="code" href="../../de/dbb/class_tracker.html#a31fcaab957d7fcb34fb32797128f14b4">00100</a>     <span class="keywordtype">double</span> <a class="code" href="../../de/dbb/class_tracker.html#a31fcaab957d7fcb34fb32797128f14b4">maxTravelDistance</a>; 
-<a name="l00102"></a>00102 };
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104 <span class="preprocessor">#endif // TRACKER_H</span>
+<a name="l00061"></a>00061 <span class="keyword">protected</span>:
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063 
+<a name="l00068"></a>00068     <span class="keywordtype">void</span> destroyFrameTouches(QVector&lt;Touch&gt;* touches);
+<a name="l00069"></a>00069 
+<a name="l00073"></a>00073     <span class="keywordtype">void</span> destroyAllFrames();
+<a name="l00074"></a>00074 
+<a name="l00083"></a>00083     <span class="keywordtype">void</span> identifyFingers(QVector&lt;Touch&gt; *touches);
+<a name="l00084"></a>00084 
+<a name="l00097"></a>00097     <span class="keywordtype">long</span> findId(<span class="keyword">const</span> <a class="code" href="../../d1/dff/class_touch.html" title="Class holding all information about touch.">Touch</a>&amp; t, QList&lt;QVector&lt;Touch&gt;*&gt; list, QMap&lt;int, bool&gt;&amp; takenIds);
+<a name="l00098"></a>00098 
+<a name="l00099"></a><a class="code" href="../../de/dbb/class_tracker.html#a601db61af5b01acaa4b73f13013e52f0">00099</a>     <span class="keywordtype">int</span> <a class="code" href="../../de/dbb/class_tracker.html#a601db61af5b01acaa4b73f13013e52f0">framesToStore</a>; 
+<a name="l00100"></a><a class="code" href="../../de/dbb/class_tracker.html#afd3b08a68c5e668917f949282dbe9068">00100</a>     <span class="keywordtype">int</span> <a class="code" href="../../de/dbb/class_tracker.html#afd3b08a68c5e668917f949282dbe9068">usedIds</a>; 
+<a name="l00101"></a><a class="code" href="../../de/dbb/class_tracker.html#a702ac376de188e180cd5a8111cf92752">00101</a>     QList&lt;QVector&lt;Touch&gt;*&gt; *<a class="code" href="../../de/dbb/class_tracker.html#a702ac376de188e180cd5a8111cf92752">frameTouches</a>; 
+<a name="l00102"></a><a class="code" href="../../de/dbb/class_tracker.html#a31fcaab957d7fcb34fb32797128f14b4">00102</a>     <span class="keywordtype">double</span> <a class="code" href="../../de/dbb/class_tracker.html#a31fcaab957d7fcb34fb32797128f14b4">maxTravelDistance</a>; 
+<a name="l00104"></a>00104 };
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 <span class="preprocessor">#endif // TRACKER_H</span>
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 10 2010 17:07:12 for TouchTracer by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 11 2010 15:35:10 for TouchTracer by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.2 </small></address>
 </body>
