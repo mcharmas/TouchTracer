@@ -28,7 +28,7 @@ public:
     /*!
      \brief Cleans up.
     */
-    ~AbstractSettingsWidget();
+    virtual ~AbstractSettingsWidget();
 
 protected:
     /*!

@@ -28,7 +28,7 @@ public:
     /**
      * @brief Clena up.
     */
-    ~ModuleTracking();
+    virtual ~ModuleTracking();
 
     QWidget* getSettingsWidget() { return settings; }
     QString getName() { return "Tracking"; };

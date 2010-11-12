@@ -32,7 +32,7 @@ public:
     /*!
      \brief Destroys.
     */
-    ~MainWindow();
+    virtual ~MainWindow();
 
 private:
     Ui::MainWindow *ui; /*!< UI */

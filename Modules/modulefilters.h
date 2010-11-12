@@ -27,7 +27,7 @@ public:
     /**
      * @brief Clean up.
     */
-    ~ModuleFilters();
+    virtual ~ModuleFilters();
 
     /**
      * @brief Processes current frame.

@@ -30,7 +30,7 @@ void VideoWidget::stopVideo()
     //ui->video->setText("No Video");
 }
 
-void VideoWidget::setSelected(bool b)
+void VideoWidget::setSelected(bool)
 {
 /*    if(b) {
         this->setFrameShadow(QFrame::Sunken);

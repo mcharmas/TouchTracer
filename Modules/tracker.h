@@ -11,12 +11,14 @@
 #include <cv.h>
 #include <highgui.h>
 
+#include "../TUIO/TuioObject.h"
 #include "../TUIO/TuioServer.h"
 
 #include "touch.h"
 
 using namespace std;
 using namespace cv;
+using namespace TUIO;
 
 /**
  * @brief Class used to track contours.
@@ -100,6 +102,16 @@ protected:
     int usedIds; /**< Already used ids. */
     QList<QVector<Touch>*> *frameTouches; /**< History of frame touches. */
     double maxTravelDistance; /**< Biggest distance the finger can travel between frames (in pixels). */
+    QMap<long, Touch> *currentTouches; /**< Fileld keeping touches by id. */
+
+private:
+    void drawTouches(QVector<Touch>* t, Mat & mat);
+    void cleanFrameList();
+
+
+    TuioServer *server;
+    QMap<long,TuioObject*> tuioObjects;
+    void notifyTUIO(QVector<Touch> * touches);
 
 };
 

@@ -35,7 +35,7 @@ public:
     /*!
      \brief Removes all stuff.
     */
-    ~Module();
+    virtual ~Module();
 
 
     /*!

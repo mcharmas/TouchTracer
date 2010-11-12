@@ -43,7 +43,7 @@ public:
     /*!
      \brief Cleans.
     */
-    ~ImageProcessor();
+    virtual ~ImageProcessor();
 
 
     /*!

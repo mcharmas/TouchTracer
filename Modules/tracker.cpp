@@ -7,6 +7,7 @@ Tracker::Tracker(QObject *parent) :
     framesToStore = 10;
     usedIds = 0;
     maxTravelDistance = 25;
+    currentTouches = new QMap<long, Touch>();
 }
 
 Tracker::~Tracker()
@@ -28,6 +29,24 @@ void Tracker::destroyAllFrames()
 
 }
 
+void Tracker::drawTouches(QVector<Touch> * t, Mat & mat)
+{
+    for(QVector<Touch>::iterator it = t->begin();it != t->end();it++){
+        Touch & t = (*it);
+        t.drawMiddle(mat);
+        t.drawId(mat);
+    }
+}
+
+void Tracker::cleanFrameList()
+{
+    if(frameTouches->size() == framesToStore){
+        QVector<Touch> *t = frameTouches->last();
+        frameTouches->removeLast();
+        destroyFrameTouches(t);
+    }
+}
+
 void Tracker::pushNewTouches(vector<vector<Point> >& touches, Mat& mat)
 {
     if(!touches.size())
@@ -44,20 +63,8 @@ void Tracker::pushNewTouches(vector<vector<Point> >& touches, Mat& mat)
     }
 
     identifyFingers(t);
-
-    if(frameTouches->size() == framesToStore)
-    {
-        QVector<Touch> *t = frameTouches->last();
-        frameTouches->removeLast();
-        destroyFrameTouches(t);
-    }
-
-    for(QVector<Touch>::iterator it=t->begin(); it!=t->end(); it++)
-    {
-        Touch& t = (*it);
-        t.drawMiddle(mat);
-        t.drawId(mat);
-    }
+    cleanFrameList();
+    drawTouches(t, mat);
     frameTouches->prepend(t);
 }
 
@@ -71,7 +78,6 @@ void Tracker::identifyFingers(QVector<Touch>* touches)
     if(!touches)
         return;
 
-    //first frame
     if(frameTouches->size()==0)
     {
         QVector<Touch>::iterator it = touches->begin();
@@ -82,14 +88,22 @@ void Tracker::identifyFingers(QVector<Touch>* touches)
         return;
     }
 
-    //rest of frames
     QMap<int,bool> takenIds;
     for(QVector<Touch>::iterator it = touches->begin();it!=touches->end();it++)
     {
         long id = findId((*it), *frameTouches, takenIds);
         (*it).setId(id);
-//        qDebug() << "Assigned: " << id;
     }
+
+
+}
+
+void Tracker::notifyTUIO(QVector<Touch> *touches)
+{
+	for(QVector<Touch>::iterator it = touches->begin(); it!=touches->end(); it++)
+	{
+
+	}
 }
 
 long Tracker::findId(const Touch &t, QList<QVector<Touch> *> list, QMap<int,bool>& takenIds)

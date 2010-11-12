@@ -29,7 +29,7 @@ public:
     /**
      * @brief Clean up;
     */
-    ~ModuleTrackingSettings();
+    virtual ~ModuleTrackingSettings();
 
     QSlider* thresholdSlider; /**< Threshold slider. */
     QSlider* minBlobSizeSlider; /**< Minimum blob size slider. */

@@ -25,7 +25,7 @@ public:
     /*!
      \brief Clean up.
     */
-    ~ModuleVideoSettigns();
+    virtual ~ModuleVideoSettigns();
 
 private:
     Ui::ModuleVideoSettigns *ui; /*!< UI */

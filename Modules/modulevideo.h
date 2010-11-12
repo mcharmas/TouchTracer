@@ -32,7 +32,7 @@ public:
     /*!
      \brief Cleans up.
     */
-    ~ModuleVideo();
+    virtual ~ModuleVideo();
 
     /*!
      \brief Implemented abstract process method.

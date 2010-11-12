@@ -36,7 +36,7 @@ public:
     /*!
      \brief Clean up.
     */
-    ~ModuleManagerWidget();
+    virtual ~ModuleManagerWidget();
 
     /**
      * @brief Opens video file.

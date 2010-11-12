@@ -26,7 +26,7 @@ public:
     /*!
      \brief Destroys widget.
     */
-    ~ModuleBackgroundSettings();
+    virtual ~ModuleBackgroundSettings();
 
 public slots:
     /*!

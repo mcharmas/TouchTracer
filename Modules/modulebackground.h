@@ -29,7 +29,7 @@ public:
     /*!
      \brief Cleans up.
     */
-    ~ModuleBackground();
+    virtual ~ModuleBackground();
 
     /*!
      \brief Processing method.

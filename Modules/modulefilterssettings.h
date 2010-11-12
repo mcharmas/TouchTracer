@@ -30,7 +30,7 @@ public:
     /**
      * @brief Clean up.
     */
-    ~ModuleFiltersSettings();
+    virtual ~ModuleFiltersSettings();
     QSlider* gainSlider; /**< Gain slider. */
     QSlider* blurSlider; /**< Blur slider. */
 
