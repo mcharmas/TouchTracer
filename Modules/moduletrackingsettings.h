@@ -34,6 +34,7 @@ public:
     QSlider* thresholdSlider; /**< Threshold slider. */
     QSlider* minBlobSizeSlider; /**< Minimum blob size slider. */
     QSlider* maxBlobSizeSlider; /**< Maximum blob size slider. */
+    QSlider* movementFilterSlider; /**< Movement filter value slider */
 
 public slots:
     /**
@@ -53,6 +54,12 @@ public slots:
      * @param x
     */
     void setMaxBlobInfo(int x);
+
+    /**
+     * @brief Displays movement filter value.
+     * @param x
+    */
+    void setMovementInfo(int x);
 
 private:
     Ui::ModuleTrackingSettings *ui; /**< Settings. */

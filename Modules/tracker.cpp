@@ -7,7 +7,9 @@ Tracker::Tracker(QObject *parent) :
     framesToStore = 10;
     usedIds = 0;
     maxTravelDistance = 25;
+    movementFilter = 0;
     currentTouches = new QMap<long, Touch>();
+    server = new TuioServer();
 }
 
 Tracker::~Tracker()
@@ -53,6 +55,7 @@ void Tracker::pushNewTouches(vector<vector<Point> >& touches, Mat& mat)
     {
 //        qDebug() << "No touches in this frame.";
         destroyAllFrames();
+        notifyTUIO(NULL);
         return;
     }
 
@@ -65,6 +68,7 @@ void Tracker::pushNewTouches(vector<vector<Point> >& touches, Mat& mat)
     identifyFingers(t);
     cleanFrameList();
     drawTouches(t, mat);
+    notifyTUIO(t);
     frameTouches->prepend(t);
 }
 
@@ -91,19 +95,73 @@ void Tracker::identifyFingers(QVector<Touch>* touches)
     QMap<int,bool> takenIds;
     for(QVector<Touch>::iterator it = touches->begin();it!=touches->end();it++)
     {
-        long id = findId((*it), *frameTouches, takenIds);
-        (*it).setId(id);
+        Touch &t = (*it);
+        long id = findId(t, *frameTouches, takenIds);
+
+        Touch *t_old = findTouch(id);
+        qDebug() << movementFilter ;
+        if(t_old!=NULL && t.distance(*t_old) < movementFilter )
+        {
+            t = *t_old;
+            t.setMoved(false);
+        }
+        t.setId(id);
     }
+}
 
-
+Touch* Tracker::findTouch(long id)
+{
+    QVector<Touch> *t = frameTouches->first();
+    for(QVector<Touch>::iterator it = t->begin(); it!=t->end(); it++)
+    {
+        if ((*it).getId() == id)
+        {
+            return &(*it);
+        }
+    }
+    return NULL;
 }
 
 void Tracker::notifyTUIO(QVector<Touch> *touches)
 {
-	for(QVector<Touch>::iterator it = touches->begin(); it!=touches->end(); it++)
-	{
 
-	}
+    server->initFrame(TuioTime::getSessionTime());
+    if(!touches)
+    {
+        for(QMap<long,TuioCursor*>::iterator it=tuioObjects.begin();it!=tuioObjects.end(); it++)
+        {
+            server->removeTuioCursor(*it);
+        }
+        tuioObjects.clear();
+        server->commitFrame();
+        return;
+    }
+
+    QList<long> keysToRemove(tuioObjects.keys());
+    for(QVector<Touch>::iterator it = touches->begin(); it!=touches->end(); it++)
+    {
+        Touch &t = (*it);
+        if(tuioObjects.find(t.getId())==tuioObjects.end())
+        {
+            tuioObjects[t.getId()] = server->addTuioCursor(t.getTuioX(), t.getTuioY());
+        }
+        else
+        {
+            if(t.hasMoved())
+            {
+                server->updateTuioCursor(tuioObjects[t.getId()], t.getTuioX(), t.getTuioY());
+            }
+            keysToRemove.removeOne(t.getId());
+        }
+    }
+
+    for(QList<long>::iterator it = keysToRemove.begin(); it!=keysToRemove.end(); it++)
+    {
+        TuioCursor *tc = tuioObjects[(*it)];
+        server->removeTuioCursor(tc);
+        tuioObjects.remove((*it));
+    }
+    server->commitFrame();
 }
 
 long Tracker::findId(const Touch &t, QList<QVector<Touch> *> list, QMap<int,bool>& takenIds)

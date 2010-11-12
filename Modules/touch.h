@@ -55,6 +55,9 @@ public:
     */
     Point getCoordinates() const { return middle; }
 
+    float getTuioX() const { return (float)middle.x / this->width; }
+    float getTuioY() const { return (float)middle.y / this->height; }
+
     /**
      * @brief Returns OpenCv contours.
      * @return OpenCV Contours.
@@ -103,6 +106,12 @@ public:
      * @return double distance between this touch and t parameter
     */
     double distance(const Touch& t) const;
+
+    void setFrameSize(int width, int height) { this->width = width; this->height = height; }
+
+    void setMoved(bool b) { moved = b; }
+    bool hasMoved() { return moved; }
+
 signals:
 
 public slots:
@@ -125,6 +134,9 @@ protected:
     Point middle; /**< Position of the touch. */
     int area; /**< Size of the touch. */
     long id; /**< Touch id. */
+    int width;
+    int height;
+    bool moved;
 
 };
 

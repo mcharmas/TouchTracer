@@ -8,16 +8,19 @@ ModuleTracking::ModuleTracking(QObject *parent) :
     connect(settings->thresholdSlider, SIGNAL(valueChanged(int)), this, SLOT(setThreshold(int)));    
     connect(settings->minBlobSizeSlider, SIGNAL(valueChanged(int)), this, SLOT(setMinBlob(int)));
     connect(settings->maxBlobSizeSlider, SIGNAL(valueChanged(int)), this, SLOT(setMaxBlob(int)));
+    connect(settings->movementFilterSlider, SIGNAL(valueChanged(int)), this, SLOT(setMovementFilterValue(int)));
 
     connect(settings, SIGNAL(showVideoChanged(bool)), this, SLOT(setVideo(bool)));
 
     connect(this, SIGNAL(thresholdChanged(int)), settings, SLOT(setThresholdInfo(int)));
     connect(this, SIGNAL(minBlobChanged(int)), settings, SLOT(setMinBlobInfo(int)));
     connect(this, SIGNAL(maxBlobChanged(int)), settings, SLOT(setMaxBlobInfo(int)));
+    connect(this, SIGNAL(movementFilterValueChanged(int)), settings, SLOT(setMovementInfo(int)));
 
     setThreshold(80);
     setMinBlob(200);
     setMaxBlob(300);
+    setMovementFilterValue(5);
 }
 
 ModuleTracking::~ModuleTracking()
@@ -88,4 +91,13 @@ void ModuleTracking::setMaxBlob(int x)
     maxBlob = x;
     settingsUnlock();
     emit maxBlobChanged(x);
+}
+
+void ModuleTracking::setMovementFilterValue(int x)
+{
+    settingsLock();
+    movementFilterValue = x;
+    tracker.setMovementFilter(x);
+    settingsUnlock();
+    emit movementFilterValueChanged(x);
 }

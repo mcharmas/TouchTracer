@@ -60,9 +60,19 @@ public:
     */
     void pushNewTouches(vector<vector<Point> >& touches, Mat& mat);
 
+    /**
+     * @brief Sets movement filter value.
+     * @param x value
+    */
+    void setMovementFilter(int x)  { movementFilter = x; }
+
+    /**
+     * @brief Sets max travel distance value. Biggest distance the finger can make between frames.
+     * @param x value
+    */
+    void setMaxTravelDistance(int x) { maxTravelDistance = x; }
+
 protected:
-
-
     /**
      * @brief Deletes vector of touches.
      * @param touches
@@ -107,10 +117,13 @@ protected:
 private:
     void drawTouches(QVector<Touch>* t, Mat & mat);
     void cleanFrameList();
+    Touch* findTouch(long id);
+
+    int movementFilter;
 
 
     TuioServer *server;
-    QMap<long,TuioObject*> tuioObjects;
+    QMap<long,TuioCursor*> tuioObjects;
     void notifyTUIO(QVector<Touch> * touches);
 
 };

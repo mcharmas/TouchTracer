@@ -63,6 +63,7 @@ protected:
     int thres; /**< Threshold value. */
     int minBlob; /**< Minimal blob size. */
     int maxBlob; /**< Maximum blob size. */
+    int movementFilterValue; /**< Movement filter value */
 
 private:
     ModuleTrackingSettings* settings; /**< Settings widget. */
@@ -87,6 +88,12 @@ signals:
     */
     void maxBlobChanged(int x);
 
+    /**
+     * @brief Emmited when movement filter value changed to updated settings GUI.
+     * @param x
+    */
+    void movementFilterValueChanged(int x);
+
 public slots:
     /**
      * @brief Sets threshold value (used in process() method).
@@ -105,6 +112,12 @@ public slots:
      * @param x maximum blob size value (in pixels).
     */
     void setMaxBlob(int x);
+
+    /**
+     * @brief Set movement filter value.
+     * @param x movement filter value in pixels.
+    */
+    void setMovementFilterValue(int x);
 
 };
 
