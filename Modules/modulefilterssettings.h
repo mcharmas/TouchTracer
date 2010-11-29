@@ -37,6 +37,13 @@ public:
 private:
     Ui::ModuleFiltersSettings *ui; /**< UI */
 
+    const QString PROP_GAIN;
+    const QString PROP_BLUR;
+
+private slots:
+    void storeGain(int g);
+    void storeBlur(int b);
+
 };
 
 #endif // MODULEFILTERSSETTINGS_H

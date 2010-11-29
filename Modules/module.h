@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include "videowidget.h"
+#include "abstractsettingswidget.h"
 
 /*!
  \brief Base class for all modules.
@@ -66,7 +67,7 @@ public:
 
      \return QWidget * with module configuration interface.
     */
-    virtual QWidget* getSettingsWidget()=0;
+    virtual AbstractSettingsWidget* getSettingsWidget()=0;
 
 public slots:
     /*!
@@ -131,7 +132,7 @@ protected:
 
     /*!
      \brief This method creates proper VideoWidget.
-     Should be called in subclass Constructor!
+     Should be called in subclass Constructor after creating of settings widget!!
     */
     void init();
 };

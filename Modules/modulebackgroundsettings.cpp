@@ -2,10 +2,10 @@
 #include "ui_modulebackgroundsettings.h"
 
 ModuleBackgroundSettings::ModuleBackgroundSettings(QWidget *parent) :
-    AbstractSettingsWidget(parent),
+    AbstractSettingsWidget("ModuleBackground", parent),
     ui(new Ui::ModuleBackgroundSettings)
 {
-    ui->setupUi(getSettingsWidget());
+    ui->setupUi(getSettingsWidget());    
     connect(ui->storeButton, SIGNAL(clicked()), this, SLOT(on_storeButton_clicked()));
 }
 

@@ -7,6 +7,11 @@ Module::Module(QObject *parent):QObject(parent),locked(false)
 void Module::init()
 {
     videoWidget = new VideoWidget(getName());
+    if(getSettingsWidget())
+    {
+        connect(getSettingsWidget(), SIGNAL(showVideoChanged(bool)), this, SLOT(setVideo(bool)));
+        setVideo(getSettingsWidget()->videoCheckBox->isChecked());
+    }
 }
 
 Module::~Module()

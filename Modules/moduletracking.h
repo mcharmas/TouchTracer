@@ -30,7 +30,7 @@ public:
     */
     virtual ~ModuleTracking();
 
-    QWidget* getSettingsWidget() { return settings; }
+    AbstractSettingsWidget* getSettingsWidget() { return settings; }
     QString getName() { return "Tracking"; };
 
 protected:
@@ -68,31 +68,6 @@ protected:
 private:
     ModuleTrackingSettings* settings; /**< Settings widget. */
     Tracker tracker; /**< Tracker object. */
-
-signals:
-    /**
-     * @brief Emmited when threshold value changed to update settings GUI.
-     * @param x
-    */
-    void thresholdChanged(int x);
-
-    /**
-     * @brief Emmited when min blob size value changed to update settings GUI.
-     * @param x
-    */
-    void minBlobChanged(int x);
-
-    /**
-     * @brief Emmited when max blob size value changed to update settings GUI.
-     * @param x
-    */
-    void maxBlobChanged(int x);
-
-    /**
-     * @brief Emmited when movement filter value changed to updated settings GUI.
-     * @param x
-    */
-    void movementFilterValueChanged(int x);
 
 public slots:
     /**

@@ -44,7 +44,7 @@ public:
     /*!
      \brief Look to Module documentation.
     */
-    QWidget* getSettingsWidget() { return settings; }
+    AbstractSettingsWidget* getSettingsWidget() { return settings; }
 
     /*!
      \brief Look to Module documentation.

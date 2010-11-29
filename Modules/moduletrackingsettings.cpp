@@ -3,14 +3,28 @@
 
 
 ModuleTrackingSettings::ModuleTrackingSettings(QWidget *parent) :
-    AbstractSettingsWidget(parent),
-    ui(new Ui::ModuleTrackingSettings)
+    AbstractSettingsWidget("ModuleTracking", parent),
+    ui(new Ui::ModuleTrackingSettings),
+    PROP_THRESH("threshold"),
+    PROP_MINBLOB("minBlob"),
+    PROP_MAXBLOB("maxBlob"),
+    PROP_MOV("movement")
 {
     ui->setupUi(getSettingsWidget());
     thresholdSlider = ui->thresSilder;
     minBlobSizeSlider = ui->minBlobSizeSlider;
     maxBlobSizeSlider = ui->maxBlobSizeSlider;
     movementFilterSlider = ui->movementSlider;
+
+    connect(thresholdSlider, SIGNAL(valueChanged(int)), SLOT(setThresholdInfo(int)));
+    connect(minBlobSizeSlider, SIGNAL(valueChanged(int)), SLOT(setMinBlobInfo(int)));
+    connect(maxBlobSizeSlider, SIGNAL(valueChanged(int)), SLOT(setMaxBlobInfo(int)));
+    connect(movementFilterSlider, SIGNAL(valueChanged(int)), SLOT(setMovementInfo(int)));
+
+    thresholdSlider->setValue(getProperty(PROP_THRESH, 83).toInt());
+    minBlobSizeSlider->setValue(getProperty(PROP_MINBLOB, 200).toInt());
+    maxBlobSizeSlider->setValue(getProperty(PROP_MAXBLOB, 300).toInt());
+    movementFilterSlider->setValue(getProperty(PROP_MOV, 5).toInt());
 }
 
 ModuleTrackingSettings::~ModuleTrackingSettings()
@@ -20,36 +34,24 @@ ModuleTrackingSettings::~ModuleTrackingSettings()
 
 void ModuleTrackingSettings::setThresholdInfo(int x)
 {
-    if(thresholdSlider->value()!=x)
-    {
-        thresholdSlider->setValue(x);
-    }
+    storeProperty(PROP_THRESH, x);
     ui->thresInfo->setText(QString::number(x));
 }
 
 void ModuleTrackingSettings::setMinBlobInfo(int x)
 {
-    if(minBlobSizeSlider->value()!=x)
-    {
-        minBlobSizeSlider->setValue(x);
-    }
+    storeProperty(PROP_MINBLOB, x);
     ui->minBlobInfo->setText(QString::number(x));
 }
 
 void ModuleTrackingSettings::setMaxBlobInfo(int x)
 {
-    if(maxBlobSizeSlider->value()!=x)
-    {
-        maxBlobSizeSlider->setValue(x);
-    }
+    storeProperty(PROP_MAXBLOB, x);
     ui->maxBlobInfo->setText(QString::number(x));
 }
 
 void ModuleTrackingSettings::setMovementInfo(int x)
 {
-    if(movementFilterSlider->value()!=x)
-    {
-        movementFilterSlider->setValue(x);
-    }
+    storeProperty(PROP_MOV, x);
     ui->movementInfo->setText(QString::number(x));
 }

@@ -20,15 +20,16 @@ public:
      \brief Setups UI on getSettingsWidget() widget.
      \param parent
     */
-    explicit ModuleVideoSettigns(QWidget *parent = 0);
+    explicit ModuleVideoSettigns(QString moduleName, QWidget *parent = 0);
 
     /*!
      \brief Clean up.
     */
-    virtual ~ModuleVideoSettigns();
+    virtual ~ModuleVideoSettigns();      
 
 private:
     Ui::ModuleVideoSettigns *ui; /*!< UI */
+
 };
 
 #endif // MODULEVIDEOSETTIGNS_H

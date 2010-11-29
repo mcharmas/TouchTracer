@@ -139,7 +139,6 @@ void ModuleManagerWidget::on_removeModuleButton_clicked()
         if(processor)
             processor->chModList();
 
-        m->setVideo(false);
         videoWidget->layout()->removeWidget(m->getVideoWidget());
         modules->removeAt(sel);
         if(currentSettingsWidget == m->getSettingsWidget()) {

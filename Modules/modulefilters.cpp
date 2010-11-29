@@ -3,13 +3,13 @@
 ModuleFilters::ModuleFilters(QObject *parent) :
     Module(parent), settings(NULL)
 {        
-    init();
     settings = new ModuleFiltersSettings();
-    connect(settings, SIGNAL(showVideoChanged(bool)), this, SLOT(setVideo(bool)));
+    init();
     connect(settings->blurSlider, SIGNAL(valueChanged(int)), this, SLOT(changeBlur(int)));
     connect(settings->gainSlider, SIGNAL(valueChanged(int)), this, SLOT(changeGain(int)));
-    blurValue = 0;
-    gain = 1;
+
+    changeBlur(settings->blurSlider->value());
+    changeGain(settings->gainSlider->value());
 }
 
 ModuleFilters::~ModuleFilters()

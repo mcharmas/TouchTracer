@@ -3,9 +3,8 @@
 ModuleVideo::ModuleVideo(QObject *parent) :
     Module(parent)
 {
+    settings = new ModuleVideoSettigns("ModuleVideo", NULL);
     init();
-    settings = new ModuleVideoSettigns(NULL);
-    connect(settings, SIGNAL(showVideoChanged(bool)), this, SLOT(setVideo(bool)));
 }
 
 ModuleVideo::~ModuleVideo()

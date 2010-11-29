@@ -39,7 +39,7 @@ public:
     */
     void process(Mat &mat);
 
-    QWidget* getSettingsWidget() { return settings; }
+    AbstractSettingsWidget* getSettingsWidget() { return settings; }
 
     QString getName() { return "Filters module"; }
 

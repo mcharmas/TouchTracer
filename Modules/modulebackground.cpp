@@ -3,9 +3,9 @@
 ModuleBackground::ModuleBackground(QObject *parent) :
     Module(parent), frameToStore(true)
 {
-    init();
     settings = new ModuleBackgroundSettings(NULL);
-    connect(settings, SIGNAL(showVideoChanged(bool)), this, SLOT(setVideo(bool)));
+    init();
+
     connect(settings, SIGNAL(storeFrameButtonClicked()), this, SLOT(storeFrame()));
     connect(this, SIGNAL(frameStored(QImage)), settings, SLOT(showStoredBackground(QImage)), Qt::QueuedConnection);
 }

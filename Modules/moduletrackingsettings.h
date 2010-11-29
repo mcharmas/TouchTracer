@@ -63,6 +63,10 @@ public slots:
 
 private:
     Ui::ModuleTrackingSettings *ui; /**< Settings. */
+    const QString PROP_THRESH;
+    const QString PROP_MINBLOB;
+    const QString PROP_MAXBLOB;
+    const QString PROP_MOV;
 };
 
 #endif // MODULETRACKINGSETTINGS_H

@@ -48,7 +48,7 @@ public:
      Returns settings widget.
      \return pointer to settings widget.
     */
-    QWidget* getSettingsWidget() { return settings; }
+    AbstractSettingsWidget* getSettingsWidget() { return settings; }
 
     /*!
      \brief Implemented method. Returns module name.
@@ -56,6 +56,8 @@ public:
      \return module name (shown in module list in  ModuleManagerWidget).
     */
     QString getName() { return "ModuleVideo"; }
+
+    void toggleVideoSetting(bool b);
 
 private:
     ModuleVideoSettigns *settings; /*!< Settings. */

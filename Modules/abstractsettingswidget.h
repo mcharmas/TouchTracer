@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QSettings>
+#include <QCheckBox>
 
 namespace Ui {
     class AbstractSettingsWidget;
@@ -23,12 +25,14 @@ public:
      \brief Constructs.
      \param parent QWidget parent
     */
-    explicit AbstractSettingsWidget(QWidget *parent = 0);
+    explicit AbstractSettingsWidget(QString moduleName, QWidget *parent = 0);
 
     /*!
      \brief Cleans up.
     */
     virtual ~AbstractSettingsWidget();
+
+    QCheckBox* videoCheckBox;
 
 protected:
     /*!
@@ -38,13 +42,23 @@ protected:
     */
     QWidget* getSettingsWidget();
 
+    const QString PROP_VIDEO;
+
+    void storeProperty(const QString prop, QVariant v);
+    QVariant getProperty(const QString prop, QVariant v);
+    QString getModuleName() {return moduleName;}
+
 private:
     Ui::AbstractSettingsWidget *baseUi; /*!< UI */
+    static QSettings* storedSettings;
+    QString moduleName;
 
+    static QSettings& getStoredSettings();
+    QString getSettingName(QString name) { return getModuleName()+"/"+name; }
 
 private slots:
     /*!
-     \brief Turns on / off video by emmiting showVideoChanged().
+     \brief Turns on / off video by emmiting showVideoChanged() and saves showVideo property.
      \param b true - on / false = off
     */
     void toggleVideo(bool b);
@@ -56,7 +70,7 @@ signals:
      Sholud be connected in constructor of new module.
      \param b indicates if property has changed
     */
-    void showVideoChanged(bool b);
+    void showVideoChanged(bool b);    
 };
 
 #endif // ABSTRACTSETTINGSWIDGET_H
