@@ -7,22 +7,27 @@ ModuleFiltersSettings::ModuleFiltersSettings(QWidget *parent) :
     PROP_GAIN("gain"),
     PROP_BLUR("blur"),
     PROP_VFLIP("vflip"),
-    PROP_HFLIP("hflip")
+    PROP_HFLIP("hflip"),
+    PROP_SHARP("sharp")
+
 {
     ui->setupUi(getSettingsWidget());
 
     gainSlider = ui->gainSlider;
+    sharpSlider = ui->sharpSlider;
     blurSlider = ui->horizontalSlider;
     vFlip = ui->verticalFlipCheck;
     hFlip = ui->horizontalFlipCheck;
 
     gainSlider->setValue(getProperty(PROP_GAIN, 0).toInt());
+    sharpSlider->setValue(getProperty(PROP_SHARP, 0).toInt());
     blurSlider->setValue(getProperty(PROP_BLUR, 100).toInt());
     vFlip->setChecked(getProperty(PROP_VFLIP, false).toBool());
     hFlip->setChecked(getProperty(PROP_HFLIP, false).toBool());
 
     connect(this->blurSlider, SIGNAL(sliderMoved(int)), this, SLOT(storeBlur(int)));
     connect(this->gainSlider, SIGNAL(sliderMoved(int)), this, SLOT(storeGain(int)));
+    connect(this->sharpSlider, SIGNAL(sliderMoved(int)), this, SLOT(storeSharp(int)));
 
     connect(this->vFlip, SIGNAL(stateChanged(int)), this, SLOT(storeFlips(int)));
     connect(this->hFlip, SIGNAL(stateChanged(int)), this, SLOT(storeFlips(int)));
@@ -41,6 +46,11 @@ void ModuleFiltersSettings::storeGain(int g)
 void ModuleFiltersSettings::storeBlur(int b)
 {
     storeProperty(PROP_BLUR, b);
+}
+
+void ModuleFiltersSettings::storeSharp(int s)
+{
+    storeProperty(PROP_SHARP, s);
 }
 
 void ModuleFiltersSettings::storeFlips(int)

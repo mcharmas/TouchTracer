@@ -33,6 +33,7 @@ public:
     virtual ~ModuleFiltersSettings();
     QSlider* gainSlider; /**< Gain slider. */
     QSlider* blurSlider; /**< Blur slider. */
+    QSlider* sharpSlider; /**< Sharp slider. */
 
     QCheckBox* vFlip;
     QCheckBox* hFlip;
@@ -44,10 +45,12 @@ private:
     const QString PROP_BLUR;
     const QString PROP_VFLIP;
     const QString PROP_HFLIP;
+    const QString PROP_SHARP;
 
 private slots:
     void storeGain(int g);
     void storeBlur(int b);
+    void storeSharp(int s);
     void storeFlips(int s);
 
 };

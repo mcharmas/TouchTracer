@@ -19,7 +19,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Video"), "~", tr("Video Files (*.avi)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Video"), "~", tr("Video Files (*.avi *.m4v)"));
     if(fileName!="")
     {
         manager->openFile(fileName);

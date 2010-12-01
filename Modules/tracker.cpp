@@ -99,7 +99,6 @@ void Tracker::identifyFingers(QVector<Touch>* touches)
         long id = findId(t, *frameTouches, takenIds);
 
         Touch *t_old = findTouch(id);
-        qDebug() << movementFilter ;
         if(t_old!=NULL && t.distance(*t_old) < movementFilter )
         {
             t = *t_old;

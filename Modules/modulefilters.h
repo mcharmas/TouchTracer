@@ -51,6 +51,12 @@ public slots:
     void changeBlur(int x);
 
     /**
+     * @brief Changes blur window size in unsharp mask filter.
+     * @param x window size
+    */
+    void changeSharp(int x);
+
+    /**
      * @brief Changes gain factor.
      *
      * Gain factor is counted by dividing int value by 100 in order to get factor double value.
@@ -61,9 +67,11 @@ public slots:
 
     void changeFlip(int i);
 
+
 private:
     ModuleFiltersSettings *settings; /**< Settings widget. */
     int blurValue; /**< Blur window size. */
+    int sharpValue; /**< Sharp Blur window size. */
     double gain; /**< Gain factor. */
     bool vFlip, hFlip;
 
