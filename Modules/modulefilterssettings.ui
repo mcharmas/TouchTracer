@@ -51,6 +51,20 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="verticalFlipCheck">
+        <property name="text">
+         <string>Vertical Flip</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="horizontalFlipCheck">
+        <property name="text">
+         <string>Horizontal Flip</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

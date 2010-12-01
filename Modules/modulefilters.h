@@ -59,11 +59,13 @@ public slots:
     */
     void changeGain(int x);
 
+    void changeFlip(int i);
 
 private:
     ModuleFiltersSettings *settings; /**< Settings widget. */
     int blurValue; /**< Blur window size. */
     double gain; /**< Gain factor. */
+    bool vFlip, hFlip;
 
 };
 

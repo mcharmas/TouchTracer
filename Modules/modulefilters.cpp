@@ -7,9 +7,12 @@ ModuleFilters::ModuleFilters(QObject *parent) :
     init();
     connect(settings->blurSlider, SIGNAL(valueChanged(int)), this, SLOT(changeBlur(int)));
     connect(settings->gainSlider, SIGNAL(valueChanged(int)), this, SLOT(changeGain(int)));
+    connect(settings->vFlip,SIGNAL(stateChanged(int)), this, SLOT(changeFlip(int)));
+    connect(settings->hFlip, SIGNAL(stateChanged(int)), this, SLOT(changeFlip(int)));
 
     changeBlur(settings->blurSlider->value());
     changeGain(settings->gainSlider->value());
+    changeFlip(0);
 }
 
 ModuleFilters::~ModuleFilters()
@@ -19,6 +22,7 @@ ModuleFilters::~ModuleFilters()
 
 void ModuleFilters::process(Mat &mat)
 {
+
     if(blurValue) {
         Mat x;
         mat.copyTo(x);
@@ -30,6 +34,17 @@ void ModuleFilters::process(Mat &mat)
         mat *= gain;
     }
 
+    if(vFlip || hFlip)
+    {
+        Mat flipped;
+        int param=1;
+        if(vFlip && hFlip)
+            param = -1;
+        else if(vFlip)
+            param = 0;
+        flip(mat, flipped, param);
+        flipped.copyTo(mat);
+    }
 }
 
 void ModuleFilters::changeBlur(int x)
@@ -46,4 +61,10 @@ void ModuleFilters::changeGain(int x)
         gain = (double)x/100;
         settingsUnlock();
     }
+}
+
+void ModuleFilters::changeFlip(int)
+{
+    vFlip = settings->vFlip->isChecked();
+    hFlip = settings->hFlip->isChecked();
 }

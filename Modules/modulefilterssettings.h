@@ -34,15 +34,21 @@ public:
     QSlider* gainSlider; /**< Gain slider. */
     QSlider* blurSlider; /**< Blur slider. */
 
+    QCheckBox* vFlip;
+    QCheckBox* hFlip;
+
 private:
     Ui::ModuleFiltersSettings *ui; /**< UI */
 
     const QString PROP_GAIN;
     const QString PROP_BLUR;
+    const QString PROP_VFLIP;
+    const QString PROP_HFLIP;
 
 private slots:
     void storeGain(int g);
     void storeBlur(int b);
+    void storeFlips(int s);
 
 };
 
