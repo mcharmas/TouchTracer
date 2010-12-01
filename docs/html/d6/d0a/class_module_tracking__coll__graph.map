@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$dd/df9/class_module.html" title="Base class for all modules." alt="" coords="31,101,97,131"/>
-<area shape="rect" id="node4" href="$db/df7/class_video_widget.html" title="Class used for displaying video." alt="" coords="5,5,107,35"/>
-<area shape="rect" id="node6" href="$db/d02/class_module_tracking_settings.html" title="Class providing settings for ModuleTracking." alt="" coords="127,101,297,131"/>
-<area shape="rect" id="node8" href="$db/dcb/class_abstract_settings_widget.html" title="Abstract widget used to create settings widget." alt="" coords="131,5,301,35"/>
-<area shape="rect" id="node10" href="$de/dbb/class_tracker.html" title="Class used to track contours." alt="" coords="321,101,388,131"/>
-</map>

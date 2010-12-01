@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$db/dcb/class_abstract_settings_widget.html" title="Abstract widget used to create settings widget." alt="" coords="7,85,177,115"/>
-<area shape="rect" id="node3" href="$d7/deb/class_module_background_settings.html" title="Class implementing settings widget for ModuleBackground." alt="" coords="227,5,424,35"/>
-<area shape="rect" id="node5" href="$d0/d0f/class_module_filters_settings.html" title="Filetering module settings widget." alt="" coords="247,59,404,88"/>
-<area shape="rect" id="node7" href="$db/d02/class_module_tracking_settings.html" title="Class providing settings for ModuleTracking." alt="" coords="240,112,411,141"/>
-<area shape="rect" id="node9" href="$d6/d30/class_module_video_settigns.html" title="Class implementing empty settings to dummy ModuleVideo." alt="" coords="247,165,404,195"/>
-</map>
