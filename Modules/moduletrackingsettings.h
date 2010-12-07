@@ -1,9 +1,11 @@
 #ifndef MODULETRACKINGSETTINGS_H
 #define MODULETRACKINGSETTINGS_H
 #include "abstractsettingswidget.h"
+#include "calibrationwidget.h"
 
 #include <QSlider>
 #include <QWidget>
+#include <QDebug>
 
 namespace Ui {
     class ModuleTrackingSettings;
@@ -67,6 +69,10 @@ private:
     const QString PROP_MINBLOB;
     const QString PROP_MAXBLOB;
     const QString PROP_MOV;
+
+private slots:
+    void openCalibration();
+
 };
 
 #endif // MODULETRACKINGSETTINGS_H

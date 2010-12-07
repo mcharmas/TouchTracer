@@ -20,6 +20,7 @@ ModuleTrackingSettings::ModuleTrackingSettings(QWidget *parent) :
     connect(minBlobSizeSlider, SIGNAL(valueChanged(int)), SLOT(setMinBlobInfo(int)));
     connect(maxBlobSizeSlider, SIGNAL(valueChanged(int)), SLOT(setMaxBlobInfo(int)));
     connect(movementFilterSlider, SIGNAL(valueChanged(int)), SLOT(setMovementInfo(int)));
+    connect(ui->calibrateButton, SIGNAL(clicked()), SLOT(openCalibration()));
 
     thresholdSlider->setValue(getProperty(PROP_THRESH, 83).toInt());
     minBlobSizeSlider->setValue(getProperty(PROP_MINBLOB, 200).toInt());
@@ -54,4 +55,11 @@ void ModuleTrackingSettings::setMovementInfo(int x)
 {
     storeProperty(PROP_MOV, x);
     ui->movementInfo->setText(QString::number(x));
+}
+
+void ModuleTrackingSettings::openCalibration()
+{
+    qDebug() << "asdf";
+    CalibrationWidget *c = new CalibrationWidget();
+    //c->show();
 }
