@@ -6,6 +6,7 @@
 #include <cv.h>
 #include <highgui.h>
 #include <QObject>
+#include <QPoint>
 
 using namespace std;
 using namespace cv;
@@ -37,6 +38,13 @@ public:
     Touch(const vector<Point> &countours, QObject *parent = 0);
 
     /**
+     * @brief Creates touch on the basis of QPoint.
+     * @param point
+     * @param parent QObject parent.
+    */
+    Touch(QPoint &p, QObject *parent = 0);
+
+    /**
      * @brief Assignement operator.
      * @param t touch to assign
      * @return Touch & this
@@ -57,6 +65,12 @@ public:
 
     float getTuioX() const { return (float)middle.x / this->width; }
     float getTuioY() const { return (float)middle.y / this->height; }
+
+    /**
+     * @brief Returns position of coursor after translation ba calibration matrix.
+     * @return Point2f
+    */
+    Point2f getPosition();
 
     /**
      * @brief Returns OpenCv contours.
@@ -112,6 +126,13 @@ public:
     void setMoved(bool b) { moved = b; }
     bool hasMoved() { return moved; }
 
+    static void setCalibrationMat(Mat* m)
+    {
+        if(calibrationMat)
+            delete calibrationMat;
+        calibrationMat = m;
+    }
+
 signals:
 
 public slots:
@@ -138,6 +159,10 @@ protected:
     int height;
     bool moved;
 
+    static Mat* calibrationMat;
+
 };
+
+
 
 #endif // TOUCH_H

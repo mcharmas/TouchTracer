@@ -3,15 +3,26 @@
 CalibrationWidget::CalibrationWidget(QWidget *parent) :
     QWidget(parent)
 {
-    showFullScreen();
-    offset = 50;
+    //showFullScreen();
+    show();
+    setFixedSize(640,480);
+
+    top_offset = 50;
+    down_offset = 50;
+    left_offset = 50;
+    right_offset = 50;
+
     pointInCalibration = 0;
     calibrationProgress = 0;
     pointSize = 15;
 
-    timer.setInterval(30);
+    rows = 4;
+    cols = 3;
+
+    timer.setInterval(10);
     connect(&timer,SIGNAL(timeout()), this, SLOT(updateProgress()));
 
+    started = false;
     duringCalibration = false;
     lastPointCompleted = false;
     finished = false;
@@ -25,30 +36,116 @@ void CalibrationWidget::keyPressEvent(QKeyEvent *ev)
         this->hide();
     }
 
-    if(ev->key() == Qt::Key_U)
+    if(ev->key() == Qt::Key_S)
     {
-        ev->accept();
+        if(started)
+        {
+            restartCalibration();
+        }
+        else
+        {
+            started = true;
+        }
         update();
     }
+
+    if(ev->key() == Qt::Key_Z && !started)
+    {
+        if(ev->modifiers() && Qt::ShiftModifier)
+        {
+            if(cols > 2)
+                cols--;
+        }
+        else
+        {
+            cols++;
+        }
+        update();
+    }
+
+    if(ev->key() == Qt::Key_X && !started)
+    {
+        if(ev->modifiers() && Qt::ShiftModifier)
+        {
+            if(rows > 2)
+                rows--;
+        }
+        else
+        {
+            rows++;
+        }
+        update();
+    }
+
+}
+
+void CalibrationWidget::generateCalibrationPoints()
+{
+    calibrationPoints.clear();
+    if(rows < 2)
+        rows = 2;
+    if(cols < 2)
+        cols = 2;
+
+    int row_offset = (height()-left_offset-right_offset)/(rows-1);
+    int col_offset = (width()-top_offset-down_offset)/(cols-1);
+    int row_start = top_offset;
+    int col_start = left_offset;
+    for(int i = 0; i<rows; i++)
+    {
+        int x = col_start;
+        int y = row_start;
+        for(int j = 0; j < cols; j++)
+        {
+            calibrationPoints.append(QPoint(x, y));
+            x+=col_offset;
+        }
+        row_start+=row_offset;
+    }
+}
+
+void CalibrationWidget::restartCalibration()
+{
+    abortPointCalibration();
+    calibrationData.clear();
+    pointInCalibration = 0;
 }
 
 void CalibrationWidget::paintEvent(QPaintEvent *ev)
 {
-    calibrationPoints.clear();
-    calibrationPoints.append(QPoint(offset,offset));
-    calibrationPoints.append(QPoint(width()-offset,offset));
-    calibrationPoints.append(QPoint(offset, height()-offset));
-    calibrationPoints.append(QPoint(width()-offset, height()-offset));
-
     QPainter painter(this);
     painter.fillRect(0, 0, this->width(), this->height(), Qt::black);
 
     drawCalibrationPoints(painter);
     drawCalibrationLines(painter);
+    drawTouches(painter);
+}
+
+Mat* CalibrationWidget::getCalibrationData()
+{
+    vector<Point2f> src;
+    vector<Point2f> dst;
+    Mat *h = NULL;
+    if(finished && calibrationPoints.size() == calibrationData.size())
+    {
+        h = new Mat();
+        for(int i = 0; i<calibrationPoints.size(); i++)
+        {
+            QPoint data = calibrationPoints[i];
+            QPoint cal = calibrationData[i];
+            src.push_back(Point2f(data.x()/(float)width(), data.y()/(float)height()));
+            dst.push_back(Point2f(cal.x()/(float)width(), cal.y()/(float)height()));
+        }
+        Mat m = findHomography(Mat(dst), Mat(src), CV_LMEDS);
+        m.copyTo(*h);
+    }
+
+    return h;
 }
 
 void CalibrationWidget::drawCalibrationPoints(QPainter &p)
 {
+    generateCalibrationPoints();
     QPen redPen(Qt::red);
     redPen.setWidth(2);
     p.setPen(redPen);
@@ -62,7 +159,7 @@ void CalibrationWidget::drawCalibrationPoints(QPainter &p)
             p.drawEllipse(*it, pointSize, pointSize);
             p.setBrush(Qt::NoBrush);
         }
-        else if(pointInCalibration == i)
+        else if(pointInCalibration == i && started)
         {
             int cSize = 2*pointSize;
             int s = 255 * (calibrationProgress/100.0);
@@ -100,7 +197,7 @@ void CalibrationWidget::drawCalibrationLines(QPainter &p)
 
 void CalibrationWidget::startNextPointCalibration(QPoint p)
 {
-    if(!duringCalibration)
+    if(!duringCalibration && started)
     {
         duringCalibration = true;
         currentCalibrationPoint = p;
@@ -124,10 +221,11 @@ void CalibrationWidget::abortPointCalibration()
 
     duringCalibration = false;
 
-    if(pointInCalibration == calibrationPoints.size())
+    if(!finished && pointInCalibration == calibrationPoints.size())
     {
         finished = true;
         emit calibrationFinished();
+        Touch::setCalibrationMat(getCalibrationData());
     }
     update();
 }
@@ -139,12 +237,28 @@ void CalibrationWidget::pointCalibrationCompleted()
 
 void CalibrationWidget::mousePressEvent(QMouseEvent *ev)
 {
-    startNextPointCalibration(ev->pos());
+    QPoint p = ev->pos();
+    Touch t(p);
+    t.setId(-1);
+    touchDown(t);
 }
 
-void CalibrationWidget::mouseReleaseEvent(QMouseEvent *)
+void CalibrationWidget::mouseReleaseEvent(QMouseEvent *ev)
 {
-    abortPointCalibration();
+    QPoint p = ev->pos();
+    Touch t(p);
+
+    t.setId(-1);
+    touchUp(t);
+}
+
+void CalibrationWidget::mouseMoveEvent(QMouseEvent *ev)
+{
+    QPoint p = ev->pos();
+    Touch t(p);
+
+    t.setId(-1);
+    touchMoved(t);
 }
 
 void CalibrationWidget::touchDown(Touch t)
@@ -157,15 +271,21 @@ void CalibrationWidget::touchDown(Touch t)
         startNextPointCalibration(QPoint(x,y));
     }
 
-    if (!finished && touches.size() >= 1 )
+    if (!finished && touches.size() > 1 )
     {
         abortPointCalibration();
     }
+
     update();
 }
 
 void CalibrationWidget::touchMoved(Touch t)
 {
+    Touch &t_old = touches[t.getId()];
+    if(t_old.distance(t) > 5)
+    {
+        abortPointCalibration();
+    }
     touches[t.getId()] = t;
     update();
 }
@@ -173,6 +293,10 @@ void CalibrationWidget::touchMoved(Touch t)
 void CalibrationWidget::touchUp(Touch t)
 {
     touches.remove(t.getId());
+
+    if(duringCalibration)
+        abortPointCalibration();
+
     update();
 }
 
@@ -189,4 +313,21 @@ void CalibrationWidget::updateProgress()
         timer.stop();
 
     update();
+}
+
+void CalibrationWidget::drawTouches(QPainter &p)
+{
+    if(finished)
+    {
+        for(QList<Touch>::iterator it = touches.values().begin(); it!=touches.values().end(); it++)
+        {
+            Touch &t = *it;
+            Point2f pos = t.getPosition();
+            QPoint c(pos.x*width(), pos.y*height());
+            QBrush green(Qt::green);
+            p.setBrush(green);
+            p.setPen(Qt::green);
+            p.drawEllipse(c, 12, 12);
+        }
+    }
 }

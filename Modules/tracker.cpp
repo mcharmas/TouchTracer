@@ -99,12 +99,16 @@ void Tracker::identifyFingers(QVector<Touch>* touches)
         long id = findId(t, *frameTouches, takenIds);
 
         Touch *t_old = findTouch(id);
-        if(t_old!=NULL && t.distance(*t_old) < movementFilter )
+
+        if(t_old!=NULL && t.distance(*t_old) < movementFilter ) //if touch exists on previous frames
         {
             t = *t_old;
             t.setMoved(false);
         }
-        t.setId(id);
+        else //if it does not
+        {
+            t.setId(id);
+        }
     }
 }
 

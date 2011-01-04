@@ -1,5 +1,7 @@
 #include "touch.h"
 
+Mat* Touch::calibrationMat = 0;
+
 Touch::Touch(QObject *parent) :QObject(parent)
 {
     middle = Point(0,0);
@@ -25,6 +27,14 @@ Touch::Touch(const Touch &t) : QObject(t.parent())
     setFrameSize(640, 480);
 }
 
+Touch::Touch(QPoint &p, QObject *parent)
+{
+    vector<Point> contours;
+    contours.push_back(Point(p.x(), p.y()));
+    setContours(contours);
+    found = false;
+    setFrameSize(640, 480);
+}
 
 Touch& Touch::operator=(const Touch& t)
 {
@@ -44,14 +54,10 @@ void Touch::setContours(const vector<Point>& contours)
 Point Touch::findMiddle()
 {
     int x=0, y=0;
-    for(vector<Point>::iterator it = contourPoints.begin(); it != contourPoints.end(); it++)
-    {
-        x += (*it).x;
-        y += (*it).y;
-    }
-    x/=contourPoints.size();
-    y/=contourPoints.size();
-
+    Mat m(contourPoints);
+    Moments mom = moments(m, true);
+    x = mom.m10 / mom.m00;
+    y = mom.m01 / mom.m00;
     return Point(x,y);
 }
 
@@ -83,4 +89,27 @@ double Touch::distance(const Touch &t) const
     int x_dst = this->getCoordinates().x - t.getCoordinates().x;
     int y_dst = this->getCoordinates().y - t.getCoordinates().y;
     return sqrt(x_dst*x_dst + y_dst*y_dst);
+}
+
+Point2f Touch::getPosition()
+{
+    Point2f p(getTuioX(), getTuioY());
+
+    if(calibrationMat)
+    {
+        vector<Point2f> srcV;
+        srcV.push_back(p);
+        Mat src(srcV);
+
+        Point2f point;
+        vector<Point2f> dstV;
+        dstV.push_back(point);
+        Mat dst(dstV);
+
+        perspectiveTransform(src, dst, *calibrationMat);
+
+        Point2f result=dst.at<Point2f>(0,0);
+        return result;
+    }
+    return p;
 }

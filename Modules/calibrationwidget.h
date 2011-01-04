@@ -8,8 +8,14 @@
 #include <QPoint>
 #include <QTimer>
 #include <QMap>
+#include <QPair>
+#include <QDebug>
+#include <cv.h>
+#include <highgui.h>
 
 #include "touch.h"
+
+using namespace cv;
 
 class CalibrationWidget : public QWidget
 {
@@ -21,34 +27,49 @@ public:
 
     void mousePressEvent(QMouseEvent *);
     void mouseReleaseEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+
+    Mat* getCalibrationData();
 
 signals:
     void calibrationFinished();
 
 public slots:
-    void startNextPointCalibration(QPoint p);
-    void abortPointCalibration();
-    void pointCalibrationCompleted();
-
     void touchDown(Touch t);
     void touchMoved(Touch t);
     void touchUp(Touch t);
 
 private:
+    void startNextPointCalibration(QPoint p);
+    void abortPointCalibration();
+    void pointCalibrationCompleted();
+    void restartCalibration();
+
+    void generateCalibrationPoints();
+
     void drawCalibrationPoints(QPainter &p);
     void drawCalibrationLines(QPainter &p);
+    void drawTouches(QPainter &p);
 
     QVector<QPoint> calibrationPoints;
     QVector<QPoint> calibrationData;
 
     QPoint currentCalibrationPoint;
 
-    int offset;
+    int top_offset;
+    int down_offset;
+    int left_offset;
+    int right_offset;
+
+    int rows;
+    int cols;
+
     int pointInCalibration;
     int calibrationProgress;
     bool duringCalibration;
     bool lastPointCompleted;
     bool finished;
+    bool started;
 
     int pointSize;
 
