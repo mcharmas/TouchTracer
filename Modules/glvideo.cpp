@@ -4,7 +4,7 @@ GLVideo::GLVideo(QWidget *parent) :
     QGLWidget(parent)
 {
     hasImage = false;
-    resize(QSize(400,300));
+    //resize(QSize(400,300));
 }
 
 void GLVideo::paintGL()
@@ -17,6 +17,7 @@ void GLVideo::paintGL()
 
 void GLVideo::resizeGL(int w, int h)
 {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport (0, 0, w, h);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity();
@@ -28,10 +29,11 @@ void GLVideo::setImage(const QImage & img)
 {
     this->img = img;
     glImg = QGLWidget::convertToGLFormat(img);
+    glImg = glImg.scaled(this->size(), Qt::KeepAspectRatio);
     if(!hasImage)
     {
         hasImage=true;
-        resize(img.size());
+        //resize(img.size());
     }
     updateGL();
 }

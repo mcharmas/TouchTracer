@@ -2,6 +2,7 @@
 #define GLVIDEO_H
 
 #include <QtOpenGL/qgl.h>
+#include <QDebug>
 using namespace QGL;
 
 /**

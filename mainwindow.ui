@@ -16,22 +16,6 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
-     <widget class="QWidget" name="managerWidget" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>280</width>
-        <height>0</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QGroupBox" name="videoBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -53,8 +37,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>363</width>
-            <height>306</height>
+            <width>609</width>
+            <height>303</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -76,7 +60,7 @@
      <x>0</x>
      <y>0</y>
      <width>675</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -96,6 +80,21 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="features">
+    <set>QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Settings</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="managerWidget"/>
+  </widget>
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>

@@ -17,8 +17,9 @@ void Module::init()
 Module::~Module()
 {
     emit videoStopped(getVideoWidget());
-    setVideo(false);
-    delete videoWidget;
+    // this is probably removed by QT when exiting the application
+    //setVideo(false);
+    //delete videoWidget;
 }
 
 bool Module::processImage(cv::Mat &mat)

@@ -59,20 +59,8 @@ private:
     QStringList possibleModules; /*!< list of possible modules (shown in modulesBox) */
     QList<Module*> *modules; /*!< list of modules passed to processor */
     QString fileName; /*!< name of videoFile */
-    QWidget *currentSettingsWidget; /*!< Pointer to currently displayed settings widget */
-    Module *selectedModule; /*!< pointer to currently selected modules */
 
 private slots:
-    /*!
-     \brief Method called after removeButton click.
-    */
-    void on_removeModuleButton_clicked();
-
-    /*!
-     \brief Method called afted addButton click.
-    */
-    void on_addModuleButton_clicked();
-
     /*!
      \brief Stops processing thread and sets processor = NULL;
     */
@@ -82,14 +70,6 @@ private slots:
      \brief Creates new processor, sets module list and starts thread.
     */
     void on_startButton_clicked();
-
-    /*!
-     \brief Shows settings of selected module.
-     \param QItemSelection
-     \param QItemSelection
-    */
-    void showSettings(QItemSelection,QItemSelection);
-
 
     /**
      * @brief Shows FPS in GUI.
