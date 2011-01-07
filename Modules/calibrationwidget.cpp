@@ -26,6 +26,8 @@ CalibrationWidget::CalibrationWidget(QWidget *parent) :
     duringCalibration = false;
     lastPointCompleted = false;
     finished = false;
+
+    generateCalibrationPoints();
 }
 
 void CalibrationWidget::keyPressEvent(QKeyEvent *ev)
@@ -60,6 +62,7 @@ void CalibrationWidget::keyPressEvent(QKeyEvent *ev)
         {
             cols++;
         }
+        generateCalibrationPoints();
         update();
     }
 
@@ -74,6 +77,7 @@ void CalibrationWidget::keyPressEvent(QKeyEvent *ev)
         {
             rows++;
         }
+        generateCalibrationPoints();
         update();
     }
 
@@ -121,31 +125,39 @@ void CalibrationWidget::paintEvent(QPaintEvent *ev)
     drawTouches(painter);
 }
 
-Mat* CalibrationWidget::getCalibrationData()
+Point2f CalibrationWidget::scalePoint(const QPoint &p)
 {
-    vector<Point2f> src;
-    vector<Point2f> dst;
-    Mat *h = NULL;
+    Point2f pr(((float)p.x())/width(), ((float)p.y())/height());
+    return pr;
+}
+
+Mapper* CalibrationWidget::getCalibrationData()
+{
     if(finished && calibrationPoints.size() == calibrationData.size())
     {
-        h = new Mat();
-        for(int i = 0; i<calibrationPoints.size(); i++)
+        QVector<CalibrationSquare*> *squares = new QVector<CalibrationSquare*>();
+        for(int i = 0; i<calibrationPoints.size() - cols; i++)
         {
-            QPoint data = calibrationPoints[i];
-            QPoint cal = calibrationData[i];
-            src.push_back(Point2f(data.x()/(float)width(), data.y()/(float)height()));
-            dst.push_back(Point2f(cal.x()/(float)width(), cal.y()/(float)height()));
+            qDebug() << i;
+            if( (i+1)%cols != 0)
+            {
+                qDebug() << "Adding square:" << i << i+1 << i+cols << i+cols+1;
+                CalibrationSquare *s = new CalibrationSquare();
+                s->addCalibrationData(scalePoint(calibrationPoints[i]), scalePoint(calibrationData[i]));
+                s->addCalibrationData(scalePoint(calibrationPoints[i+1]), scalePoint(calibrationData[i+1]));
+                s->addCalibrationData(scalePoint(calibrationPoints[i+cols+1]), scalePoint(calibrationData[i+cols+1]));
+                s->addCalibrationData(scalePoint(calibrationPoints[i+cols]), scalePoint(calibrationData[i+cols]));
+                squares->append(s);
+            }
         }
-        Mat m = findHomography(Mat(dst), Mat(src), CV_LMEDS);
-        m.copyTo(*h);
+        return new Mapper(squares);
     }
 
-    return h;
+    return NULL;
 }
 
 void CalibrationWidget::drawCalibrationPoints(QPainter &p)
 {
-    generateCalibrationPoints();
     QPen redPen(Qt::red);
     redPen.setWidth(2);
     p.setPen(redPen);
@@ -225,7 +237,7 @@ void CalibrationWidget::abortPointCalibration()
     {
         finished = true;
         emit calibrationFinished();
-        Touch::setCalibrationMat(getCalibrationData());
+        Touch::setCalibrationMapper(getCalibrationData());
     }
     update();
 }

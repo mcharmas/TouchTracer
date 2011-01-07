@@ -7,6 +7,7 @@
 #include <highgui.h>
 #include <QObject>
 #include <QPoint>
+#include "mapper.h"
 
 using namespace std;
 using namespace cv;
@@ -126,11 +127,11 @@ public:
     void setMoved(bool b) { moved = b; }
     bool hasMoved() { return moved; }
 
-    static void setCalibrationMat(Mat* m)
+    static void setCalibrationMapper(Mapper* m)
     {
-        if(calibrationMat)
-            delete calibrationMat;
-        calibrationMat = m;
+        if(calibrationMapper)
+            delete calibrationMapper;
+        calibrationMapper = m;
     }
 
 signals:
@@ -158,8 +159,9 @@ protected:
     int width;
     int height;
     bool moved;
+    bool fixedMiddle;
 
-    static Mat* calibrationMat;
+    static Mapper* calibrationMapper;
 
 };
 

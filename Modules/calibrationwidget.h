@@ -14,7 +14,8 @@
 #include <highgui.h>
 
 #include "touch.h"
-
+#include "calibrationsquare.h"
+#include "mapper.h"
 using namespace cv;
 
 class CalibrationWidget : public QWidget
@@ -29,7 +30,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *);
     void mouseMoveEvent(QMouseEvent *);
 
-    Mat* getCalibrationData();
+    Mapper* getCalibrationData();
 
 signals:
     void calibrationFinished();
@@ -44,6 +45,7 @@ private:
     void abortPointCalibration();
     void pointCalibrationCompleted();
     void restartCalibration();
+    Point2f scalePoint(const QPoint& p);
 
     void generateCalibrationPoints();
 

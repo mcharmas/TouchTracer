@@ -1,9 +1,10 @@
 #include "touch.h"
 
-Mat* Touch::calibrationMat = 0;
+Mapper* Touch::calibrationMapper = 0;
 
 Touch::Touch(QObject *parent) :QObject(parent)
 {
+    fixedMiddle = false;
     middle = Point(0,0);
     area = 0;
     found = false;
@@ -14,6 +15,7 @@ Touch::Touch(QObject *parent) :QObject(parent)
 Touch::Touch(const vector<Point>& contours, QObject *parent) :
     QObject(parent)
 {
+    fixedMiddle = false;
     setContours(contours);
     found = false;
     setFrameSize(640, 480);
@@ -21,6 +23,7 @@ Touch::Touch(const vector<Point>& contours, QObject *parent) :
 
 Touch::Touch(const Touch &t) : QObject(t.parent())
 {
+    fixedMiddle = t.fixedMiddle;
     setContours(t.getCvContour());
     found = t.isFound();
     id = t.getId();
@@ -29,15 +32,17 @@ Touch::Touch(const Touch &t) : QObject(t.parent())
 
 Touch::Touch(QPoint &p, QObject *parent)
 {
+    fixedMiddle = true;
     vector<Point> contours;
     contours.push_back(Point(p.x(), p.y()));
     setContours(contours);
     found = false;
-    setFrameSize(640, 480);
+    setFrameSize(640, 480);    
 }
 
 Touch& Touch::operator=(const Touch& t)
 {
+    fixedMiddle = t.fixedMiddle;
     setContours(t.getCvContour());
     found = t.isFound();
     id = t.getId();
@@ -54,10 +59,19 @@ void Touch::setContours(const vector<Point>& contours)
 Point Touch::findMiddle()
 {
     int x=0, y=0;
-    Mat m(contourPoints);
-    Moments mom = moments(m, true);
-    x = mom.m10 / mom.m00;
-    y = mom.m01 / mom.m00;
+    if(fixedMiddle)
+    {
+        Point p = contourPoints[0];
+        x = p.x;
+        y = p.y;
+    }
+    else
+    {
+        Mat m(contourPoints);
+        Moments mom = moments(m, true);
+        x = mom.m10 / mom.m00;
+        y = mom.m01 / mom.m00;
+    }
     return Point(x,y);
 }
 
@@ -95,21 +109,9 @@ Point2f Touch::getPosition()
 {
     Point2f p(getTuioX(), getTuioY());
 
-    if(calibrationMat)
+    if(calibrationMapper)
     {
-        vector<Point2f> srcV;
-        srcV.push_back(p);
-        Mat src(srcV);
-
-        Point2f point;
-        vector<Point2f> dstV;
-        dstV.push_back(point);
-        Mat dst(dstV);
-
-        perspectiveTransform(src, dst, *calibrationMat);
-
-        Point2f result=dst.at<Point2f>(0,0);
-        return result;
+        return calibrationMapper->map(p);
     }
     return p;
 }
