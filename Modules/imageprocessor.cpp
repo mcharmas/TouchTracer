@@ -1,30 +1,23 @@
 #include "imageprocessor.h"
 
-ImageProcessor::ImageProcessor(QString fileName, QObject *parent) :
+ImageProcessor::ImageProcessor(ImageSource* imgSrc, QObject *parent) :
     QThread(parent)
 {
-    init(fileName, NULL);
+    init(imgSrc, NULL);
 }
 
-ImageProcessor::ImageProcessor(QString fileName, QList<Module *> * modules, QObject *parent)
+ImageProcessor::ImageProcessor(ImageSource* imgSrc, QList<Module *> * modules, QObject *parent)
     :     QThread(parent)
 {
-    init(fileName, modules);
+    init(imgSrc, modules);
 }
 
-void ImageProcessor::init(QString fileName, QList<Module *> *modules)
+void ImageProcessor::init(ImageSource *imgSrc, QList<Module *> *modules)
 {
-    this->fileName = fileName;
-    capture = new VideoCapture(fileName.toStdString());
-    if(!capture->isOpened()) {
-        throw new Exception();
-    }
-
-    interval = (int)(1000000 / (capture->get(CV_CAP_PROP_FPS) + 1) );
+    this->imgSrc = imgSrc;
     setModuleList(modules);
     running = true;
-    fps = 30;
-    dps = 0;
+    fps = 0;
 }
 
 ImageProcessor::~ImageProcessor()
@@ -32,69 +25,30 @@ ImageProcessor::~ImageProcessor()
     if(this->isRunning()) {
        this->stop();
     }
-    delete capture;
-
 }
 
 void ImageProcessor::run()
 {
     startTimer(1000);
-    bool skipFrame = false;
-    qint64 timeToWait = 0;
 
     while(running) {
-        while(capture->grab() && running)
-        {
-            qint64 start = QDateTime::currentMSecsSinceEpoch();
+        fpsMutex.lock();
+        fps++;
+        fpsMutex.unlock();
 
-            fpsMutex.lock();
-            fps++;
-            fpsMutex.unlock();
+        Mat frame;
+        imgSrc->getFrame(frame);
 
-            Mat frame;
-            if(!capture->retrieve(frame))
-                break;
-
-            if(skipFrame) {
-                fpsMutex.lock();
-                dps++;
-                fpsMutex.unlock();
-                int x = timeToWait - interval;
-                if(x > 0) {
-                    skipFrame = true;
-                    timeToWait = x;
-                } else {
-                    skipFrame = false;
-                    this->usleep(interval - timeToWait);
-                }
-                continue;
-            }
-
-            mut.lock();
-            if(modules != NULL) {
-                foreach(Module *m, *modules){
-                    m->processImage(frame);
-                }
-            }
-            mut.unlock();
-
-            qint64 duration = QDateTime::currentMSecsSinceEpoch() - start;
-            qDebug() << duration;
-
-            if((interval - duration*1000) < 0)
-            {
-                skipFrame = true;
-                timeToWait = duration*1000 - interval;
-            }
-            else
-            {
-                this->usleep(interval - duration*1000);
+        qint64 start = QDateTime::currentMSecsSinceEpoch();
+        mut.lock();
+        if(modules != NULL) {
+            foreach(Module *m, *modules){
+                m->processImage(frame);
             }
         }
-
-        capture->release();
-        delete capture;
-        capture = new VideoCapture(fileName.toStdString());
+        mut.unlock();
+        qint64 duration = QDateTime::currentMSecsSinceEpoch() - start;
+        imgSrc->setProcessingTime(duration);
     }
 }
 
@@ -108,9 +62,8 @@ void ImageProcessor::countFps()
     fpsMutex.lock();
     int xfps = fps;
     fps = 0;
-    int xdps = dps;
-    dps=0;
+    int xdps = imgSrc->droppedFrames();
     fpsMutex.unlock();
-    emit fpsUpdated(xfps);
+    emit fpsUpdated(xfps + xdps);
     emit dpsUpdated(xdps);
 }

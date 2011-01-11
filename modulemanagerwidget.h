@@ -11,6 +11,7 @@
 #include "Modules/modulebackground.h"
 #include "Modules/modulefilters.h"
 #include "Modules/moduletracking.h"
+#include "Modules/imagesource.h"
 
 namespace Ui {
     class ModuleManagerWidget;
@@ -56,9 +57,8 @@ private:
     Ui::ModuleManagerWidget *ui; /*!< UI */
     VideoGallery* videoWidget; /*!< pointer to video widget */
     ImageProcessor *processor; /*!< pointer to image processor thread */
-    QStringList possibleModules; /*!< list of possible modules (shown in modulesBox) */
     QList<Module*> *modules; /*!< list of modules passed to processor */
-    QString fileName; /*!< name of videoFile */
+    ImageSource *imgSrc;
 
 private slots:
     /*!

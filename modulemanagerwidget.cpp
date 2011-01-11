@@ -5,7 +5,7 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
     QWidget(parent), ui(new Ui::ModuleManagerWidget), videoWidget((VideoGallery*)videoWidget)
 {
     ui->setupUi(this);
-    fileName = "";
+    imgSrc = NULL;
 
     processor = NULL;
     modules = new QList<Module*>();
@@ -44,7 +44,11 @@ ModuleManagerWidget::ModuleManagerWidget(QWidget *videoWidget, QWidget *parent) 
 void ModuleManagerWidget::openFile(QString fileName)
 {
     on_stopButton_clicked();
-    this->fileName = fileName;
+    if(imgSrc)
+    {
+        delete imgSrc;
+    }
+    this->imgSrc = new FileImageSource(fileName);
 }
 
 ModuleManagerWidget::~ModuleManagerWidget()
@@ -54,6 +58,10 @@ ModuleManagerWidget::~ModuleManagerWidget()
     {
         processor->stop();
         delete processor;
+    }
+    if(imgSrc)
+    {
+        delete imgSrc;
     }
 
     foreach(Module *m, *modules)
@@ -66,14 +74,14 @@ ModuleManagerWidget::~ModuleManagerWidget()
 
 void ModuleManagerWidget::on_startButton_clicked()
 {
-    if(fileName=="")
+    if(!imgSrc)
     {
         QMessageBox::information(this, tr("No file opened."), tr("No video file has been opened."), QMessageBox::Ok);
         return;
     }
 
     if(!processor) {
-        processor = new ImageProcessor(fileName, modules, this);
+        processor = new ImageProcessor(imgSrc, modules, this);
         processor->setModuleList(modules);
         connect(processor, SIGNAL(fpsUpdated(int)), this, SLOT(showFps(int)));
         connect(processor, SIGNAL(dpsUpdated(int)), this, SLOT(showDps(int)));
@@ -82,8 +90,6 @@ void ModuleManagerWidget::on_startButton_clicked()
     if(!processor->isRunning()) {
         processor->start();
     }
-
-
 }
 
 void ModuleManagerWidget::on_stopButton_clicked()

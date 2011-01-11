@@ -10,6 +10,7 @@
 #include <highgui.h>
 
 #include "module.h"
+#include "imagesource.h"
 
 using namespace cv;
 
@@ -29,7 +30,7 @@ public:
      \param fileName of the file to be opened.
      \param parent QObject parent.
     */
-    ImageProcessor(QString fileName, QObject *parent = 0);
+    ImageProcessor(ImageSource *imgSrc, QObject *parent = 0);
 
     /*!
      \brief Constructor.
@@ -38,7 +39,7 @@ public:
      \param modules list of pointer to modules which should be used during processing.
      \param parent QObject parent.
     */
-    ImageProcessor(QString fileName, QList<Module*> *modules, QObject *parent = 0);
+    ImageProcessor(ImageSource *imgSrc, QList<Module*> *modules, QObject *parent = 0);
 
     /*!
      \brief Cleans.
@@ -56,17 +57,6 @@ public:
       \brief Sets module list. Should be thread safe.
     */
     void setModuleList(QList<Module*> *modules) { mut.lock(); this->modules = modules; mut.unlock(); }
-
-    /*!
-      \brief Should be called before modules list is changed outside the thread.
-    */
-    void chModList() { mut.lock(); }
-
-    /*!
-      \brief Should be called after changing of module list to unlock processing
-    */
-    void stopChModList() { mut.unlock(); }
-
 
     /**
      * @brief Used to count FPS.
@@ -88,22 +78,20 @@ private:
     int interval; /*!< Frame reading interval to mantain proper framerate. */
     bool running; /*!< If thread is running. */
     QList<Module*> *modules; /*!< Pointer to module list. */
-    QMutex mut; /*!< Mutex securing module list. */
-    QString fileName; /**< Name of the file to open. */
+    QMutex mut; /*!< Mutex securing module list. */    
     QMutex fpsMutex; /**< Mutex controlling access to fps and dps. */
     int fps; /**< Fps counter */
-    int dps; /**< Dropped frame counder counter */
-
+    ImageSource *imgSrc;
 
     /*!
      \brief Inits whole class.
 
      Opens the file through OpenCV VideoCapture class.
      Registers all the modules.
-     \param fileName
+     \param imgSrc image source class
      \param modules
     */
-    void init(QString fileName, QList<Module*> *modules);
+    void init(ImageSource *imgSrc, QList<Module*> *modules);
 
 private slots:
     /**
