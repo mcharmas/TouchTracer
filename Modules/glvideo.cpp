@@ -30,7 +30,7 @@ void GLVideo::setImage(const QImage & img)
     this->img = img;
     glImg = QGLWidget::convertToGLFormat(img);
     //glImg = glImg.scaled(this->size(), Qt::KeepAspectRatio);
-    if(!hasImage)
+    if(!hasImage || this->size()!=img.size())
     {
         hasImage=true;
         resize(img.size());

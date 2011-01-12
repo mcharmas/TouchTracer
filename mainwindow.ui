@@ -108,6 +108,9 @@
    <property name="text">
     <string>Open Camera</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
