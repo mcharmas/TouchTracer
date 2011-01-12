@@ -35,8 +35,8 @@ public:
     QSlider* blurSlider; /**< Blur slider. */
     QSlider* sharpSlider; /**< Sharp slider. */
 
-    QCheckBox* vFlip;
-    QCheckBox* hFlip;
+    QCheckBox* vFlip; /**< Exported checkbox from ui. */
+    QCheckBox* hFlip; /**< Exported checkbox from ui. */
 
 private:
     Ui::ModuleFiltersSettings *ui; /**< UI */

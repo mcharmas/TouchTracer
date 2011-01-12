@@ -1,6 +1,8 @@
 #include "touch.h"
 
 Mapper* Touch::calibrationMapper = 0;
+int Touch::width = 640;
+int Touch::height = 480;
 
 Touch::Touch(QObject *parent) :QObject(parent)
 {
@@ -8,7 +10,6 @@ Touch::Touch(QObject *parent) :QObject(parent)
     middle = Point(0,0);
     area = 0;
     found = false;
-    setFrameSize(640, 480);
     moved = true;
 }
 
@@ -18,7 +19,6 @@ Touch::Touch(const vector<Point>& contours, QObject *parent) :
     fixedMiddle = false;
     setContours(contours);
     found = false;
-    setFrameSize(640, 480);
 }
 
 Touch::Touch(const Touch &t) : QObject(t.parent())
@@ -27,17 +27,15 @@ Touch::Touch(const Touch &t) : QObject(t.parent())
     setContours(t.getCvContour());
     found = t.isFound();
     id = t.getId();
-    setFrameSize(640, 480);
 }
 
-Touch::Touch(QPoint &p, QObject *parent)
+Touch::Touch(QPoint &p, QObject *parent) : QObject(parent)
 {
     fixedMiddle = true;
     vector<Point> contours;
     contours.push_back(Point(p.x(), p.y()));
     setContours(contours);
     found = false;
-    setFrameSize(640, 480);    
 }
 
 Touch& Touch::operator=(const Touch& t)

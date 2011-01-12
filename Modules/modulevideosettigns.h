@@ -18,6 +18,7 @@ class ModuleVideoSettigns : public AbstractSettingsWidget
 public:
     /*!
      \brief Setups UI on getSettingsWidget() widget.
+     \param moduleName name of module - used to store settings
      \param parent
     */
     explicit ModuleVideoSettigns(QString moduleName, QWidget *parent = 0);

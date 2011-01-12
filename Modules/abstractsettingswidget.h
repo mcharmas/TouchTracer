@@ -21,9 +21,11 @@ class AbstractSettingsWidget : public QWidget
     Q_OBJECT
 
 public:
-    /*!
-     \brief Constructs.
-     \param parent QWidget parent
+    /**
+     * @brief Constructs object.
+     *
+     * @param moduleName name of module (used for storing settings in proper section).
+     * @param parent QObject parent
     */
     explicit AbstractSettingsWidget(QString moduleName, QWidget *parent = 0);
 
@@ -32,7 +34,7 @@ public:
     */
     virtual ~AbstractSettingsWidget();
 
-    QCheckBox* videoCheckBox;
+    QCheckBox* videoCheckBox; /**< Check box used for enabling video. */
 
 protected:
     /*!
@@ -42,10 +44,32 @@ protected:
     */
     QWidget* getSettingsWidget();
 
-    const QString PROP_VIDEO;
+    const QString PROP_VIDEO; /**< Constant property used for storing settings. */
 
+    /**
+     * @brief Stores property in config file.
+     *
+     * Stores property in config file in the section responsible for each module.
+     * @param prop key
+     * @param v value
+    */
     void storeProperty(const QString prop, QVariant v);
+
+
+    /**
+     * @brief Reads property from config file.
+     *
+     * @param prop key
+     * @param v default value
+     * @return QVariant value from cfg file or default value when not asvailable
+    */
     QVariant getProperty(const QString prop, QVariant v);
+
+    /**
+     * @brief Returns module name.
+     *
+     * @return module name
+    */
     QString getModuleName() {return moduleName;}
 
 private:

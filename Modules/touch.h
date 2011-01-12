@@ -40,7 +40,7 @@ public:
 
     /**
      * @brief Creates touch on the basis of QPoint.
-     * @param point
+     * @param p point of touch
      * @param parent QObject parent.
     */
     Touch(QPoint &p, QObject *parent = 0);
@@ -64,11 +64,20 @@ public:
     */
     Point getCoordinates() const { return middle; }
 
-    float getTuioX() const { return (float)middle.x / this->width; }
-    float getTuioY() const { return (float)middle.y / this->height; }
+    /**
+     * @brief Returns Y position of touch in TUIO format.
+     * @return Touch position.
+    */
+    float getTuioX() const { return (float)middle.x / Touch::width; }
 
     /**
-     * @brief Returns position of coursor after translation ba calibration matrix.
+     * @brief Returns Y position of touch in TUIO format.
+     * @return Touch position.
+    */
+    float getTuioY() const { return (float)middle.y / Touch::height; }
+
+    /**
+     * @brief Returns position of coursor after translation by calibration matrix.
      * @return Point2f
     */
     Point2f getPosition();
@@ -122,11 +131,22 @@ public:
     */
     double distance(const Touch& t) const;
 
-    void setFrameSize(int width, int height) { this->width = width; this->height = height; }
-
+    /**
+     * @brief Sets point as moved (TUIO message will be sent by tracker).
+     * @param b moved or not
+    */
     void setMoved(bool b) { moved = b; }
+
+    /**
+     * @brief Returns if the point is to be consider as moved.
+     * @return moved or not
+    */
     bool hasMoved() { return moved; }
 
+    /**
+     * @brief Sets calibration mapper used by getPosition() method.
+     * @param m mapper
+    */
     static void setCalibrationMapper(Mapper* m)
     {
         if(calibrationMapper)
@@ -134,9 +154,18 @@ public:
         calibrationMapper = m;
     }
 
-signals:
-
-public slots:
+    /**
+     * @brief Sets frame size of current image input.
+     *
+     * Used when computing TUIO scaled coordinates.
+     * @param w width
+     * @param h height
+    */
+    static void setFrameSize(int w, int h)
+    {
+        Touch::width = w;
+        Touch::height = h;
+    }
 
 protected:
     /**
@@ -156,13 +185,12 @@ protected:
     Point middle; /**< Position of the touch. */
     int area; /**< Size of the touch. */
     long id; /**< Touch id. */
-    int width;
-    int height;
-    bool moved;
-    bool fixedMiddle;
+    bool moved; /**< if point was moved (used by movemement filter) */
+    bool fixedMiddle; /**< one point touch (mouse emulation) */
 
-    static Mapper* calibrationMapper;
-
+    static Mapper* calibrationMapper; /**< calibration mapper */
+    static int width; /**< frame width */
+    static int height; /**< frame height */
 };
 
 

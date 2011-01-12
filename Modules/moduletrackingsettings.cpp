@@ -60,6 +60,6 @@ void ModuleTrackingSettings::setMovementInfo(int x)
 void ModuleTrackingSettings::openCalibration()
 {
     qDebug() << "asdf";
-    CalibrationWidget *c = new CalibrationWidget();
+    new CalibrationWidget();
     //c->show();
 }

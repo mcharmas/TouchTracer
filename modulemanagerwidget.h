@@ -48,7 +48,10 @@ public:
     */
     void openFile(QString fileName);
 
-
+    /**
+     * @brief Creates CameraImageSource object and new image processor.
+     * @param i number camera of device (X in /dev/videoX)
+    */
     void openCameraDevice(int i);
 
 private:
@@ -61,7 +64,7 @@ private:
     VideoGallery* videoWidget; /*!< pointer to video widget */
     ImageProcessor *processor; /*!< pointer to image processor thread */
     QList<Module*> *modules; /*!< list of modules passed to processor */
-    ImageSource *imgSrc;
+    ImageSource *imgSrc; /**< Image source. */
 
 private slots:
     /*!

@@ -27,17 +27,17 @@ public:
     /*!
      \brief Constructor.
 
-     \param fileName of the file to be opened.
-     \param parent QObject parent.
+     \param imgSrc image supplier object
+     \param parent QObject parent
     */
     ImageProcessor(ImageSource *imgSrc, QObject *parent = 0);
 
     /*!
-     \brief Constructor.
+        \brief Constructor.
 
-     \param fileName name of the file to be opened.
+     \param imgSrc image supplier object
      \param modules list of pointer to modules which should be used during processing.
-     \param parent QObject parent.
+     \param parent QObject parent
     */
     ImageProcessor(ImageSource *imgSrc, QList<Module*> *modules, QObject *parent = 0);
 

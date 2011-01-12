@@ -65,6 +65,10 @@ public slots:
     */
     void changeGain(int x);
 
+    /**
+     * @brief Changes image flip
+     * @param i probably not used at all
+    */
     void changeFlip(int i);
 
 
@@ -73,7 +77,7 @@ private:
     int blurValue; /**< Blur window size. */
     int sharpValue; /**< Sharp Blur window size. */
     double gain; /**< Gain factor. */
-    bool vFlip, hFlip;
+    bool vFlip, hFlip; /**< Flips. */
 
 };
 

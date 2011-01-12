@@ -57,6 +57,10 @@ public:
     */
     QString getName() { return "ModuleVideo"; }
 
+    /**
+     * @brief Toggles video on/off.
+     * @param b
+    */
     void toggleVideoSetting(bool b);
 
 private:

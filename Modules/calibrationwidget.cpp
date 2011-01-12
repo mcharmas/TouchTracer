@@ -115,7 +115,7 @@ void CalibrationWidget::restartCalibration()
     pointInCalibration = 0;
 }
 
-void CalibrationWidget::paintEvent(QPaintEvent *ev)
+void CalibrationWidget::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     painter.fillRect(0, 0, this->width(), this->height(), Qt::black);
@@ -203,7 +203,7 @@ void CalibrationWidget::drawCalibrationPoints(QPainter &p)
     }
 }
 
-void CalibrationWidget::drawCalibrationLines(QPainter &p)
+void CalibrationWidget::drawCalibrationLines(QPainter&)
 {
 }
 

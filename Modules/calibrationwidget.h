@@ -18,67 +18,164 @@
 #include "mapper.h"
 using namespace cv;
 
+/**
+ * @brief Widget used to create calibration grid.
+*/
 class CalibrationWidget : public QWidget
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Creates and shows widget.
+     * @param parent QWidget parent
+    */
     explicit CalibrationWidget(QWidget *parent = 0);
+
+    /**
+     * @brief Event processing key presses.
+     *
+     *  X, Z adding cols/rows, Shift+X/Y
+     *  S start calibration
+     *  R restarts calibration process
+     * @param ev
+    */
     void keyPressEvent(QKeyEvent *);
+
+    /**
+     * @brief Paints scene.
+    */
     void paintEvent(QPaintEvent *);
 
+    /**
+     * @brief Transfers mouse presses to touches for testing purpose.
+    */
     void mousePressEvent(QMouseEvent *);
+
+    /**
+     * @brief Transfers mouse presses to touches for testing purpose.
+     * @param ev
+    */
     void mouseReleaseEvent(QMouseEvent *);
+
+    /**
+     * @brief Transfers mouse presses to touches for testing purpose.
+     * @param ev
+    */
     void mouseMoveEvent(QMouseEvent *);
 
+    /**
+     * @brief Returns calibration mapper when ready.
+     * @return Mapper *
+    */
     Mapper* getCalibrationData();
 
 signals:
+    /**
+     * @brief Signal emmited when calibration is finished.
+    */
     void calibrationFinished();
 
 public slots:
+    /**
+     * @brief Slot which should be connected to touch tracer.
+     * @param t
+    */
     void touchDown(Touch t);
+
+    /**
+     * @brief Slot which should be connected to touch tracer.
+     * @param t
+    */
     void touchMoved(Touch t);
+
+    /**
+     * @brief Slot which should be connected to touch tracer.
+     * @param t
+    */
     void touchUp(Touch t);
 
 private:
+    /**
+     * @brief Moves calibration to next point.
+     * @param p of touch
+    */
     void startNextPointCalibration(QPoint p);
+
+    /**
+     * @brief Aborts current point calibration.
+    */
+
     void abortPointCalibration();
+
+    /**
+     * @brief Saves calibration and generates Mapper from collected data.
+    */
     void pointCalibrationCompleted();
+
+    /**
+     * @brief Restarts calibration process.
+    */
     void restartCalibration();
+
+    /**
+     * @brief Scales point from QT coordinates to TUIO coordinates.
+     * @param p to be scalled
+     * @return Point2f scalled point
+    */
     Point2f scalePoint(const QPoint& p);
 
+    /**
+     * @brief Generates calibration points on the grid.
+    */
     void generateCalibrationPoints();
 
+    /**
+     * @brief Draws calibration points using the painter.
+     * @param p painter
+    */
     void drawCalibrationPoints(QPainter &p);
-    void drawCalibrationLines(QPainter &p);
+
+    /**
+     * @brief Does not work.
+     * @param painter
+    */
+    void drawCalibrationLines(QPainter&);
+
+    /**
+     * @brief Draws touches when callibration is finished.
+     * @param p
+    */
     void drawTouches(QPainter &p);
 
-    QVector<QPoint> calibrationPoints;
-    QVector<QPoint> calibrationData;
+    QVector<QPoint> calibrationPoints; /**< Points on the screen. */
+    QVector<QPoint> calibrationData; /**< Camera points. */
 
-    QPoint currentCalibrationPoint;
+    QPoint currentCalibrationPoint; /**< Current calibration point. */
 
-    int top_offset;
-    int down_offset;
-    int left_offset;
-    int right_offset;
+    int top_offset; /**< Offset from top used while generating calibration points. */
+    int down_offset; /**< Down */
+    int left_offset; /**< Left */
+    int right_offset; /**< Right */
 
-    int rows;
-    int cols;
+    int rows; /**< Rows count */
+    int cols; /**< Cols count */
 
-    int pointInCalibration;
-    int calibrationProgress;
-    bool duringCalibration;
-    bool lastPointCompleted;
-    bool finished;
-    bool started;
+    int pointInCalibration; /**< Number of point in calibtration */
+    int calibrationProgress; /**< Calibration progress. */
+    bool duringCalibration; /**< If is during calibration. */
+    bool lastPointCompleted; /**< If last point was succesfuly calibrated. */
+    bool finished; /**< Calibration is finished. */
+    bool started; /**< Calibration is started. */
 
-    int pointSize;
+    int pointSize; /**< Calibration poin size. */
 
-    QTimer timer;
-    QMap<int, Touch> touches;
+    QTimer timer; /**< Timer counting one touch calibration time to draw proper circle. */
+    QMap<int, Touch> touches; /**< Map of current touches on the widget (used by functions touchDown... */
 
 private slots:
+    /**
+     * @brief Updates progress of point calibration.
+    */
     void updateProgress();
 
 };

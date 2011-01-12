@@ -8,7 +8,7 @@ FileImageSource::FileImageSource(QString fileName, QObject *parent) : ImageSourc
     }
     frameGettingTime = 0;
     interval = (int)(1000000 / (capture->get(CV_CAP_PROP_FPS) + 1) );
-
+    updateFrameSize();
 }
 
 FileImageSource::~FileImageSource()
@@ -66,6 +66,7 @@ CameraImageSource::CameraImageSource(int device, QObject *parent):ImageSource(pa
     capture = new VideoCapture(device);
     if(!capture->isOpened())
         throw new Exception();
+    updateFrameSize();
 }
 
 CameraImageSource::~CameraImageSource()
