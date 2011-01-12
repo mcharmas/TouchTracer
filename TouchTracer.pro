@@ -18,12 +18,14 @@ include(TUIO/TUIO.pri)
 SOURCES += main.cpp\
         mainwindow.cpp \
     modulemanagerwidget.cpp \
-    videogallery.cpp
+    videogallery.cpp \
+    cameraselectiondialog.cpp
 
 HEADERS  += mainwindow.h \
     modulemanagerwidget.h \
-    videogallery.h
+    videogallery.h \
+    cameraselectiondialog.h
 
 FORMS    += mainwindow.ui \
-    modulemanagerwidget.ui
-
+    modulemanagerwidget.ui \
+    cameraselectiondialog.ui

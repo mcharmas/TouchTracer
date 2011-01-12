@@ -25,3 +25,10 @@ void MainWindow::on_actionOpen_triggered()
         manager->openFile(fileName);
     }
 }
+
+void MainWindow::on_actionOpen_Camera_triggered()
+{
+    CameraSelectionDialog dialog;
+    dialog.exec();
+    manager->openCameraDevice(dialog.getSelectedDevice());
+}

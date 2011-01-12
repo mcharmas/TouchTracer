@@ -47,8 +47,38 @@ void ModuleManagerWidget::openFile(QString fileName)
     if(imgSrc)
     {
         delete imgSrc;
+        imgSrc = NULL;
     }
-    this->imgSrc = new FileImageSource(fileName);
+    try
+    {
+        this->imgSrc = new FileImageSource(fileName);
+        ui->startButton->setEnabled(true);
+    }
+    catch (...)
+    {
+        ui->startButton->setEnabled(false);
+        QMessageBox::critical(this, tr("Error opening video."), tr("Unable to open this file."), QMessageBox::Ok);
+    }
+}
+
+void ModuleManagerWidget::openCameraDevice(int i)
+{
+    on_stopButton_clicked();
+    if(imgSrc)
+    {
+        delete imgSrc;
+        imgSrc = NULL;
+    }
+    try
+    {
+        this->imgSrc = new CameraImageSource(i);
+        ui->startButton->setEnabled(true);
+    }
+    catch (...)
+    {
+        ui->startButton->setEnabled(false);
+        QMessageBox::critical(this, tr("Error opening video."), tr("Unable to open this device."), QMessageBox::Ok);
+    }
 }
 
 ModuleManagerWidget::~ModuleManagerWidget()
@@ -76,7 +106,7 @@ void ModuleManagerWidget::on_startButton_clicked()
 {
     if(!imgSrc)
     {
-        QMessageBox::information(this, tr("No file opened."), tr("No video file has been opened."), QMessageBox::Ok);
+        QMessageBox::information(this, tr("No file opened."), tr("No video source has been opened."), QMessageBox::Ok);
         return;
     }
 
@@ -90,6 +120,8 @@ void ModuleManagerWidget::on_startButton_clicked()
     if(!processor->isRunning()) {
         processor->start();
     }
+    ui->stopButton->setEnabled(true);
+    ui->startButton->setEnabled(false);
 }
 
 void ModuleManagerWidget::on_stopButton_clicked()
@@ -101,7 +133,8 @@ void ModuleManagerWidget::on_stopButton_clicked()
         delete processor;
         processor = NULL;
     }
-
+    ui->startButton->setEnabled(true);
+    ui->stopButton->setEnabled(false);
 }
 
 void ModuleManagerWidget::showFps(int x)

@@ -48,4 +48,16 @@ private:
 
 };
 
+class CameraImageSource : public ImageSource
+{
+public:
+    CameraImageSource(int device, QObject *parent=0);
+    ~CameraImageSource();
+    void getFrame(Mat &mat);
+    int droppedFrames();
+
+private:
+    VideoCapture *capture;
+};
+
 #endif // IMAGESOURCE_H

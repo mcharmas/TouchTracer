@@ -60,3 +60,27 @@ void FileImageSource::retriveFrame(Mat &mat)
         capture->retrieve(mat);
     }
 }
+
+CameraImageSource::CameraImageSource(int device, QObject *parent):ImageSource(parent)
+{
+    capture = new VideoCapture(device);
+    if(!capture->isOpened())
+        throw new Exception();
+}
+
+CameraImageSource::~CameraImageSource()
+{
+    capture->release();
+    delete capture;
+}
+
+void CameraImageSource::getFrame(Mat &mat)
+{
+    capture->grab();
+    capture->retrieve(mat);
+}
+
+int CameraImageSource::droppedFrames()
+{
+    return 0;
+}

@@ -68,6 +68,7 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen"/>
+    <addaction name="actionOpen_Camera"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -97,10 +98,15 @@
   </widget>
   <action name="actionOpen">
    <property name="text">
-    <string>Open</string>
+    <string>Open Video File</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionOpen_Camera">
+   <property name="text">
+    <string>Open Camera</string>
    </property>
   </action>
  </widget>

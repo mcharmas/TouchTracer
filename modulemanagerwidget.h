@@ -48,6 +48,9 @@ public:
     */
     void openFile(QString fileName);
 
+
+    void openCameraDevice(int i);
+
 private:
     /*!
      \brief Updates list of loaded modules in QListView.

@@ -8,6 +8,7 @@
 #include <highgui.h>
 #include "Modules/imageprocessor.h"
 #include "modulemanagerwidget.h"
+#include "cameraselectiondialog.h"
 
 namespace Ui {
     class MainWindow;
@@ -40,6 +41,7 @@ private:
 
 
 private slots:
+    void on_actionOpen_Camera_triggered();
     void on_actionOpen_triggered();
 };
 
