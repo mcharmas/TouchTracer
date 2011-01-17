@@ -25,7 +25,7 @@ void ModuleBackground::process(Mat& mat)
         m1.copyTo(mat);
     }
 
-    if(storedFrame.size != mat.size)
+    if(storedFrame.size() != mat.size())
         frameToStore = true;
 
     if(frameToStore)

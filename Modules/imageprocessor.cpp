@@ -18,6 +18,7 @@ void ImageProcessor::init(ImageSource *imgSrc, QList<Module *> *modules)
     setModuleList(modules);
     running = true;
     fps = 0;
+    startTimer(1000);
 }
 
 ImageProcessor::~ImageProcessor()
@@ -29,8 +30,6 @@ ImageProcessor::~ImageProcessor()
 
 void ImageProcessor::run()
 {
-    startTimer(1000);
-
     while(running) {
         fpsMutex.lock();
         fps++;
