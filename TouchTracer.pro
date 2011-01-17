@@ -1,16 +1,7 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2010-10-21T19:50:07
-#
-#-------------------------------------------------
-
 QT       += core gui opengl
 
 TARGET = TouchTracer
 TEMPLATE = app
-
-CONFIG += link_pkgconfig
-PKGCONFIG += opencv
 
 include(Modules/Modules.pri)
 include(TUIO/TUIO.pri)
@@ -29,3 +20,16 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     modulemanagerwidget.ui \
     cameraselectiondialog.ui
+
+win32:INCLUDEPATH += C:\OpenCV-2.1.0\include\opencv
+win32:LIBS += -L"C:\OpenCV-2.1.0\out\bin" \
+        -lcxcore210 \
+        -lcv210 \
+        -lcvaux210 \
+        -lhighgui210 \
+        -lml210 \
+        -lws2_32 \
+        -lwinmm
+
+unix:CONFIG += link_pkgconfig
+unix:PKGCONFIG += opencv
