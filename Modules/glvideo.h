@@ -45,6 +45,16 @@ public:
     */
     void setImage(const QImage & img);
 
+    /**
+     * @brief Returns displayed image.
+     * @return QImage displayed image.
+    */
+    QImage getImage()
+    {
+        return img;
+    }
+
+
 private:
     QImage img, glImg; /**< Images */
     bool hasImage; /**< If had imagebefore. Used to check if resizing needed. */

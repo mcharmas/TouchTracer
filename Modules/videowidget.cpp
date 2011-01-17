@@ -7,11 +7,24 @@ VideoWidget::VideoWidget(QString caption, QWidget *parent) :
 {    
     ui->setupUi(this);
     ui->caption->setText(caption);
+    QAction *saveAction = new QAction("Save Image", this);
+    connect(saveAction, SIGNAL(triggered()), this, SLOT(saveImageAction()));
+    this->addAction(saveAction);
+    this->setContextMenuPolicy(Qt::ActionsContextMenu);
 }
 
 VideoWidget::~VideoWidget()
 {
     delete ui;
+}
+
+void VideoWidget::saveImageAction()
+{
+    QString result = QFileDialog::getSaveFileName(this, "Save Image", "~", tr("Image Files (*.png *.jpg *.bmp)"));
+    if(result != "")
+    {
+        ui->video->getImage().save(result);
+    }
 }
 
 void VideoWidget::showFrame(const QImage &img)

@@ -7,6 +7,7 @@
 #include "module.h"
 #include "modulebackgroundsettings.h"
 #include <QDebug>
+#include <QFileDialog>
 using namespace cv;
 
 /*!
@@ -56,6 +57,11 @@ public slots:
      \brief Slot which handles request from settings widget and make process method to store frame as background.
     */
     void storeFrame();
+
+    /*!
+     \brief To save bg image.
+    */
+    void saveFrame();
 
 private:
     bool frameToStore; /*!< if process method have to store new background */

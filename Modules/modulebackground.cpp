@@ -7,6 +7,7 @@ ModuleBackground::ModuleBackground(QObject *parent) :
     init();
 
     connect(settings, SIGNAL(storeFrameButtonClicked()), this, SLOT(storeFrame()));
+    connect(settings, SIGNAL(saveFrameButtonClicked()), this, SLOT(saveFrame()));
     connect(this, SIGNAL(frameStored(QImage)), settings, SLOT(showStoredBackground(QImage)), Qt::QueuedConnection);
 }
 
@@ -36,6 +37,16 @@ void ModuleBackground::process(Mat& mat)
     }
 
     mat = mat-storedFrame;
+}
+
+void ModuleBackground::saveFrame()
+{
+    QString result = QFileDialog::getSaveFileName(getSettingsWidget(), "Save Image", "~", tr("Image Files (*.png *.jpg *.bmp)"));
+    if(result != "")
+    {
+        QImage img = matToQImage(storedFrame);
+        img.save(result);
+    }
 }
 
 void ModuleBackground::storeFrame()

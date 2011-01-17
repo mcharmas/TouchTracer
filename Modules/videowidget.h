@@ -2,6 +2,7 @@
 #define VIDEOWIDGET_H
 
 #include <QFrame>
+#include <QFileDialog>
 
 namespace Ui {
     class VideoWidget;
@@ -51,6 +52,12 @@ public slots:
      \param frame image to be displayed.
     */
     void showFrame(const QImage& frame);
+
+    /**
+     * @brief Saves displayed image.
+     *
+    */
+    void saveImageAction();
 
 private:
     Ui::VideoWidget *ui; /*!< UI */

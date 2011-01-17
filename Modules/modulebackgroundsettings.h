@@ -2,7 +2,7 @@
 #define MODULEBACKGROUNDSETTINGS_H
 
 #include <QWidget>
-
+#include <QDebug>
 #include "abstractsettingswidget.h"
 
 namespace Ui {
@@ -42,6 +42,11 @@ private:
 
 private slots:
     /*!
+     \brief Emits saveFrameButtonClicked().
+    */
+    void on_saveBackground_clicked();
+
+    /*!
      \brief Emits storeFrameButtonClicked().
     */
     void on_storeButton_clicked();
@@ -51,6 +56,11 @@ signals:
      \brief Signal used to notify ModuleBackground that user requested to save background frame.
     */
     void storeFrameButtonClicked();
+
+    /*!
+     \brief Signal used to notify ModuleBackground that user requested to save background frame as file.
+    */
+    void saveFrameButtonClicked();
 
 };
 

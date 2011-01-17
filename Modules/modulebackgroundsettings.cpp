@@ -7,6 +7,7 @@ ModuleBackgroundSettings::ModuleBackgroundSettings(QWidget *parent) :
 {
     ui->setupUi(getSettingsWidget());    
     connect(ui->storeButton, SIGNAL(clicked()), this, SLOT(on_storeButton_clicked()));
+    connect(ui->saveBackground, SIGNAL(clicked()), this, SLOT(on_saveBackground_clicked()));
 }
 
 ModuleBackgroundSettings::~ModuleBackgroundSettings()
@@ -23,4 +24,9 @@ void ModuleBackgroundSettings::showStoredBackground(QImage img)
 {
     img = img.scaled(ui->frameLabel->size(),Qt::KeepAspectRatio);
     ui->frameLabel->setPixmap(QPixmap::fromImage(img));
+}
+
+void ModuleBackgroundSettings::on_saveBackground_clicked()
+{
+    emit saveFrameButtonClicked();
 }
